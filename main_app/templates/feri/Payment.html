@@ -1,0 +1,124 @@
+{% extends 'feri/base.html' %}
+
+{% block title %}Payment - Frontiers in Environmental Revolutionary Innovation (FERI) {% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+<!-- Payment Section -->
+<section id="payment" class="payment section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Payment Details<br /></h2>
+        <p>
+            Please use the following payment methods to complete your transaction with Frontiers in Environmental Revolutionary Innovation (FERI).
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <div class="payment-card rounded-4 p-4">
+                    <h3 class="text-center mb-4">How to Pay: NEFT/UPI</h3>
+                    
+                    <div class="bank-details mb-4">
+                        <h4>ACCOUNT DETAILS</h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Name of Bank:</th>
+                                        <td>Axis Bank Limited</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Branch:</th>
+                                        <td>Hoshangabad road Bhopal, MP</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Account Holder Name:</th>
+                                        <td><strong>Curevita Research Private Limited</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <th>A/c No:</th>
+                                        <td>924020050690340</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IFSC Code:</th>
+                                        <td>UTIB0001048</td>
+                                    </tr>
+                                    <tr>
+                                        <th>SWIFT Code:</th>
+                                        <td>AXISINBB044</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="upi-details text-center">
+                        <h4>UPI Payment</h4>
+                        <p>Scan the QR code below for UPI payment:</p>
+                        <div class="qr-code-placeholder bg-light rounded-3 d-inline-block">
+                            <!-- Replace with actual QR code image -->
+                            <div class="text-center">
+                                <img src="{{ url_for('static', filename='assets/img/upi_payment_qr.jpeg') }}" class="img-fluid" style="max-height: 400px;" alt="Google Scholar">  <!-- max-height से image की ऊंचाई कम की -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-instructions mt-5">
+                        <h4>Payment Instructions:</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Please include your submission reference number in the payment remarks
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                After making payment, email the transaction details to infocvrb@curevita.org
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Processing may take 1-2 business days after payment confirmation
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Contact infocvrb@curevita.org for any payment-related queries
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .payment-card {
+        background-color: #fff;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    
+    .bank-details h4, .upi-details h4, .payment-instructions h4 {
+        color: #2c3e50;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #3498db;
+        margin-bottom: 1.5rem;
+    }
+    
+    .table th {
+        width: 40%;
+        background-color: #f8f9fa;
+    }
+    
+    .upi-id {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .qr-code-placeholder {
+        border: 1px dashed #dee2e6;
+    }
+</style>
+{% endblock %}

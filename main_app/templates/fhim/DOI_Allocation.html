@@ -1,0 +1,125 @@
+{% extends 'fhim/base.html' %}
+
+{% block title %}DOI Allocation Policy - Frontiers of Health Innovations and Medical Advances{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .section-title {
+      text-align: center;
+      margin: 40px 0 30px;
+    }
+    .section-title h2 {
+      color: #1a237e;
+      font-weight: 600;
+    }
+    .card {
+      margin-bottom: 20px;
+      border-left: 4px solid #1a237e;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-title {
+      color: #1a237e;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .note-box {
+      background-color: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 25px 0;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      color: #d32f2f;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+</style>
+
+<div class="container">
+  <div class="section-title">
+    <h2>DOI Allocation Policy</h2>
+    <p>Permanent accessibility, global visibility, and digital traceability of scholarly content</p>
+  </div>
+
+  <!-- Box 1: DOI Assignment -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">DOI Assignment</h5>
+      <p class="card-text">Each accepted and published article is assigned a unique Digital Object Identifier (DOI).</p>
+    </div>
+  </div>
+
+  <!-- Box 2: Activation Time -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Activation Time</h5>
+      <p class="card-text">DOIs are registered and activated immediately upon publication.</p>
+    </div>
+  </div>
+
+  <!-- Box 3: Indexing and Metadata -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Indexing and Metadata</h5>
+      <p class="card-text">Article metadata is submitted to DOI registries (like Crossref) for indexing, citation linking, and search discoverability.</p>
+    </div>
+  </div>
+
+  <!-- Box 4: DOI Format -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">DOI Format Example</h5>
+      <p class="card-text">
+        <code>https://doi.org/10.xxxx/crin.2025.vX.iY.ZZZ</code><br>
+        (Where X = volume, Y = issue, ZZZ = article ID)
+      </p>
+    </div>
+  </div>
+
+  <!-- Box 5: Fee Structure -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Fee Structure</h5>
+      <p class="card-text">A nominal DOI & barcode charge of INR 1000 (or USD 12 for international authors) is applied.</p>
+    </div>
+  </div>
+
+  <!-- Box 6: Benefits of DOI -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Benefits of DOI</h5>
+      <ul>
+        <li>Global citation tracking</li>
+        <li>Persistent article access</li>
+        <li>Compatibility with academic indexing services</li>
+        <li>Recognition for institutional and funding purposes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Note for Authors -->
+  <div class="note-box">
+    <strong>Note for Authors:</strong><br>
+    Once your paper is accepted, the DOI will be generated and shared with the final published version. All articles with DOIs can be cited and accessed globally across digital platforms.
+  </div>
+</div>
+{% endblock %}

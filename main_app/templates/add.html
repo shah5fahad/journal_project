@@ -1,0 +1,59 @@
+{% extends "basecode.html" %}
+{% block title %}Add Editor{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4 text-success">
+        <i class="bi bi-plus-circle"></i> Add New Editor
+    </h2>
+
+    <form method="POST" action="{{ url_for('add_editor') }}">
+        <div class="mb-3">
+        <label class="form-label">Journal</label>
+        <select name="journal_id" class="form-select" required>
+            <option value="">Select Journal</option>
+            {% for journal in journals %}
+                <option value="{{ journal.id }}">{{ journal.full_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+        <div class="mb-3">
+            <label class="form-label">Select Category <span class="text-danger">*</span></label>
+            <select name="code" id="category" class="form-control" required>
+                <option value="">-- Select --</option>
+                <option value="01">Editorial Board</option>
+                <option value="02">Reviewer Team</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Name <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="Enter editor name" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Designation</label>
+            <input type="text" name="designation" class="form-control" placeholder="Enter designation">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Link</label>
+            <input type="url" name="link" class="form-control" placeholder="https://example.com">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Quote</label>
+            <textarea name="quote" class="form-control" rows="3" placeholder="Enter a quote"></textarea>
+        </div>
+
+        
+        
+        
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-save"></i> Save
+        </button>
+        <a href="{{ url_for('listedi') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+    </form>
+</div>
+{% endblock %}

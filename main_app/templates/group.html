@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curevita Research Journals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #232d2c;
+      --secondary: #f39c12;
+      --accent1: #ffffff84;
+      --accent2: #4e7b85ff;
+      --accent3: #2ecc71;
+      --accent4: #9b59b6;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    /* Particle background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    /* Navigation */
+    .navbar {
+      background: #232d2c;
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      transition: all 0.4s ease;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--light);
+      font-size: 1.5rem;
+    }
+    
+    .nav-link {
+      color: var(--light);
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/static/assets/cibdi/img/group_top_bg.png') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--secondary), var(--accent1));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(243, 156, 18, 0.8), 0 0 30px rgba(243, 156, 18, 0.6);
+      }
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease;
+    }
+    
+    /* Floating elements */
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    /* Section Styles */
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    /* Why Publish Section */
+    .features-section {
+      padding: 100px 0;
+      background: var(--light);
+    }
+    
+    .feature-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0;
+      background: var(--secondary);
+      transition: height 0.4s ease;
+    }
+    
+    .feature-box:hover::before {
+      height: 100%;
+    }
+    
+    .feature-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--secondary);
+    }
+    
+    /* About Section Styles */
+    .about-section {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-content {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      padding: 60px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .about-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .about-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 0;
+      border-radius: 2px;
+    }
+    
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+    
+    .highlight {
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    
+    /* Animated elements */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent1);
+      top: -150px;
+      right: -150px;
+      animation: float 15s ease-in-out infinite;
+    }
+    
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent3);
+      bottom: -100px;
+      left: -100px;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+    
+    /* Values section */
+    .values-container {
+      margin-top: 50px;
+    }
+    
+    .value-box {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      height: 100%;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .value-box::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: rgba(255,255,255,0.1);
+      transform: rotate(45deg) translate(-20%, -50%);
+      transition: all 0.5s ease;
+    }
+    
+    .value-box:hover::before {
+      transform: rotate(45deg) translate(20%, -20%);
+    }
+    
+    .value-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--secondary);
+    }
+    
+    .value-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+    /* Stats counter */
+    .stats-container {
+      background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+      border-radius: 20px;
+      padding: 50px 30px;
+      margin-top: 70px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stats-container::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+      opacity: 0.1;
+      animation: backgroundMove 30s linear infinite;
+    }
+    
+    @keyframes backgroundMove {
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(-10%, -10%);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+    
+    .stat-item {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      background: linear-gradient(45deg, var(--secondary), #ffcc70);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* Journals Section */
+    .journals-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+    }
+    
+    .journal-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      height: 100%;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .journal-card:hover {
+      transform: translateY(-15px) rotate(2deg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .journal-header {
+      padding: 25px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .journal-header::after {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: rgba(255,255,255,0.1);
+      transform: rotate(45deg) translate(-20%, -50%);
+      transition: all 0.5s ease;
+    }
+    
+    .journal-card:hover .journal-header::after {
+      transform: rotate(45deg) translate(20%, -20%);
+    }
+    
+    .journal-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .journal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .journal-body {
+      padding: 25px;
+      position: relative;
+    }
+    
+    .journal-description {
+      color: #6c757d;
+      margin-bottom: 20px;
+    }
+    
+    .journal-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .journal-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.4s ease;
+    }
+    
+    .journal-btn:hover::before {
+      left: 100%;
+    }
+    
+    .journal-btn:hover {
+      background: var(--secondary);
+      transform: scale(1.05);
+    }
+    
+    /* Journal-specific colors */
+    .fhima { background: linear-gradient(135deg, var(--accent1) 0%, #4b4a5d83 100%); }
+    .crin { background: linear-gradient(135deg, var(--accent2) 0%, #bfbddf83 100%); }
+    .cibdi { background: linear-gradient(135deg, var(--accent3) 0%, #2827ae 100%); }
+    .faai { background: linear-gradient(135deg, var(--secondary) 0%, #00d397 100%); }
+    
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 0;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--primary);
+      transition: all 0.4s ease;
+      z-index: -1;
+    }
+    
+    .cta-btn:hover::before {
+      width: 100%;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      padding: 100px 0;
+      background: var(--light);
+    }
+    
+    .contact-info {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-right: 15px;
+    }
+    
+    .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .form-control {
+      padding: 15px;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-links h5 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-links h5::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 3px;
+      background: var(--secondary);
+      bottom: -10px;
+      left: 0;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+      padding-left: 5px;
+    }
+    
+    .social-icons {
+      margin-top: 20px;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .top-header .logo {
+      line-height: 1;
+    }
+
+    .top-header .logo img {
+      max-height: 50px;
+      margin-right: 8px;
+      border-radius: 8px;
+    }
+
+    .top-header .logo h1 {
+      font-size: 30px;
+      margin: 0;
+      font-weight: 700;
+      color: var(--heading-color);
+    }
+
+    .top-header .logo span {
+      font-size: 32px;
+      margin-left: 2px;
+      color: var(--nav-hover-color);
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fadeInUp {
+      animation: fadeInUp 1s ease;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .section-title, .about-title {
+        font-size: 2rem;
+      }
+      
+      .about-content {
+        padding: 30px;
+      }
+      
+      .feature-box, .journal-card, .contact-info, .contact-form, .value-box, .stat-item {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Navigation -->
+  <nav class="top-header navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a href="/" class="logo d-flex align-items-center text-decoration-none">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img
+            src="{{ url_for('static', filename='assets/img/file-3i0SDQN6Ojb5x94AKMPiXW63.webp') }}"
+            alt=""
+        />
+
+        <div class="sitename text-light fs-5">
+            Curevita
+            <hr
+              style="margin: 0 !important; opacity: 0.5 !important;"
+            />
+            Research
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#journals">Journals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home" class="hero">
+    <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+      <h1 class="hero-title floating">Curevita Research Journals</h1>
+      <p class="hero-subtitle">Where Knowledge Meets Innovation, and Research Shapes Tomorrow</p>
+      <a href="#about" class="btn btn-lg btn-warning mt-3 px-5 py-3 floating">Explore More</a>
+    </div>
+  </header>
+
+    <!-- Journals Section with Auto Slide -->
+  <section id="journals" class="journals-section py-5">
+    <div class="container">
+      <h2 class="text-center section-title mb-4" data-aos="fade-up">Our Journals</h2>
+      <!-- Slider main container -->
+      <div class="swiper journals-slider">
+        <div class="swiper-wrapper">
+          <!-- FHIMA Journal -->
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="100">
+            <div class="journal-card">
+              <a class="text-decoration-none" href="/fhim/home" target="_blank">
+                <div class="journal-header fhima" style="padding-top: 75px; padding-bottom: 75px;">
+                  <div class="journal-icon">
+                    <img src="{{ url_for('static', filename='assets/cibdi/img/fhim_logo.png') }}" class="img-fluid" alt="FHIMA" />
+                  </div>
+                  <h3 class="journal-title text-primary">FHIMA</h3>
+                </div>
+                <div class="journal-body">
+                  <h4>Frontiers of Health Innovations and Medical Advances</h4>
+                  <p class="text-muted">International peer-reviewed journal Publishing cutting-edge research in medical technology, healthcare innovations, and clinical advancements.</p>
+                  <button class="journal-btn">Learn More</button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- FERI Journal -->
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
+            <div class="journal-card">
+              <a class="text-decoration-none" href="/feri/home" target="_blank">
+                <div class="journal-header faai" style="padding-top: 75px; padding-bottom: 75px;">
+                  <div class="journal-icon">
+                    <img src="{{ url_for('static', filename='assets/cibdi/img/feri_logo.png') }}" class="img-fluid" alt="FERI" />
+                  </div>
+                  <h3 class="journal-title">FERI</h3>
+                </div>
+                <div class="journal-body">
+                  <h4>Frontiers in Environmental Revolutionary Innovation</h4>
+                  <p class="text-muted">International peer-reviewed journal advancing research in ecology, vitality sciences, environmental health, and sustainable innovation.</p>
+                  <button class="journal-btn">Learn More</button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- CRIN Journal -->
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="200">
+            <div class="journal-card">
+              <a class="text-decoration-none" href="/crin/home" target="_blank">
+                <div class="journal-header crin">
+                  <div class="journal-icon">
+                    <img src="{{ url_for('static', filename='assets/cibdi/img/crin_logo.png') }}" class="img-fluid" alt="CRIN" />
+                  </div>
+                  <h3 class="journal-title">CRIN</h3>
+                </div>
+                <div class="journal-body">
+                  <h4>Curevita Research International Nexus</h4>
+                  <p class="text-muted">A multidisciplinary journal connecting global research across scientific domains and collaborations.</p>
+                  <button class="journal-btn">Learn More</button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- CIBDI Journal -->
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="300">
+            <div class="journal-card">
+              <a class="text-decoration-none" href="/cibdi/home" target="_blank">
+                <div class="journal-header cibdi">
+                  <div class="journal-icon">
+                    <img src="{{ url_for('static', filename='assets/cibdi/img/cibdi_logo.png') }}" class="img-fluid" alt="CIBDI" />
+                  </div>
+                  <h3 class="journal-title">CIBDI</h3>
+                </div>
+                <div class="journal-body">
+                  <h4>Curevita Innovation of BioData Intelligence</h4>
+                  <p class="text-muted">International peer-reviewed journal exploring the intersection of biological data, AI, and computational approaches to solve complex problems.</p>
+                  <button class="journal-btn">Learn More</button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- FAAI Journal -->
+          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
+            <div class="journal-card">
+              <a class="text-decoration-none" href="/faai/home" target="_blank">
+                <div class="journal-header faai">
+                  <div class="journal-icon">
+                    <img src="{{ url_for('static', filename='assets/cibdi/img/faai_logo.png') }}" class="img-fluid" alt="FAAI" />
+                  </div>
+                  <h3 class="journal-title">FAAI</h3>
+                </div>
+                <div class="journal-body">
+                  <h4>Frontiers of Agri & Animal Innovation</h4>
+                  <p class="text-muted">International peer-reviewed journal advancing research in agricultural sciences, animal husbandry, and sustainable farming practices.</p>
+                  <button class="journal-btn">Learn More</button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center" data-aos="zoom-in" data-aos-duration="1200">
+          <h2 class="cta-title">Submit Your Research Today</h2>
+          <p class="mb-4">Join thousands of researchers publishing with Curevita Journals and make an impact.</p>
+          <a href="#contact" class="cta-btn">Submit Now <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Publish Section -->
+  <section class="features-section">
+    <div class="container">
+        <h2 class="text-center section-title" data-aos="fade-up">Why Publish with Curevita?</h2>
+        <!-- Values -->
+        <div class="values-container">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="value-box">
+                <div class="value-icon">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <h4 class="value-title">Global Reach</h4>
+                <p>Connecting researchers from around the world to share knowledge and innovations.</p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="value-box">
+                <div class="value-icon">
+                  <i class="fas fa-check-double"></i>
+                </div>
+                <h4 class="value-title">Rigorous Peer-Review</h4>
+                <p>Ensuring the highest quality standards through meticulous evaluation processes.</p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="value-box">
+                <div class="value-icon">
+                  <i class="fas fa-lock-open"></i>
+                </div>
+                <h4 class="value-title">Open Access</h4>
+                <p>Making knowledge freely available to accelerate scientific progress worldwide.</p>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+              <div class="value-box">
+                <div class="value-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <h4 class="value-title">Innovation Focus</h4>
+                <p>Bridging the gap between research and real-world applications for maximum impact.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Stats -->
+        <div class="stats-container">
+          <div class="row">
+            <div class="col-md-3 col-6">
+              <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="stat-number" id="journal-count">4</h3>
+                <p class="stat-label">Specialized Journals</p>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6">
+              <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="stat-number" id="country-count">50</h3>
+                <p class="stat-label">Countries Reached</p>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6">
+              <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="stat-number" id="author-count">500</h3>
+                <p class="stat-label">Published Authors</p>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-6">
+              <div class="stat-item" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="stat-number" id="article-count">1000</h3>
+                <p class="stat-label">Research Articles</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+    <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    
+    <div class="container">
+      <div class="about-content" data-aos="fade-up" data-aos-duration="1500">
+        <h2 class="about-title">About Curevita Journals</h2>
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="about-text" data-aos="fade-right" data-aos-delay="200">
+              <span class="highlight">Curevita Research Journals</span> is a global platform dedicated to advancing scientific
+              discovery, innovation, and interdisciplinary knowledge. Guided by a vision to
+              connect research with real-world impact, we publish high-quality, peer-reviewed
+              international journals spanning a wide range of disciplines, including sciences,
+              commerce and management, health and medicine, agriculture and animal
+              sciences, engineering and technology, environmental studies, computer and
+              data sciences, and beyond.
+            </p>
+            
+            <p class="about-text" data-aos="fade-right" data-aos-delay="300">
+              With rigorous editorial standards and adherence to international indexing
+              norms, Curevita Research Journals serves as a bridge between researchers,
+              academicians, industry experts, and policymakers. We are committed to
+              promoting open access, ethical publishing practices, and collaborative
+              scholarship, ensuring that innovative ideas and groundbreaking research reach
+              the global community.
+            </p>
+            
+            <p class="about-text" data-aos="fade-right" data-aos-delay="400">
+              <span class="highlight">Where Knowledge Meets Innovation, and Research Shapes Tomorrow</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="text-center section-title" data-aos="fade-up">Contact Us</h2>
+      <div class="row g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="contact-info">
+            <h4 class="mb-4">Get In Touch</h4>
+            <div class="d-flex align-items-center mb-4">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h5>Email</h5>
+                <p><a href="mailto:infocvrb@curevita.org" class="text-decoration-none text-dark">infocvrb@curevita.org</a></p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-4">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h5>Phone</h5>
+                <p><a href="tel:+917987082627" class="text-decoration-none text-dark"> +91 79870 82627</a></p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-4">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h5>Address</h5>
+                <p>4/21 LIG, Informal Sector, Vidya Nagar, Bhopal, MP, India</p>
+              </div>
+            </div>
+            <div class="social-icons">
+                <a href="https://x.com/curevitares?t=y7v5NGuSNIHXwTPs5jLNUw&amp;s=08"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/Curevitaresearch?rdid=UzKVvwaxNBCMndkM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15L8uPdxqR%2F#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/curevitaresearch/?igsh=MW1qOWMyaG1mdnRkOQ%3D%3D#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/curevita-research-pvt-ltd/"><i class="fab fa-linkedin-in"></i></a>
+                <a href="http://www.youtube.com/@curevitaresearch"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="contact-form">
+            <h4 class="mb-4">Send Message</h4>
+            <form>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <input type="text" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <input type="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="col-12 mb-3">
+                  <input type="text" class="form-control" placeholder="Subject">
+                </div>
+                <div class="col-12 mb-3">
+                  <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-warning w-100 py-3">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h4 class="text-white mb-4">Curevita Research Journals</h4>
+          <p>Where Knowledge Meets Innovation, and Research Shapes Tomorrow</p>
+          <div class="social-icons">
+              <a href="https://x.com/curevitares?t=y7v5NGuSNIHXwTPs5jLNUw&amp;s=08"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.facebook.com/Curevitaresearch?rdid=UzKVvwaxNBCMndkM&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15L8uPdxqR%2F#"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/curevitaresearch/?igsh=MW1qOWMyaG1mdnRkOQ%3D%3D#"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/curevita-research-pvt-ltd/"><i class="fab fa-linkedin-in"></i></a>
+              <a href="http://www.youtube.com/@curevitaresearch"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4 mb-md-0 footer-links">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#journals">Journals</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4 mb-md-0 footer-links">
+          <h5>Journals</h5>
+          <ul>
+            <li><a href="https://fhima.curevitajournals.com/" target="_blank">FHIMA</a></li>
+            <li><a href="https://curevitajournals.com/home" target="_blank">CRIN</a></li>
+            <li><a href="https://cibdi.curevitajournals.com/" target="_blank">CIBDI</a></li>
+            <li><a href="https://faai.curevitajournals.com/" target="_blank">FAAI</a></li>
+            <li><a href="https://feri.curevitajournals.com/" target="_blank">FERI</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 footer-links">
+          <h5>Contact Info</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt me-2"></i> 4/21 LIG, Informal Sector, Vidya Nagar, Bhopal, MP, India</li>
+            <li><a href="tel:+917987082627"><i class="fa-solid fa-phone me-2"></i> +91 79870 82627</a></li>
+            <li><a href="mailto:infocvrb@curevita.org"><i class="fa fa-envelope me-2"></i>infocvrb@curevita.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center copyright">
+        <p>&copy; 2025 Curevita Research Journals. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      new Swiper('.journals-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          992: { slidesPerView: 3 },
+          1200: { slidesPerView: 4 },
+        },
+      });
+    });
+  </script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#f39c12" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#f39c12",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        document.querySelector('.navbar').style.padding = '10px 0';
+        document.querySelector('.navbar').style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+      } else {
+        document.querySelector('.navbar').style.padding = '15px 0';
+        document.querySelector('.navbar').style.boxShadow = 'none';
+      }
+    });
+    
+    // Counter animation for stats
+    function animateCounter(element, target, duration) {
+      let start = 0;
+      const increment = target / (duration / 16); // 60fps
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(start) + '+';
+        }
+      }, 16);
+    }
+    
+    // Animate counters when they come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(document.getElementById('journal-count'), 4, 2000);
+          animateCounter(document.getElementById('country-count'), 50, 2000);
+          animateCounter(document.getElementById('author-count'), 500, 2000);
+          animateCounter(document.getElementById('article-count'), 1000, 2000);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(document.querySelector('.stats-container'));
+  </script>
+</body>
+</html>

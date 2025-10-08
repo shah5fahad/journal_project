@@ -1,0 +1,1284 @@
+{% extends 'feri/base.html' %}
+
+{% block title %}Homepage - Frontiers in Environmental Revolutionary Innovation{% endblock %}
+
+{% block content %}
+<main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section accent-background top_background_img">
+        <div
+            class="container position-relative"
+            data-aos="fade-up"
+            data-aos-delay="100"
+        >
+            <div class="row gy-5 justify-content-between">
+                <div
+                    class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+                >
+                    <div style="text-align: center; color: #095903; font-size: 28px; line-height: 1.2; font-family: monospace; font-weight: bold;">
+                    International Multi-Disciplinary Journal
+                    </div>
+
+                    <div style="text-align: center; color: #095903; font-size: 19px; margin-top: 8px; font-family: cursive;">
+                    A peer-reviewed and refereed online journal — openly
+                    accessible, widely indexed, multidisciplinary, and
+                    globally recognized for academic and scholarly
+                    excellence.
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2">
+                    <img
+                    src="{{ url_for('static', filename='assets/feri/img/image-3.png') }}"
+                    class="img-fluid"
+                    alt=""
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="icon-boxes position-relative"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
+            <div class="container position-relative">
+                <div class="row gy-4 mt-5">
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/feri/peer_reviewed" class="stretched-link"
+                                >Peer-Reviewed Papers</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-globe"></i></div>
+                        <h4 class="title">
+                            <a href="#global_index" class="stretched-link"
+                                >Global Indexing</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-cloud-upload"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="#" class="stretched-link"
+                                >Easy Online Submission</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/feri/ugc_care" class="stretched-link"
+                                >UGC-CARE Guidelines</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reward-section" class="call-to-action section dark-background">
+        <div class="container py-2">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="reward-header">
+                    <div class="reward-badge" aria-hidden="true">
+                        <!-- Trophy icon -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4Z" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 7H5a3 3 0 0 0 3 3M17 7h2a3 3 0 0 1-3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 id="opportunities-title" class="opportunities-title">OPPORTUNITIES &amp; REWARDS</h1>
+                        <p class="opportunities-subtitle">Grow your impact with access, recognition, and expert guidance.</p>
+                    </div>
+                </div>
+                <div class="reward-content">
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Ticket/Pass icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9a3 3 0 1 0 0 6v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a3 3 0 1 1 0-6V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Free Participation</h3>
+                        <p>Access to workshops, FDPs, webinars, and symposia organized by Curevita Research.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Book/Bookmark icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 4h7a4 4 0 0 1 4 4v12l-4-2-4 2V8a4 4 0 0 0-4-4Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Knowledge Access</h3>
+                        <p>Complimentary subscription to eNews Later and current affairs updates.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Award/Medal icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M9 14v7l3-2 3 2v-7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Recognition &amp; Rewards</h3>
+                        <p>Best Paper Awards with special certificates; recommendation rewards for high-impact research enhancing academic, research, and industry careers.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Users/Handshake icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm8 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M3 21v-1a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Mentorship &amp; Guidance</h3>
+                        <p>Early-career authors receive mentorship from leading scientists, professors, and industry experts.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Our Services</h2>
+            <p>
+                Explore our key offerings that support authors, researchers,
+                and the academic community globally.
+            </p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+            <div class="row gy-4">
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-journal-check"></i>
+                    </div>
+                    <h3>Peer-Reviewed Publication</h3>
+                    <p>
+                        All submitted papers undergo rigorous peer review
+                        ensuring high academic quality and research
+                        standards.
+                    </p>
+                    <a href="/feri/peer_reviewed" class="readmore stretched-link">
+                        Read more <i class="bi bi-arrow-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-cloud-upload"></i>
+                    </div>
+                    <h3>Easy Online Submission</h3>
+                    <p>
+                        Submit your research online using our simple and
+                        intuitive paper submission platform.
+                    </p>
+                    <a href="#" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h3>Global Indexing</h3>
+                    <p>
+                        Our journal is indexed by major research databases
+                        including Google Scholar, Academia, and more.
+                    </p>
+                    <a href="#global_index" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-badge-ad"></i>
+                    </div>
+                    <h3>DOI Allocation</h3>
+                    <p>
+                        Each published paper receives a unique CrossRef DOI
+                        for better visibility and citation tracking.
+                    </p>
+                    <a href="/feri/doi_allocation" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3>UGC-CARE Guidelines</h3>
+                    <p>
+                        Our publication follows UGC-CARE recommendations and
+                        maintains compliance with ethical research practices.
+                    </p>
+                    <a href="/feri/ugc_care" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="600"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-chat-square-text"></i>
+                    </div>
+                    <h3>24x7 Support</h3>
+                    <p>
+                        Dedicated support through email, phone, and WhatsApp
+                        to assist authors at every stage of publication.
+                    </p>
+                    <a href="#contact" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- global_index Section -->
+    <section id="global_index" class="global_index section">  
+        <div  class="container section-title" data-aos="fade-up">
+            <!-- Centered Heading -->
+            <h2 class="text-center fw-bold mb-3">Global Indexing</h2>  
+            <!-- First Row -->
+            <div class="row justify-content-center mb-2">  
+                    <div class="col-6 col-md-3 text-center p-2">  
+                    <img src="{{ url_for('static', filename='assets/img/google-scholar.png') }}" class="img-fluid" style="max-height: 80px;" alt="Google Scholar">  <!-- max-height से image की ऊंचाई कम की -->
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/research-gate.png') }}" class="img-fluid" style="max-height: 80px;" alt="Research Gate">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/arxiv01.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="ArXiv">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/openAire.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="OpenAIRE">
+                    </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="row justify-content-center">
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/DOI_logo.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOI">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/logo-crossref.png') }}" class="img-fluid" style="max-height: 80px;" alt="Crossref">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/zonodo1.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="Zenodo">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/doaj.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOAJ">
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Services Section -->
+    <section
+    id="call-to-action"
+    class="call-to-action section dark-background"
+    >
+        <div class="container">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="col-xl-10">
+                    <div class="text-center">
+                        <h4>
+                            Submit Research Work for Consideration of Publication
+                        </h4>
+                        <a class="cta-btn" href="/feri/current_issue">Submit Papers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+ <section id="testimonials" class="testimonials section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Editorial Board</h2>
+        <p>
+            Meet our esteemed editors who uphold our
+            commitment to academic excellence.
+        </p>
+    </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+                {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                    "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                },
+                "breakpoints": {
+                    "320": {
+                        "slidesPerView": 1,
+                        "spaceBetween": 40
+                    },
+                    "1200": {
+                        "slidesPerView": 3,
+                        "spaceBetween": 10
+                    }
+                }
+                }
+            </script>
+            <div class="swiper-wrapper">
+                {% for editor in editors %}
+                  {% if editor.code == "01" %}
+                    <div class="swiper-slide">
+                      <div class="testimonial-item">
+                        <h3>
+                          {{ editor.name }}
+                          {% if editor.link %}
+                          {% if "linkedin" in editor.link %}
+                              <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                                  <i class="bi bi-linkedin"></i>
+                              </a>
+                          {% else %}
+                              <a href="{{ editor.link }}" target="_blank" title="Visit">
+                                <i class="bi bi-link-45deg"></i>
+                              </a>
+                          {% endif %}
+                      {% endif %}
+                      
+                        </h3>
+                        <h4>{{ editor.designation }}</h4>
+              
+                        <div class="stars">
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                        </div>
+              
+                        {% if editor.quote %}
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>"{{ editor.quote }}"</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+            <!-- End testimonial item -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    </section>
+    <!-- Team Section -->
+     <section id="team" class="team section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Reviewer Team</h2>
+        <p>
+            Meet our dedicated reviewers who ensure the quality and
+            integrity of our journal publications.
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Dr. Niharika Bhawsar -->
+            {% for editor in editors %}
+                  {% if editor.code == "02" %}
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+                <h4>{{ editor.name }}</h4>
+                <span>{{ editor.designation}},{{editor.quote}}</span>
+                <div class="social">
+                    {% if editor.link %}
+                    {% if "linkedin" in editor.link %}
+                        <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ editor.link }}" target="_blank" title="Visit">
+                          <i class="bi bi-link-45deg"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                </div>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+        </div>
+    </div>
+    </section>
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Left Content -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="content px-xl-5">
+                        <h3>
+                            <span>Why Publish </span><strong> in FERI ?</strong>
+                        </h3>
+                        <p>
+                            Publishing with our journal gives your research
+                            global visibility, credibility through peer review,
+                            and indexing in leading academic databases.
+                        </p>
+                        <ul class="mt-3">
+                            <li>FERI is designed for Researchers & Academicians in environmental and health sciences</li>
+                            <li>Policy Makers & Sustainability Advocates</li>
+                            <li>Innovators in renewable energy & eco-technology</li>
+                            <li>NGOs, Community Leaders & Practitioners</li>
+                            <li>Students & Young Scholars passionate about sustainability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- FAQ Right Side -->
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-container">
+
+                        <div class="faq-item faq-active">
+                            <h3>
+                                <span class="num">1.</span>
+                                <span>Interdisciplinary Platform</span>
+                            </h3>
+                            <div class="faq-content">
+                                <p>
+                                    FERI serves as a truly interdisciplinary platform, bringing together researchers, 
+                                    policymakers, practitioners, and innovators to address complex environmental 
+                                    and sustainability challenges.
+                                </p>
+                            </div>
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+                        </div>
+                        <!-- End Faq item-->
+
+                        <div class="faq-item">
+                            <h3>
+                                <span class="num">2.</span>
+                                <span>Global Readership & Indexing</span>
+                            </h3>
+                            <div class="faq-content">
+                                <p>
+                                    With global readership and indexing in leading academic databases, 
+                                    your work achieves international visibility and recognition.
+                                </p>
+                            </div>
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+                        </div>
+                        <!-- End Faq item-->
+
+                        <div class="faq-item">
+                            <h3>
+                                <span class="num">3.</span>
+                                <span>Contribution to Sustainability Goals (SDGs)</span>
+                            </h3>
+                            <div class="faq-content">
+                                <p>
+                                    Published articles contribute to advancing the United Nations Sustainable Development Goals (SDGs), 
+                                    ensuring real-world impact beyond academia.
+                                </p>
+                            </div>
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+                        </div>
+                        <!-- End Faq item-->
+
+                        <div class="faq-item">
+                            <h3>
+                                <span class="num">4.</span>
+                                <span>Rapid, Transparent Review Process</span>
+                            </h3>
+                            <div class="faq-content">
+                                <p>
+                                    We ensure a fair, transparent, and timely peer review process to maintain academic rigor 
+                                    while allowing faster dissemination of quality research.
+                                </p>
+                            </div>
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+                        </div>
+                        <!-- End Faq item-->
+
+                        <div class="faq-item">
+                            <h3>
+                                <span class="num">5.</span>
+                                <span>Opportunities for Collaboration & Policy Impact</span>
+                            </h3>
+                            <div class="faq-content">
+                                <p>
+                                    FERI provides opportunities for academic, industry, and policy collaborations, 
+                                    enabling research to influence decision-making and real-world applications.
+                                </p>
+                            </div>
+                            <i class="faq-toggle bi bi-chevron-right"></i>
+                        </div>
+                        <!-- End Faq item-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Faq Section -->
+
+    <!-- Recent Posts Section -->
+    <section id="publication-guidelines" class="recent-posts section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Scope Of Journal</h2>
+            <p>
+                FERI welcomes contributions in (but not limited to):
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Box 1: Ecological Restoration & Biodiversity Conservation -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <article>
+                        <p class="post-category">Ecological Restoration & Biodiversity Conservation</p>
+                        <h2 class="title">
+                            <a href="#">Conservation & Habitat Restoration</a>
+                        </h2>
+                        <ul>
+                            <li>Advances in conservation biology, habitat restoration, and climate-resilient agriculture</li>
+                            <li>Indigenous resource management in biodiversity-rich areas like the Western Ghats, Himalayas, and Northeast India</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 2: Climate Resilience & Adaptive Innovation -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <article>
+                        <p class="post-category">Climate Resilience & Adaptive Innovation</p>
+                        <h2 class="title">
+                            <a href="#">Sustainable Adaptation</a>
+                        </h2>
+                        <ul>
+                            <li>Research on sustainable urban design, flood & drought mitigating infrastructure</li>
+                            <li>Climate-smart agriculture & community-led adaptation in vulnerable regions like Sundarbans and arid western India</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 3: Circular Economy & Sustainable Resource Use -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <article>
+                        <p class="post-category">Circular Economy & Sustainable Resource Use</p>
+                        <h2 class="title">
+                            <a href="#">Sustainable Economy</a>
+                        </h2>
+                        <ul>
+                            <li>Studies on waste valorization, zero-waste manufacturing, clean energy cycles</li>
+                            <li>Water recycling, eco-industrial clusters, grassroots enterprises, and scalable innovations</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 4: Sustainable Technology & Indigenous Knowledge -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <article>
+                        <p class="post-category">Sustainable Technology & Indigenous Knowledge</p>
+                        <h2 class="title">
+                            <a href="#">Traditional & Modern Integration</a>
+                        </h2>
+                        <ul>
+                            <li>Integration of traditional practices like water harvesting in Rajasthan and agroforestry in tribal regions</li>
+                            <li>Evaluations of green technology impact: rural energy access, clean cooking solutions</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 5: Health–Ecology Nexus -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <article>
+                        <p class="post-category">Health–Ecology Nexus</p>
+                        <h2 class="title">
+                            <a href="#">Environment & Public Health</a>
+                        </h2>
+                        <ul>
+                            <li>Exploring links between environmental degradation, biodiversity loss, and public health threats</li>
+                            <li>Focus on zoonotic spillovers, malnutrition, and pollution-driven diseases in Indian contexts</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 6: Policy, Governance & Community Engagement -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <article>
+                        <p class="post-category">Policy, Governance & Community Engagement</p>
+                        <h2 class="title">
+                            <a href="#">Policy & Stewardship</a>
+                        </h2>
+                        <ul>
+                            <li>Evaluation of environmental legislation: Air Act, Water Act</li>
+                            <li>Implementation of Swachh Bharat Mission, National River Conservation</li>
+                            <li>Participatory models for ecological stewardship with local communities & traditional governance</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12" data-aos="fade-up" data-aos-delay="700">
+                    <article class="p-4 shadow-sm rounded bg-light">
+                        <p class="post-category text-primary fw-bold">National Significance &amp; Objectives</p>
+                        <h2 class="title">
+                            <a>National Significance &amp; Objectives</a>
+                        </h2>
+                        <ul>
+                            <li>
+                                <strong>India-Centric Relevance:</strong> Showcases research directly responding to India’s environmental crises—urban pollution, land degradation, water stress, and the effects of climate change—tailored to regional socio-ecological dynamics.
+                            </li>
+                            <li>
+                                <strong>Bridging Science &amp; Practice:</strong> Encourages partnerships among Indian universities, rural and tribal communities, government agencies, and social innovators, ensuring that research yields tangible, resilient outcomes.
+                            </li>
+                            <li>
+                                <strong>Advancing Policy &amp; Innovation:</strong> Publishes data-driven insights to inform Indian environmental and sustainability policy while elevating homegrown innovation models—from village-based water harvesting to scalable circular manufacturing enterprises.
+                            </li>
+                            <li>
+                                <strong>Amplifying Inclusive Voices:</strong> Emphasizes contributions from historically marginalized groups—smallholder farmers, women eco-entrepreneurs, tribal communities—highlighting their adaptive practices and eco-innovative strategies.
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center vertical-center my-5" data-aos="fade-up">
+            <p>
+                Frontiers in Environmental Revolutionary Innovation (FERI) - An
+                International Peer-Reviewed Multidisciplinary Journal
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Box 1: Ecovitality & Ecosystem Health -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <article>
+                        <p class="post-category">Ecovitality & Ecosystem Health</p>
+                        <h2 class="title"><a href="#">Environmental Health & Risk Management</a></h2>
+                        <ul>
+                            <li>Biodiversity conservation & climate adaptation</li>
+                            <li>Sustainable agriculture & soil vitality</li>
+                            <li>Urban ecology & green infrastructure</li>
+                            <li>Community-based sustainability practices</li>
+                            <li>Socio-ecological resilience & policy innovations</li>
+                            <li>Integration of traditional wisdom with modern technologies</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 2: Environmental Health & Climate -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <article>
+                        <p class="post-category">Environmental Health & Climate</p>
+                        <h2 class="title"><a href="#">Risk Assessment & Ecosystem Services</a></h2>
+                        <ul>
+                            <li>Environmental health risk assessment & impact analysis</li>
+                            <li>Air, water, and soil quality monitoring & remediation</li>
+                            <li>Toxicology, exposure science, and pollutant dynamics</li>
+                            <li>Climate change implications for ecosystem services</li>
+                            <li>Conservation & restoration ecology</li>
+                            <li>Nature-based solutions for resilience & climate adaptation</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 3: AI & Data Science in Environment -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <article>
+                        <p class="post-category">AI & Data Science in Environment</p>
+                        <h2 class="title"><a href="#">Smart Monitoring & Prediction</a></h2>
+                        <ul>
+                            <li>AI-driven environmental monitoring (air, water, soil, climate)</li>
+                            <li>Machine learning for biodiversity tracking & ecosystem forecasting</li>
+                            <li>Remote sensing, GIS, and satellite data integration</li>
+                            <li>Predictive analytics for climate change adaptation</li>
+                            <li>Digital twins of ecosystems for simulation & resilience planning</li>
+                            <li>Ethical use of AI in environmental governance</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 4: Forest Ecology & Biodiversity -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <article>
+                        <p class="post-category">Forest Ecology & Biodiversity</p>
+                        <h2 class="title"><a href="#">Forests & Climate Change</a></h2>
+                        <ul>
+                            <li>Studies on forest structure, flora, fauna, and ecological interactions</li>
+                            <li>Forest role in carbon sequestration & climate adaptation</li>
+                            <li>Silviculture, agroforestry & innovations in tree cultivation</li>
+                            <li>Wildlife and habitat conservation strategies</li>
+                            <li>Restoration and reforestation of degraded lands</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 5: Forest Genetics & Resource Management -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <article>
+                        <p class="post-category">Forest Genetics & Resource Management</p>
+                        <h2 class="title"><a href="#">Biotechnology & Resource Utilization</a></h2>
+                        <ul>
+                            <li>Forest genetics & molecular tools for species improvement</li>
+                            <li>Timber, non-timber forest products & value-added innovations</li>
+                            <li>Socioeconomic & policy dimensions in forestry</li>
+                            <li>Community forestry & indigenous knowledge systems</li>
+                            <li>International forestry policies & governance models</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 6: Smart Forestry & Emerging Technologies -->
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <article>
+                        <p class="post-category">Smart Forestry & Emerging Technologies</p>
+                        <h2 class="title"><a href="#">AI, IoT & Remote Sensing</a></h2>
+                        <ul>
+                            <li>Remote sensing & AI analysis for forest monitoring</li>
+                            <li>Predictive modeling for fire, pests & climate impacts</li>
+                            <li>IoT & smart sensors for real-time forest health</li>
+                            <li>Automated biodiversity & wildlife monitoring</li>
+                            <li>Sustainable agroforestry with data-driven planning</li>
+                            <li>Forest genomics & bioinformatics applications</li>
+                            <li>Big data in forest governance & ecosystem valuation</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /Recent Posts Section -->
+    <section id="submission-guidelines" class="recent-posts section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Submission Guidelines</h2>
+            <p>
+                Ensure your manuscript follows the required format before
+                submitting to Frontiers in Environmental Revolutionary Innovation (FERI)
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Box 1: Types of Manuscripts Accepted -->
+                <div class="col-xl-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <article>
+                        <p class="post-category">Types of Manuscripts Accepted</p>
+                        <h2 class="title">
+                            <a href="#">What You Can Submit</a>
+                        </h2>
+                        <ul>
+                            <li>Original Research Articles – Cutting-edge discoveries</li>
+                            <li>Review Articles – Comprehensive state-of-the-art studies</li>
+                            <li>Policy & Practice Notes – Real-world insights & implementation strategies</li>
+                            <li>Case Studies – Successful models of ecological resilience</li>
+                            <li>Innovations & Technology Reports – New approaches & sustainable solutions</li>
+                            <li>Perspectives & Commentaries – Future directions & thought leadership</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Box 2: Editorial Features -->
+                <div class="col-xl-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <article>
+                        <p class="post-category">Editorial Features</p>
+                        <h2 class="title">
+                            <a href="#">Why Choose FERI?</a>
+                        </h2>
+                        <ul>
+                            <li>Double-blind peer review process</li>
+                            <li>Global editorial board of experts</li>
+                            <li>Open-access availability for a wide reach</li>
+                            <li>Interdisciplinary and cross-sector approach</li>
+                            <li>High visibility through Curevita Research Network</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+            <!-- End row -->
+        </div>
+        <!-- End container -->
+    </section>
+
+    <section id="publication-policies" class="recent-posts section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Publication Policies</h2>
+            <p>
+                Our commitment to quality, transparency, and ethical
+                publishing practices.
+            </p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Box 1: Peer Review Policy -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div class="post-box">
+                    <h4>Peer Review Policy</h4>
+                    <p>
+                        We follow a double-blind peer review process. Each
+                        submission is reviewed by at least two experts. Final
+                        decisions are made by the editorial team based on the
+                        reviewers’ evaluations. Typical review time is 2–4
+                        weeks.
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Box 2: Ethical Guidelines -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <div class="post-box">
+                    <h4>Ethical Guidelines</h4>
+                    <p>
+                        We adhere to COPE standards. Authors must ensure
+                        originality, cite all sources, disclose conflicts of
+                        interest, and get ethical approval for human/animal
+                        studies.
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Box 3: Publication Fee -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <div class="post-box">
+                    <h4>Publication Fee</h4>
+                    <p>
+                        A nominal Article Processing Charge (APC)- 10,000 INR, and for international 148 USD fee may apply to support open-access dissemination.
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Box 4: Copyright and Licensing -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <div class="post-box">
+                    <h4>Copyright & Licensing</h4>
+                    <p>
+                        Authors retain copyright of their work. Publications
+                        are licensed under Creative Commons (CC BY), unless
+                        stated otherwise.
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Box 5: Indexing and Archiving -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <div class="post-box">
+                    <h4>Indexing & Archiving</h4>
+                    <p>
+                        Articles receive a DOI and are archived permanently.
+                        Indexing in reputed databases is ensured through
+                        active partnerships.
+                    </p>
+                    </div>
+                </div>
+
+                <!-- Box 6: Plagiarism Policy -->
+                <div
+                    class="col-xl-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="600"
+                >
+                    <div class="post-box">
+                    <h4>Plagiarism Policy</h4>
+                    <p>
+                        Manuscripts must be original. We screen for
+                        plagiarism and reject those with over 15% similarity
+                        (excluding references). Self-plagiarism is not
+                        allowed.
+                    </p>
+                    </div>
+                </div>
+
+                <div
+                    class="col-xl-6 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="800"
+                >
+                    <div class="post-box">
+                    <h4>Membership Policy</h4>
+                    <p>
+                        Annual Author Membership for Indian Author is ₹12,000 INR and for International author is $148 USD.
+                    </p>
+                    <h5>Membership Privileges</h5>
+                    <ul>
+                        <li><strong>Publication Support:</strong> Up to four (4) articles published free of cost annually.</li>
+                        <li><strong>Academic Engagement:</strong> Exclusive access to Curevita’s research webinars, workshops, faculty development programs (FDPs), seminars, and symposia.</li>
+                        <li><strong>Leadership Opportunities:</strong> Participation in editorial boards and scholarly committees within Curevita Journals.</li>
+                    </ul>
+                    </div>
+                </div>
+                
+                <div class="col-xl-6 col-md-6 mt-3 pt-2 row">
+                    <div
+                        class="col-12"
+                        data-aos="fade-up"
+                        data-aos-delay="700"
+                    >
+                        <div class="post-box">
+                        <h4>Withdrawal & Retraction</h4>
+                        <p>
+                            Authors can withdraw before acceptance via email.
+                            After acceptance, justification is required.
+                            Retractions are issued for ethical violations
+                            post-publication.
+                        </p>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12"
+                        data-aos="fade-up"
+                        data-aos-delay="800"
+                    >
+                        <div class="post-box">
+                            <h4>Complaints & Appeals</h4>
+                            <p>
+                                Complaints regarding editorial decisions, peer
+                                review, or ethical issues can be formally submitted.
+                                Each case will be independently reviewed by our team.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="document-upload" class="section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Document Upload Instructions</h2>
+            <p>
+                For Authors of Frontiers in Environmental Revolutionary Innovation (FERI) 
+            </p>
+        </div>
+
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Online Upload -->
+                <div class="col-lg-6">
+                    <div class="box p-3 shadow rounded bg-light">
+                        <h4>Online Upload</h4>
+                        <p>
+                            Fill in the form and upload files under the following
+                            fields:
+                        </p>
+                        <ul>
+                            <li><strong>Author Name & Manuscript Title</strong></li>
+                            <li>
+                                <strong>Upload Field 1:</strong> Copyright Form
+                            </li>
+                            <li>
+                                <strong>Upload Field 2:</strong> Payment Receipt
+                            </li>
+                            <li>
+                                <strong>Format accepted:</strong> DOCX
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Important Notes -->
+                <div class="col-lg-6">
+                    <div class="box p-4 shadow rounded bg-light">
+                        <h4>Important Notes</h4>
+                        <ul>
+                            <li>
+                                ✔ Ensure the Copyright Form is signed by all
+                                contributing authors.
+                            </li>
+                            <li>
+                                ✔ Use clear scans or photographs of documents if
+                                not in digital format.
+                            </li>
+                            <li>
+                                ✔ Double-check your manuscript ID or title is
+                                clearly mentioned in all files or filenames.
+                            </li>
+                            <li>
+                                ✔ Retain a copy of both documents for your
+                                records.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Join As A Reviewer</h2>
+        <p>
+            For queries related to submission, review process, or
+            publication
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gx-lg-0 gy-4">
+            <div class="col-lg-4">
+                <div
+                class="info-container d-flex flex-column align-items-center justify-content-center"
+                >
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <i
+                        class="bi bi-building flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Publisher</h3>
+                        {% if contact %}
+                        <p>{{ contact.name}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <i class="bi bi-telephone flex-shrink-0"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <i class="bi bi-envelope flex-shrink-0"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <i
+                        class="bi bi-globe flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Website</h3>
+                        {% if contact %}
+                        <a class="text-light" href="{{contact.company_website}}" target="_blank">{{contact.company_website}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <form
+                action="forms/contact.php"
+                method="post"
+                class="php-email-form"
+                data-aos="fade"
+                data-aos-delay="100"
+                >
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Your Name"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Your Email"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="subject"
+                            placeholder="Subject"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea
+                            class="form-control"
+                            name="message"
+                            rows="8"
+                            placeholder="Message"
+                            required=""
+                        ></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">
+                            Your message has been sent. Thank you!
+                        </div>
+
+                        <button type="submit">Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <!-- End Contact Form -->
+        </div>
+    </div>
+    </section>
+    <!-- /Contact Section -->
+</main>
+{% endblock %}

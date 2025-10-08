@@ -1,0 +1,186 @@
+{% extends "basecode.html" %}
+{% block title %}Add Company{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-header bg-primary text-white text-center rounded-top-4 py-3">
+          <h3 class="mb-0 fw-bold"><i class="fas fa-building me-2"></i>Add Journal Details</h3>
+        </div>
+        <div class="card-body p-5">
+          <form method="POST">
+            <!-- Basic Information Section -->
+            <div class="mb-4">
+              <h5 class="text-primary mb-3 pb-2 border-bottom"><i class="fas fa-info-circle me-2"></i>Basic Information</h5>
+               <!--Journal Dropdown -->
+              <div class="mb-3">
+                  <label class="form-label fw-semibold">Journal</label>
+                  <select name="journal_id" class="form-select" required>
+                      <option value="">Select Journal</option>
+                      {% for journal in journals %}
+                          <option value="{{ journal.id }}">{{ journal.full_name }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label class="form-label fw-semibold">Company Full Name <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-building"></i></span>
+                    <input type="text" name="name" class="form-control" placeholder="Enter Company Full Name" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Company Email <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" name="email" class="form-control" placeholder="company@example.com" required>
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Company Phone <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    <input type="text" name="phone" class="form-control" placeholder="+1 (555) 123-4567" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Company Address</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                  <textarea name="address" class="form-control" rows="3" placeholder="Enter Company Address"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="mb-4">
+              <h5 class="text-primary mb-3 pb-2 border-bottom"><i class="fas fa-share-alt me-2"></i>Social Media Links</h5>
+              
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">LinkedIn</label>
+                  <div class="input-group">
+                    <span class="input-group-text linkedin-color text-white"><i class="fab fa-linkedin-in"></i></span>
+                    <input type="url" name="linkedin" class="form-control" placeholder="https://linkedin.com/company/name">
+                  </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Instagram</label>
+                  <div class="input-group">
+                    <span class="input-group-text instagram-color text-white"><i class="fab fa-instagram"></i></span>
+                    <input type="url" name="instagram" class="form-control" placeholder="https://instagram.com/companyname">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Facebook</label>
+                  <div class="input-group">
+                    <span class="input-group-text facebook-color text-white"><i class="fab fa-facebook-f"></i></span>
+                    <input type="url" name="facebook" class="form-control" placeholder="https://facebook.com/companyname">
+                  </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Twitter (X)</label>
+                  <div class="input-group">
+                    <span class="input-group-text twitter-color text-white"><i class="fab fa-twitter"></i></span>
+                    <input type="url" name="twitter" class="form-control" placeholder="https://twitter.com/companyname">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">Company Website</label>
+                  <div class="input-group">
+                    <span class="input-group-text website-color text-white"><i class="fas fa-globe"></i></span>
+                    <input type="url" name="company_website" class="form-control" placeholder="https://companywebsite.com">
+                  </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold">YouTube</label>
+                  <div class="input-group">
+                    <span class="input-group-text youtube-color text-white"><i class="fab fa-youtube"></i></span>
+                    <input type="url" name="youtube_url" class="form-control" placeholder="https://youtube.com/companyname">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-5 pt-2">
+              <a href="{{ url_for('list_contacts') }}" class="btn btn-outline-secondary px-4">
+                <i class="fas fa-arrow-left me-2"></i>Back
+              </a>
+              <button type="submit" class="btn btn-primary px-4">
+                <i class="fas fa-save me-2"></i>Save Company
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .input-group-text {
+    width: 45px;
+    justify-content: center;
+  }
+  
+  .linkedin-color {
+    background-color: #0A66C2;
+  }
+  
+  .instagram-color {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  }
+  
+  .facebook-color {
+    background-color: #1877F2;
+  }
+  
+  .twitter-color {
+    background-color: #1DA1F2;
+  }
+  
+  .website-color {
+    background-color: #2b2b2b;
+  }
+  
+  .youtube-color {
+    background-color: #FF0000;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+  }
+  
+  .card {
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+</style>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+      <title>CIBDI - Curevita Innovation of BioData Intelligence</title>
+      <meta name="description" content="" />
+      <meta name="keywords" content="" />
+
+      <!-- Favicons -->
+      <link
+         href="{{ url_for('static', filename='assets/cibdi/img/cibdi_image-3.png') }}"
+         rel="icon"
+      />
+      <link
+         href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}"
+         rel="apple-touch-icon"
+      />
+
+      <!-- Fonts -->
+      <link href="https://fonts.googleapis.com" rel="preconnect" />
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+         rel="stylesheet"
+      />
+      <link 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+        rel="stylesheet"
+      >
+
+      <!-- Vendor CSS Files -->
+      <link
+         href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}"
+         rel="stylesheet"
+      />
+      <link
+         href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}"
+         rel="stylesheet"
+      />
+      <link
+         href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}"
+         rel="stylesheet"
+      />
+      <link
+         href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}"
+         rel="stylesheet"
+      />
+      <link
+         href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}"
+         rel="stylesheet"
+      />
+
+      <!-- Main CSS File -->
+      <link
+         href="{{ url_for('static', filename='assets/css/cibdi/main.css') }}"
+         rel="stylesheet"
+      />
+
+   </head>
+
+   <body class="index-page">
+      <header id="header" class="header fixed-top">
+         <div class="topbar d-flex align-items-center">
+            <div
+               class="container d-flex justify-content-center justify-content-md-between"
+            >
+               <div class="contact-info d-flex align-items-center">
+                  {% if contact %}
+                  <i class="bi bi-envelope d-flex align-items-center"
+                     ><a href="mailto:{{contact.email}}"
+                        >{{contact.email}}</a
+                     ></i
+                  >
+                  <i class="bi bi-phone d-flex align-items-center ms-4"
+                     ><a class="text-light" href="tel:{{ contact.phone }}">{{ contact.phone }}</a></i
+                  >
+                  {% endif %}
+               </div>
+               <div class="social-links d-none d-md-flex align-items-center">
+                  {% if contact %}
+                      {% if contact.twitter %}
+                          <a href="{{ contact.twitter }}" class="twitter" target="_blank">
+                              <i class="bi bi-twitter"></i>
+                          </a>
+                      {% endif %}
+                      {% if contact.facebook %}
+                          <a href="{{ contact.facebook }}" class="facebook" target="_blank">
+                              <i class="bi bi-facebook"></i>
+                          </a>
+                      {% endif %}
+                      {% if contact.instagram %}
+                          <a href="{{ contact.instagram }}" class="instagram" target="_blank">
+                              <i class="bi bi-instagram"></i>
+                          </a>
+                      {% endif %}
+                      {% if contact.linkedin %}
+                          <a href="{{ contact.linkedin }}" class="linkedin" target="_blank">
+                              <i class="bi bi-linkedin"></i>
+                          </a>
+                      {% endif %}
+                      {% if contact.youtube_url %}
+                          <a href="{{ contact.youtube_url }}" class="youtube" target="_blank">
+                              <i class="bi bi-youtube"></i>
+                          </a>
+                      {% endif %}
+                  {% endif %}
+              </div>
+            </div>
+         </div>
+         <div class="branding d-flex align-items-center">
+            <div
+               class="container position-relative d-flex align-items-center justify-content-between"
+            >
+               <a href="/cibdi/home" class="logo d-flex align-items-center">
+                  <!-- Uncomment the line below if you also wish to use an image logo -->
+                  <img
+                     src="{{ url_for('static', filename='assets/img/file-3i0SDQN6Ojb5x94AKMPiXW63.webp') }}"
+                     alt=""
+                  />
+
+                  <div class="sitename text-light fs-5">
+                     Curevita
+                     <hr
+                        style="margin: 0 !important; opacity: 0.5 !important"
+                     />
+                     Research
+                  </div>
+                  <span></span>
+               </a>
+
+               <nav id="navmenu" class="navmenu">
+                  <ul>
+                     <li><a href="/cibdi/about">About</a></li>
+                     <li><a href="/cibdi/current_issue">Current Issues</a></li>
+                     <li class="dropdown">
+                        <div class="dropdown-content">Author Guidelines ▾</div>
+                        <ul class="dropdown-contents">
+                           <div class="text-danger text-center">Download</div><hr>
+                           <li><a href="/static/assets/pdf/CRIN_Paper_template.docx" download>Paper Template</a></li>
+                           <li><a href="/static/assets/pdf/CRIN_Copyright_Transfer_Form.docx" download>Copyright Transfer Form</a></li>
+                           <li><a href="/static/assets/pdf/Sample_Research_Article.docx" download>Sample Research Article</a></li>
+                        </ul>
+                     </li>
+                     <li><a href="/cibdi/home#testimonials">Editor</a></li>
+                     <li><a href="/cibdi/home#team">Reviewer</a></li>
+                     <li><a href="/cibdi/payment">Payment</a></li>
+                     <li><a href="/cibdi/home#contact">Contact</a></li>
+                  </ul>
+                  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+               </nav>
+            </div>
+         </div>
+         <div class="topbar d-flex align-items-center">
+            <div class="scrolling-heading-wrapper">
+              <div class="scrolling-heading-text">
+                Call for Papers: Submit your original research to our quarterly journal and contribute to global academic discourse. Cycles: May-june-July / Aug-sep-Oct / Nov-Dec-Jan / Feb-March-Apr
+              </div>
+            </div>
+          </div>
+      </header>
+      <!-- Page content -->
+      <div>
+         <br><br>
+         {% block content %}{% endblock %}
+      </div>
+      <footer id="footer" class="footer accent-background">
+         <div class="container footer-top">
+            <div class="row gy-4">
+               <div class="col-lg-5 col-md-12 footer-about">
+                  <a href="index.html" class="logo d-flex align-items-center">
+                     <span class="sitename">CIBDI</span>
+                  </a>
+                  <p>
+                     <strong
+                        >Curevita Innovation of BioData Intelligence (CIBDI)</strong
+                     >
+                     is a global platform for multidisciplinary research
+                     publication. We strive to promote high-quality research
+                     through our streamlined peer-reviewed process and
+                     transparent publishing system.
+                  </p>
+                  <div class="social-links d-flex mt-4">
+                     {% if contact %}
+                         {% if contact.twitter %}
+                             <a href="{{ contact.twitter }}" target="_blank"><i class="bi bi-twitter"></i></a>
+                         {% endif %}
+                         {% if contact.facebook %}
+                             <a href="{{ contact.facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                         {% endif %}
+                         {% if contact.instagram %}
+                             <a href="{{ contact.instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                         {% endif %}
+                         {% if contact.linkedin %}
+                             <a href="{{ contact.linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                         {% endif %}
+                         {% if contact.youtube_url %}
+                             <a href="{{ contact.youtube_url }}" target="_blank"><i class="bi bi-youtube"></i></a>
+                         {% endif %}
+                     {% endif %}
+                 </div>
+               </div>
+
+               <div class="col-lg-2 col-6 footer-links">
+                  <h4>Useful Links</h4>
+                  <ul>
+                     <li><a href="/cibdi/home">Home</a></li>
+                     <li><a href="/cibdi/about">About Us</a></li>
+                     <li><a href="/cibdi/home#publication-guidelines">Scope Of Journal</a></li>
+                     <li><a href="/cibdi/home#submission-guidelines">Submission Process</a></li>
+                     <li><a href="/cibdi/home#faq">FAQ</a></li>
+                  </ul>
+               </div>
+
+               <div class="col-lg-2 col-6 footer-links">
+                  <h4>Quick Services</h4>
+                  <ul>
+                     <li><a href="/cibdi/home#team">Reviewer Panel</a></li>
+                     <li><a href="/cibdi/home#services">Services</a></li>
+                     <li><a href="/cibdi/home#contact">Contact Support</a></li>
+                     <li><a href="/cibdi/home#testimonials">Editorial Board</a></li>
+                     <li><a href="/">Journals Group</a></li>
+                  </ul>
+               </div>
+
+              <div
+                  class="col-lg-3 col-md-12 footer-contact text-center text-md-start"
+               >  {% if contact %}
+                  <h4>Contact Us</h4>
+                  <p>{{ contact.address }}</p>
+                  <p class="mt-4">
+                      <a href="tel:{{ contact.phone }}"><i class="fa-solid fa-phone me-2"></i>{{ contact.phone }}</a>
+                  </p>
+                  <p>
+                    <a href="mailto:{{ contact.email }}"><i class="fa fa-envelope me-2"></i>{{ contact.email }}</a>
+                  </p>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+
+         <div class="container copyright text-center mt-4">
+            <p>
+               © Copyright <strong class="px-1 sitename">Curevita Research Pvt Ltd</strong> | All
+               Rights Reserved
+            </p>
+            <div class="credits">
+               Designed & Maintained by Curevita Research Web Team
+            </div>
+         </div>
+      </footer>
+      <!-- Scroll Top -->
+      <a
+         href="#"
+         id="scroll-top"
+         class="scroll-top d-flex align-items-center justify-content-center"
+         ><i class="bi bi-arrow-up-short"></i
+      ></a>
+      <!-- Preloader -->
+      <div id="preloader"></div>
+      <!-- Vendor JS Files -->
+      <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+   </body>
+</html>

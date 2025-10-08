@@ -1,0 +1,1433 @@
+{% extends 'fhim/base.html' %}
+
+{% block title %}Homepage - Frontiers of Health Innovations and Medical Advances {% endblock %}
+
+{% block content %}
+<main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section accent-background top_background_img">
+        <div
+            class="container position-relative"
+            data-aos="fade-up"
+            data-aos-delay="100"
+        >
+            <div class="row gy-5 justify-content-between">
+                <div
+                    class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+                >
+                    <div style="text-align: center; color: white; font-size: 23px; line-height: 1.2; font-family: 'FontAwesome'; font-weight: bold; margin-bottom: 5px;">
+                        Frontiers of Health Innovations and Medical Advances
+                    </div>
+                    <div style="text-align: center; color: white; font-size: 28px; line-height: 1.2; font-family: monospace; font-weight: bold;">
+                        International Multi-Disciplinary Journal
+                    </div>
+
+                    <div style="text-align: center; color: white; font-size: 19px; margin-top: 8px; font-family: cursive;">
+                    A peer-reviewed and refereed online journal — openly
+                    accessible, widely indexed, multidisciplinary, and
+                    globally recognized for academic and scholarly
+                    excellence.
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2">
+                    <img
+                    src="{{ url_for('static', filename='assets/fhim/img/image-3.png') }}"
+                    class="img-fluid"
+                    alt=""
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="icon-boxes position-relative"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
+            <div class="container position-relative">
+                <div class="row gy-4 mt-5">
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/fhim/peer_reviewed" class="stretched-link"
+                                >Peer-Reviewed Papers</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-globe"></i></div>
+                        <h4 class="title">
+                            <a href="#global_index" class="stretched-link"
+                                >Global Indexing</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-cloud-upload"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="#" class="stretched-link"
+                                >Easy Online Submission</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/fhim/ugc_care" class="stretched-link"
+                                >UGC-CARE Guidelines</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reward-section" class="call-to-action section dark-background">
+        <div class="container py-2">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="reward-header">
+                    <div class="reward-badge" aria-hidden="true">
+                        <!-- Trophy icon -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4Z" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 7H5a3 3 0 0 0 3 3M17 7h2a3 3 0 0 1-3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 id="opportunities-title" class="opportunities-title">OPPORTUNITIES &amp; REWARDS</h1>
+                        <p class="opportunities-subtitle">Grow your impact with access, recognition, and expert guidance.</p>
+                    </div>
+                </div>
+                <div class="reward-content">
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Ticket/Pass icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9a3 3 0 1 0 0 6v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a3 3 0 1 1 0-6V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Free Participation</h3>
+                        <p>Access to workshops, FDPs, webinars, and symposia organized by Curevita Research.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Book/Bookmark icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 4h7a4 4 0 0 1 4 4v12l-4-2-4 2V8a4 4 0 0 0-4-4Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Knowledge Access</h3>
+                        <p>Complimentary subscription to eNews Later and current affairs updates.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Award/Medal icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M9 14v7l3-2 3 2v-7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Recognition &amp; Rewards</h3>
+                        <p>Best Paper Awards with special certificates; recommendation rewards for high-impact research enhancing academic, research, and industry careers.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Users/Handshake icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm8 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M3 21v-1a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Mentorship &amp; Guidance</h3>
+                        <p>Early-career authors receive mentorship from leading scientists, professors, and industry experts.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Our Services</h2>
+            <p>
+                Explore our key offerings that support authors, researchers,
+                and the academic community globally.
+            </p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+            <div class="row gy-4">
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-journal-check"></i>
+                    </div>
+                    <h3>Peer-Reviewed Publication</h3>
+                    <p>
+                        All submitted papers undergo rigorous peer review
+                        ensuring high academic quality and research
+                        standards.
+                    </p>
+                    <a href="/fhim/peer_reviewed" class="readmore stretched-link">
+                        Read more <i class="bi bi-arrow-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-cloud-upload"></i>
+                    </div>
+                    <h3>Easy Online Submission</h3>
+                    <p>
+                        Submit your research online using our simple and
+                        intuitive paper submission platform.
+                    </p>
+                    <a href="#" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h3>Global Indexing</h3>
+                    <p>
+                        Our journal is indexed by major research databases
+                        including Google Scholar, Academia, and more.
+                    </p>
+                    <a href="#global_index" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-badge-ad"></i>
+                    </div>
+                    <h3>DOI Allocation</h3>
+                    <p>
+                        Each published paper receives a unique CrossRef DOI
+                        for better visibility and citation tracking.
+                    </p>
+                    <a href="/fhim/doi_allocation" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3>UGC-CARE Guidelines</h3>
+                    <p>
+                        Our publication follows UGC-CARE recommendations and
+                        maintains compliance with ethical research practices.
+                    </p>
+                    <a href="/fhim/ugc_care" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="600"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-chat-square-text"></i>
+                    </div>
+                    <h3>24x7 Support</h3>
+                    <p>
+                        Dedicated support through email, phone, and WhatsApp
+                        to assist authors at every stage of publication.
+                    </p>
+                    <a href="#contact" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- global_index Section -->
+    <section id="global_index" class="global_index section">  
+        <div  class="container section-title" data-aos="fade-up">
+            <!-- Centered Heading -->
+            <h2 class="text-center fw-bold mb-3">Global Indexing</h2>  
+            <!-- First Row -->
+            <div class="row justify-content-center mb-2">  
+                    <div class="col-6 col-md-3 text-center p-2">  
+                    <img src="{{ url_for('static', filename='assets/img/google-scholar.png') }}" class="img-fluid" style="max-height: 80px;" alt="Google Scholar">  <!-- max-height से image की ऊंचाई कम की -->
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/research-gate.png') }}" class="img-fluid" style="max-height: 80px;" alt="Research Gate">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/arxiv01.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="ArXiv">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/openAire.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="OpenAIRE">
+                    </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="row justify-content-center">
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/DOI_logo.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOI">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/logo-crossref.png') }}" class="img-fluid" style="max-height: 80px;" alt="Crossref">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/zonodo1.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="Zenodo">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/doaj.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOAJ">
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Services Section -->
+    <section
+    id="call-to-action"
+    class="call-to-action section dark-background"
+    >
+        <div class="container">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="col-xl-10">
+                    <div class="text-center">
+                        <h4>
+                            Submit Research Work for Consideration of Publication
+                        </h4>
+                        <a class="cta-btn" href="/fhim/current_issue">Submit Papers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Editorial Board</h2>
+        <p>
+            Meet our esteemed editors who uphold our
+            commitment to academic excellence.
+        </p>
+    </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+                {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                    "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                },
+                "breakpoints": {
+                    "320": {
+                        "slidesPerView": 1,
+                        "spaceBetween": 40
+                    },
+                    "1200": {
+                        "slidesPerView": 3,
+                        "spaceBetween": 10
+                    }
+                }
+                }
+            </script>
+            <div class="swiper-wrapper">
+                {% for editor in editors %}
+                  {% if editor.code == "01" %}
+                    <div class="swiper-slide">
+                      <div class="testimonial-item">
+                        <h3>
+                          {{ editor.name }}
+                          {% if editor.link %}
+                          {% if "linkedin" in editor.link %}
+                              <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                                  <i class="bi bi-linkedin"></i>
+                              </a>
+                          {% else %}
+                              <a href="{{ editor.link }}" target="_blank" title="Visit">
+                                <i class="bi bi-link-45deg"></i>
+                              </a>
+                          {% endif %}
+                      {% endif %}
+                      
+                        </h3>
+                        <h4>{{ editor.designation }}</h4>
+              
+                        <div class="stars">
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                        </div>
+              
+                        {% if editor.quote %}
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>"{{ editor.quote }}"</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+            <!-- End testimonial item -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    </section>
+    <!-- /Testimonials Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Reviewer Team</h2>
+        <p>
+            Meet our dedicated reviewers who ensure the quality and
+            integrity of our journal publications.
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Dr. Niharika Bhawsar -->
+            {% for editor in editors %}
+                  {% if editor.code == "02" %}
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+                <h4>{{ editor.name }}</h4>
+                <span>{{ editor.designation}}{{editor.quote}}</span>
+                <div class="social">
+                    {% if editor.link %}
+                    {% if "linkedin" in editor.link %}
+                        <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ editor.link }}" target="_blank" title="Visit">
+                          <i class="bi bi-link-45deg"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                </div>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+        </div>
+    </div>
+    </section>
+    <!-- /Team Section -->
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Left Content -->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="content px-xl-5">
+                <h3>
+                    <span>Why Publish </span><strong>With Us?</strong>
+                </h3>
+                <p>
+                    Publishing with our journal gives your research
+                    global visibility, credibility through peer review,
+                    and indexing in leading academic databases.
+                </p>
+                </div>
+            </div>
+
+            <!-- FAQ Right Side -->
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-container">
+                <div class="faq-item faq-active">
+                    <h3>
+                        <span class="num">1.</span>
+                        <span>International Peer Review Panel</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            All submitted manuscripts undergo rigorous peer
+                            review by experts from our international
+                            editorial and reviewer panel.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">2.</span>
+                        <span>Fast Turnaround Time</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            We aim to complete the review and publication
+                            process within a short span, ensuring timely
+                            dissemination of your research.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">3.</span>
+                        <span>Open Access for Maximum Visibility</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            All articles are openly accessible to readers
+                            across the globe, ensuring high visibility and
+                            citation potential.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">4.</span>
+                        <span>Indexed in Major Databases</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            Our journal is indexed in multiple research
+                            databases and directories, expanding the reach
+                            of your research work.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">5.</span>
+                        <span>DOI for Each Published Article</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            Every published paper is assigned a unique
+                            Digital Object Identifier (DOI) for easy
+                            citation and traceability.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">6.</span>
+                        <span>Certificate of Publication</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            We provide an official Certificate of
+                            Publication to the corresponding author for
+                            academic and professional use.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- /Faq Section -->
+
+    <!-- Recent Posts Section -->
+    <section id="publication-guidelines" class="recent-posts section">
+   <!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <h2>Scope Of Journal</h2>
+    <p>
+        Frontiers of Health Innovations and Medical Advances (FHIMA) - A
+        National Peer-Reviewed Multidisciplinary Journal
+    </p>
+</div>
+
+<!-- Scope of the Journal Section -->
+<div class="container">
+    <div class="row gy-4">
+        <!-- Box 1 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <article>
+                <p class="post-category">Indian National Scope for FHIMA</p>
+                <h2 class="title"><a href="#">Clinical and Translational Innovations</a></h2>
+                <ul>
+                    <li>Cutting-edge research in diagnostics, therapeutics, and medical devices addressing top-ranked local health concerns (infectious diseases, NCDs, maternal-child health, geriatric care).</li>
+                    <li>Translating lab breakthroughs into practical, culturally attuned medical technologies and treatment models.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <article>
+                <p class="post-category">Health Systems & Public Health Solutions</p>
+                <h2 class="title"><a href="#">Strengthening Public Health</a></h2>
+                <ul>
+                    <li>Improving primary care, public health infrastructure, and implementation science in national initiatives (e.g., Ayushman Bharat).</li>
+                    <li>Preventive care programs and health equity efforts for rural and underserved populations.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+                <p class="post-category">Digital Health & Technological Integration</p>
+                <h2 class="title"><a href="#">AI, mHealth & Wearable Tech</a></h2>
+                <ul>
+                    <li>Research on telemedicine, AI-driven diagnostics, health informatics, and mobile health technologies.</li>
+                    <li>Digital tools designed to overcome accessibility gaps in both urban and rural India.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <article>
+                <p class="post-category">Affordable and Accessible Innovation</p>
+                <h2 class="title"><a href="#">Frugal Engineering & Scalable Solutions</a></h2>
+                <ul>
+                    <li>Showcasing cost-effective health innovations like BETiC (IIT Bombay).</li>
+                    <li>Prioritizing scalable solutions adaptable to India’s resource-constrained environments.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 5 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <article>
+                <p class="post-category">Policy, Implementation & Socioeconomic Research</p>
+                <h2 class="title"><a href="#">Health Policy & Governance</a></h2>
+                <ul>
+                    <li>Analysis of health policies, financing, insurance models, and regulatory frameworks.</li>
+                    <li>Exploring public-private synergies in medicine and technology dissemination.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 6 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <p class="post-category">Cross-disciplinary & Societal Insights</p>
+                <h2 class="title"><a href="#">Biomedical, Social & Ethical Perspectives</a></h2>
+                <ul>
+                    <li>Contributions from biomedical engineering, health economics, behavioral sciences, and community health.</li>
+                    <li>Ethical discussions on innovation, equity, and access in healthcare.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 7 -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <article>
+                <p class="post-category">National Relevance and Strategic Importance</p>
+                <h2 class="title"><a href="#">Context, Innovation & Policy Impact</a></h2>
+                <ul>
+                    <li><strong>Contextual Responsiveness:</strong> Studies addressing India’s socioeconomic fabric, urban-rural disparities, and cultural diversity.</li>
+                    <li><strong>Innovation Enablement:</strong> Collaborations among academic institutions, hospitals, industry partners, and government agencies.</li>
+                    <li><strong>Policy Influence:</strong> Findings that inform NHM, NCD control, and Digital Health rollouts.</li>
+                    <li><strong>Capacity Building & Inclusion:</strong> Encouraging regional institutions and early-career researchers to contribute.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</div>
+
+    <div class="container my-5">
+    <div class="row">
+        <div class="col-12" data-aos="fade-up" data-aos-delay="700">
+            <article class="p-4 shadow-sm rounded bg-light">
+                <p class="post-category text-primary fw-bold">National Significance</p>
+                <h2 class="title">
+                    <a>National Significance</a>
+                </h2>
+                <ul>
+                    <li>
+                        FHIMA provides a strategic platform for health innovations developed or adapted to the unique demographic, cultural, and socioeconomic conditions of India
+                    </li>
+                    <li>
+                        <strong>Local Relevance:</strong> Encouraging solutions that address region-specific health challenges (e.g., endemic diseases, healthcare access disparities).
+                    </li>
+                    <li>
+                        <strong>Capacity Building:</strong> Promoting collaborations between academic institutions, hospitals, industries, and policymakers within the country.
+                    </li>
+                    <li>
+                        <strong>Policy Impact:</strong> Informing evidence-based decision-making and guiding national health priorities.
+                    </li>
+                    <li>
+                        <strong>Knowledge Equity:</strong> Facilitating access to leading-edge research for healthcare professionals, institutions, and communities nationally.
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center vertical-center my-5" data-aos="fade-up">
+    <p>
+        Frontiers of Health Innovations and Medical Advances (FHIMA) - An
+        International Peer-Reviewed Multidisciplinary Journal
+    </p>
+</div>
+
+<div class="container">
+    <div class="row gy-4">
+
+        <!-- Box 1: Medical and Clinical Innovations -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/medical-clinical.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Medical & Clinical Innovations</p>
+                <h2 class="title"><a href="#">Diagnostics & Therapeutics</a></h2>
+                <ul>
+                    <li>Novel diagnostic methods, therapeutic interventions, surgical techniques, and evidence-based medical practices.</li>
+                    <li>Clinical medicine and diagnostics – advances in diagnosis, treatment, surgical techniques, and disease management.</li>
+                    <li>Precision medicine, genomics, and infectious & non-communicable disease management.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 2: Digital Health & AI -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/digital-health.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Digital Health & AI</p>
+                <h2 class="title"><a href="#">AI, Telemedicine & Wearables</a></h2>
+                <ul>
+                    <li>Applications of AI, machine learning, telemedicine, health informatics, wearable technologies, and digital therapeutics.</li>
+                    <li>Digital and technological health innovations – telemedicine, AI-driven healthcare, medical imaging, wearable devices.</li>
+                    <li>Health technology & digital innovations – robotics, remote monitoring, and automation in diagnostics and surgery.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 3: Biomedical Research -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/biomedical-research.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Biomedical Research</p>
+                <h2 class="title"><a href="#">Translational & Regenerative Medicine</a></h2>
+                <ul>
+                    <li>Translational medicine, biomaterials, regenerative medicine, biotechnology, and nanomedicine.</li>
+                    <li>Biomedical research and translational medicine – from bench to bedside innovations, molecular medicine, regenerative therapies, and clinical trials.</li>
+                    <li>Pharmaceutical and therapeutic developments – drug discovery, targeted therapies, vaccine development, and personalized medicine.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 4: Public Health & Preventive Strategies -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/public-health.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Public Health & Preventive Strategies</p>
+                <h2 class="title"><a href="#">Epidemiology & Preventive Care</a></h2>
+                <ul>
+                    <li>Health promotion, epidemiology, vaccination strategies, disease surveillance, and preventive healthcare models.</li>
+                    <li>Public & global health – health systems strengthening, policy analysis, community health, epidemiology, and pandemic preparedness.</li>
+                    <li>Nutrition, lifestyle, and wellness research.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 5: Integrative & Lifestyle Medicine -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/integrative-medicine.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Integrative & Lifestyle Medicine</p>
+                <h2 class="title"><a href="#">Holistic Health & Wellness</a></h2>
+                <ul>
+                    <li>Holistic health practices, mind-body interventions, nutrition science, and lifestyle disease management.</li>
+                    <li>Yoga and meditation – scientific studies on yoga therapy, mindfulness, pranayama, stress management, preventive and rehabilitative health.</li>
+                    <li>Sustainable & integrative health – lifestyle medicine, mental health, environmental health, and climate-related health risks.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 6: Health Policy & Medical Education -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/health-policy.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Health Policy & Medical Education</p>
+                <h2 class="title"><a href="#">Policy, Governance & Training</a></h2>
+                <ul>
+                    <li>Health policy reforms, healthcare delivery models, financing, ethics, and SDGs in health.</li>
+                    <li>Innovations in medical education – new teaching methods, simulation-based learning, and capacity-building for healthcare professionals.</li>
+                    <li>Medical ethics and competency-based training in medicine.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 7: Specialized & Emerging Fields -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/specialized-fields.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Specialized & Emerging Fields</p>
+                <h2 class="title"><a href="#">Neuroscience, Cardiovascular & Cancer</a></h2>
+                <ul>
+                    <li>Neuroscience – molecular & cellular mechanisms, neural circuits, cognitive & behavioral processes, clinical neuroscience.</li>
+                    <li>Cardiovascular studies – physiology, epidemiology, diagnostics, interventional cardiology, regenerative medicine, imaging & technology innovations.</li>
+                    <li>Cancer science – biology, genetics, tumor microenvironment, metastasis, diagnostics, therapeutics, immuno-oncology, and personalized medicine.</li>
+                    <li>Dental science & oral health – surgery, orthodontics, periodontology, prosthodontics, oral pathology, preventive dentistry, and material innovations.</li>
+                </ul>
+            </article>
+        </div>
+
+    </div>
+</div>
+<div class="container text-center vertical-center my-5" data-aos="fade-up">
+    <p>
+        Mental Health & Integrative Sciences - Research and Innovations
+    </p>
+</div>
+
+<div class="container">
+    <div class="row gy-4">
+
+        <!-- Box 1: Mental Health under Palmistry -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/palmistry-mental.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Mental Health & Palmistry</p>
+                <h2 class="title"><a href="#">Dermatoglyphics & Psychological Profiling</a></h2>
+                <ul>
+                    <li>Dermatoglyphics & Mental Profiling – fingerprint patterns correlated with personality, learning styles, and emotional states.</li>
+                    <li>Palmistry in Psychological Assessment – alignment of palm features with mental health indicators.</li>
+                    <li>Integrative Diagnostics – combining traditional palmistry with clinical psychology, psychiatry, and neuroscience.</li>
+                    <li>Cultural & Historical Perspectives – ancient & modern interpretations of palm features related to human behavior.</li>
+                    <li>Therapeutic Applications – complementary tools for counseling, stress management, and self-awareness.</li>
+                    <li>Predictive Biometrics – fingerprints as supportive indicators for early mental disorder detection.</li>
+                    <li>Interdisciplinary Approaches – integrating anthropology, biometric science, cognitive science, and wellness practices.</li>
+                    <li>AI in Mental Health – pattern recognition, predictive screening, personalized therapy, ethical computational approaches.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 2: Physiotherapy & Rehabilitation -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/physiotherapy.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Physiotherapy & Rehabilitation</p>
+                <h2 class="title"><a href="#">Exercise, Rehab & Pain Management</a></h2>
+                <ul>
+                    <li>Innovations in physical therapy, exercise science, and sports rehabilitation.</li>
+                    <li>Pain management strategies and assistive technology applications.</li>
+                    <li>Holistic rehabilitation programs integrating physical and mental well-being.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 3: Paramedical Sciences -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/paramedical.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Paramedical Sciences</p>
+                <h2 class="title"><a href="#">Radiology, EMS & Allied Health</a></h2>
+                <ul>
+                    <li>Advancements in laboratory technology, radiology, and emergency medical services.</li>
+                    <li>Anesthesia technology and allied health profession innovations.</li>
+                    <li>Integration of paramedical research with clinical practices.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 4: Nursing Sciences -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/nursing.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Nursing Sciences</p>
+                <h2 class="title"><a href="#">Education, Clinical & Leadership</a></h2>
+                <ul>
+                    <li>Nursing education and clinical practice innovations.</li>
+                    <li>Patient-centered care, geriatric and pediatric nursing.</li>
+                    <li>Nursing leadership and management strategies.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 5: Homeopathy -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/homeopathy.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Homeopathy</p>
+                <h2 class="title"><a href="#">Principles, Pharmacology & Efficacy</a></h2>
+                <ul>
+                    <li>Research on homeopathic principles and pharmacology.</li>
+                    <li>Clinical efficacy, safety studies, and integration with modern medicine.</li>
+                    <li>Evidence-based complementary treatments.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 6: Ayurveda -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/ayurveda.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Ayurveda</p>
+                <h2 class="title"><a href="#">Diagnostics, Therapies & Lifestyle</a></h2>
+                <ul>
+                    <li>Ayurvedic diagnostics, herbal medicine, and panchakarma therapies.</li>
+                    <li>Lifestyle-based healing and preventive health strategies.</li>
+                    <li>Integrating traditional Ayurvedic practices with modern health research.</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 7: Integrative & Alternative Medicine -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/integrative-medicine.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Integrative & Alternative Medicine</p>
+                <h2 class="title"><a href="#">Holistic Healing & Scientific Research</a></h2>
+                <ul>
+                    <li>Evidence-based approaches combining traditional healing systems with modern scientific research.</li>
+                    <li>Holistic and complementary health solutions.</li>
+                    <li>Bridging conventional medicine with lifestyle and wellness practices.</li>
+                </ul>
+            </article>
+        </div>
+
+    </div>
+</div>
+
+    </section>
+    <!-- /Recent Posts Section -->
+    <section id="submission-guidelines" class="recent-posts section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Submission Guidelines</h2>
+        <p>
+            Ensure your manuscript follows the required format before
+            submitting to Frontiers of Health Innovations and Medical Advances (FHIMA)
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Box 1: Types of Submissions -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="100"
+            >
+                <article>
+                <p class="post-category">Types of Submissions</p>
+                <h2 class="title">
+                    <a href="#">What You Can Submit</a>
+                </h2>
+                <ul>
+                    <li>Original Research Articles</li>
+                    <li>Review Articles</li>
+                    <li>Case Studies</li>
+                    <li>Short Communications</li>
+                    <li>Conceptual Papers</li>
+                    <li>Editorials and Opinion Pieces</li>
+                </ul>
+                </article>
+            </div>
+
+            <!-- Box 2: Manuscript Preparation -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
+                <article>
+                <p class="post-category">Manuscript Preparation</p>
+                <h2 class="title">
+                    <a href="#">Formatting & Structure</a>
+                </h2>
+                <ul>
+                    <li>Language: English (British or American)</li>
+                    <li>Font: Times New Roman, 12pt, 1.5 spacing</li>
+                    <li>Length: 3,000–7,000 words</li>
+                    <li>
+                        <strong>Structure:</strong>
+                        <ul>
+                            <li>
+                            Title, Abstract (150–300 words), Keywords
+                            (4–6)
+                            </li>
+                            <li>
+                            Introduction, Methodology, Results &
+                            Discussion
+                            </li>
+                            <li>Conclusion, References (APA/MLA/IEEE)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Figures & Tables: High resolution, clearly labeled
+                    </li>
+                </ul>
+                </article>
+            </div>
+
+            <!-- Box 3: Submission Process -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="300"
+            >
+                <article>
+                <p class="post-category">Submission Process</p>
+                <h2 class="title"><a href="#">How to Submit</a></h2>
+                <ul>
+                    <li>Submit via Email or Submission Portal</li>
+                    <li>
+                        <strong>Email:</strong>
+                        <a href="mailto:infocvrb@curevita.org"
+                            >infocvrb@curevita.org</a
+                        >
+                    </li>
+                    <li>
+                        <strong>Include Cover Letter with:</strong>
+                        <ul>
+                            <li>Title of the manuscript</li>
+                            <li>Author names and affiliations</li>
+                            <li>Corresponding author's contact details</li>
+                            <li>Declaration of originality</li>
+                            <li>Conflict of interest statement</li>
+                        </ul>
+                    </li>
+                </ul>
+                </article>
+            </div>
+        </div>
+        <!-- End row -->
+    </div>
+    <!-- End container -->
+    </section>
+   <section id="publication-policies" class="recent-posts section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Publication Policies</h2>
+        <p>
+            Our commitment to quality, transparency, and ethical publishing practices.
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row gy-4">
+
+            <!-- Box 1: Frequency -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Frequency</a></h2>
+                    <ul>
+                        <li>Quarterly (4 issues per year) with occasional special thematic issues.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 2: Peer Review -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Peer Review</a></h2>
+                    <ul>
+                        <li>Double-blind peer review process to ensure unbiased evaluation of all submissions.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 3: Ethical Standards -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Ethical Standards</a></h2>
+                    <ul>
+                        <li>Follows ICMJE, COPE, and WHO publication ethics guidelines for all submissions.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 4: Indexing & DOI -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Indexing & DOI</a></h2>
+                    <ul>
+                        <li>DOI registration via CrossRef, indexing in reputed scholarly databases (in process).</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 5: Open Access -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Open Access</a></h2>
+                    <ul>
+                        <li>All articles are freely accessible under a Creative Commons license.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 6: Publication Fee -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <article>
+                    <p class="post-category">Publication Policy</p>
+                    <h2 class="title"><a href="#">Publication Fee</a></h2>
+                    <ul>
+                        <li>A nominal Article Processing Charge (APC) – 18,000 INR for Indian authors and 205 USD for international authors to support open-access dissemination.</li>
+                    </ul>
+                </article>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="document-upload" class="section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Document Upload Instructions</h2>
+        <p>For Authors of Frontiers of Health Innovations and Medical Advances (FHIMA)</p>
+    </div>
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Online Upload -->
+            <div class="col-lg-6">
+                <div class="box p-4 shadow rounded bg-light">
+                    <h4>Online Upload</h4>
+                    <p>Fill in the form and upload files under the following fields:</p>
+                    <ul>
+                        <li><strong>Author Name & Manuscript Title</strong></li>
+                        <li><strong>Upload Field 1:</strong> Copyright Form</li>
+                        <li><strong>Upload Field 2:</strong> Payment Receipt</li>
+                        <li><strong>Format accepted:</strong> DOCX</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="col-lg-6">
+                <div class="box p-4 shadow rounded bg-light">
+                    <h4>Important Notes</h4>
+                    <ul>
+                        <li>✔ Ensure the Copyright Form is signed by all contributing authors.</li>
+                        <li>✔ Use clear scans or photographs of documents if not in digital format.</li>
+                        <li>✔ Double-check your manuscript ID or title is clearly mentioned in all files or filenames.</li>
+                        <li>✔ Retain a copy of both documents for your records.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Submission Guidelines -->
+            <div class="col-lg-6">
+                <div class="box p-4 shadow rounded bg-light">
+                    <h4>Submission Guidelines</h4>
+                    <p>
+                        Authors can submit manuscripts online at 
+                        <a href="https://www.curevitajournals.com" target="_blank">
+                            www.curevitajournals.com
+                        </a> following the FHIMA author instructions. 
+                        Submissions should be prepared according to the FHIMA Uniform Requirements for Manuscripts and accompanied by an originality declaration.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Article Types Accepted -->
+            <div class="col-lg-6">
+                <div class="box p-4 shadow rounded bg-light">
+                    <h4>Article Types Accepted</h4>
+                    <ul>
+                        <li>Original Research Papers</li>
+                        <li>Review Articles</li>
+                        <li>Short Communications</li>
+                        <li>Case Studies</li>
+                        <li>Technical Notes</li>
+                        <li>Policy Briefs</li>
+                        <li>Editorials & Commentaries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Join As A Reviewer</h2>
+        <p>
+            For queries related to submission, review process, or
+            publication
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gx-lg-0 gy-4">
+            <div class="col-lg-4">
+                <div
+                class="info-container d-flex flex-column align-items-center justify-content-center"
+                >
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <i
+                        class="bi bi-building flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Publisher</h3>
+                        {% if contact %}
+                        <p>{{ contact.name}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <i class="bi bi-telephone flex-shrink-0"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <i class="bi bi-envelope flex-shrink-0"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <i
+                        class="bi bi-globe flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Website</h3>
+                        {% if contact %}
+                        <a class="text-light" href="{{contact.company_website}}" target="_blank">{{contact.company_website}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <form
+                action="forms/contact.php"
+                method="post"
+                class="php-email-form"
+                data-aos="fade"
+                data-aos-delay="100"
+                >
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Your Name"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Your Email"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="subject"
+                            placeholder="Subject"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea
+                            class="form-control"
+                            name="message"
+                            rows="8"
+                            placeholder="Message"
+                            required=""
+                        ></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">
+                            Your message has been sent. Thank you!
+                        </div>
+
+                        <button type="submit">Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <!-- End Contact Form -->
+        </div>
+    </div>
+    </section>
+    <!-- /Contact Section -->
+</main>
+{% endblock %}

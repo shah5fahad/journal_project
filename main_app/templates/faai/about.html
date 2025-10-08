@@ -1,0 +1,196 @@
+{% extends 'faai/base.html' %}
+
+{% block title %}About FAAI - Frontiers of Agri & Animal Innovation{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<!-- Hero Section -->
+<section class="about-hero py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='assets/img/research-hero.jpg') }}') no-repeat center center; background-size: cover;">
+    <div class="container text-center py-4">
+        <h1 class="display-5 fw-bold mb-2 text-white">About FAAI</h1>
+        <h4 class="mb-3 text-light">Frontiers of Agri & Animal Innovation, Starting from 2025</h4>
+        <p class="lead mb-4 text-light">
+            A peer-reviewed, international journal dedicated to publishing high-quality, interdisciplinary research in agriculture and animal sciences.
+        </p>
+    </div>
+</section>
+
+<!-- Main About Section -->
+<section id="about" class="about section py-5">
+    <div class="container">
+        <div class="row gy-4 align-items-center">
+            <!-- Left Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm mb-4">
+                    <img src="{{ url_for('static', filename='assets/img/about.jpg') }}" class="card-img-top rounded-top" alt="About FAAI">
+                </div>
+                
+                <div class="about-content">
+                    <h3 class="h4 mb-3">About FAAI</h3>
+                    <p class="mb-3">
+                        Frontiers of Agri & Animal Innovation (FAAI) is a peer-reviewed, international journal dedicated to publishing high-quality, interdisciplinary research that addresses critical issues, pioneers innovative solutions, and explores emerging challenges in the fields of agriculture and animal sciences. Published by Curevita Research, FAAI adheres to NAAS and ICAR-NAAS guidelines, ensuring rigorous academic and ethical standards.
+                    </p>
+                    
+                    <p class="mb-3">
+                        FAAI represents a progressive platform dedicated to advancing agriculture and animal sciences through innovation, technology, and sustainability. It reflects the frontier where traditional practices meet modern science, driving solutions for food security, environmental resilience, animal health, and sustainable farming systems.
+                    </p>
+
+                    <p class="mb-3">
+                        The journal serves as a platform for bridging the gap between fundamental scientific research and practical applications, fostering knowledge exchange that supports holistic and sustainable advancements in global food systems. FAAI encourages contributions that integrate diverse perspectives, promote innovation, and drive positive change across agricultural and animal sectors worldwide.
+                    </p>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1521737604893-d14cc237f11d.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Collaboration">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="ps-lg-4">
+                    <h3 class="h4 mb-4">Quick Facts</h3>
+
+                    <ul class="list-unstyled mb-4">
+                        <li><strong>Starting Year:</strong> 2025</li>
+                        <li><strong>Frequency of Publication:</strong> Quarterly</li>
+                        <li><strong>Format:</strong> Online</li>
+                        <li><strong>Subject Area:</strong> Agriculture &amp; Animal Sciences</li>
+                        <li><strong>Language:</strong> English</li>
+                    </ul>
+
+                    <h3 class="h4 mb-4">Key Features</h3>
+                    
+                    <div class="features-list">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Peer-Reviewed Journal</h5>
+                                <p class="small mb-0">All submissions undergo rigorous review in compliance with NAAS and ICAR-NAAS standards.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Interdisciplinary Research</h5>
+                                <p class="small mb-0">Encourages contributions from agriculture, animal sciences, and related fields.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Global Collaboration</h5>
+                                <p class="small mb-0">Supports international research exchange and cross-border scientific collaboration.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Open Access</h5>
+                                <p class="small mb-0">All published articles are freely accessible worldwide.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Ethical Compliance</h5>
+                                <p class="small mb-0">FAAI strictly follows ethical guidelines for human and animal studies, plagiarism checks, and conflict of interest declarations.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Publication Credentials</h5>
+                                <p class="small mb-0">Each article receives a DOI and a certificate of publication.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Author Support</h5>
+                                <p class="small mb-0">Authors are guided throughout submission, review, and publication stages.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Submission Tracking</h5>
+                                <p class="small mb-0">Online dashboard to monitor submission, review, and publication progress.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Global Indexing</h5>
+                                <p class="small mb-0">Indexed in major databases and repositories to ensure maximum visibility.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1657.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Publications">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mission Statement -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0 p-4">
+                    <div class="card-body text-center">
+                        <h3 class="h4 mb-3">Our Mission</h3>
+                        <p class="lead mb-0">
+                            FAAI bridges the gap between fundamental scientific research and practical applications, fostering knowledge exchange that supports sustainable advancements in global food systems. It encourages innovation, interdisciplinary collaboration, and contributions that drive positive change across agricultural and animal sectors worldwide.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-hero {
+        background: linear-gradient(rgba(0, 82, 147, 0.9), rgba(0, 82, 147, 0.9));
+    }
+    
+    .features-list .d-flex {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+    
+    .features-list .d-flex:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+</style>
+{% endblock %}

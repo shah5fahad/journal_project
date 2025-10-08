@@ -1,0 +1,228 @@
+{% extends 'cibdi/base.html' %}
+
+{% block title %}About Us - Curevita Innovation of BioData Intelligence{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<!-- Hero Section -->
+<section class="about-hero py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='assets/img/research-hero.jpg') }}') no-repeat center center; background-size: cover;">
+    <div class="container text-center py-4">
+        <h1 class="display-5 fw-bold mb-2 text-white">About CIBDI Journal</h1>
+        <h4 class="mb-3 text-light">Starting from 2025</h4>
+        <p class="lead mb-4 text-light">
+            A global, peer-reviewed journal fostering interdisciplinary innovation and real-world impact.
+            Bridging science, society, and sustainability through high-quality, accessible research.
+        </p>
+    </div>
+</section>
+
+<!-- Main About Section -->
+<section id="about" class="about section py-5">
+    <div class="container">
+        <div class="row gy-4 align-items-center">
+            <!-- Left Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm mb-4">
+                    <img src="{{ url_for('static', filename='assets/img/about.jpg') }}" class="card-img-top rounded-top" alt="About Curevita Research">
+                </div>
+                
+                <div class="about-content">
+                    <h3 class="h4 mb-3">Our Journal</h3>
+                    <p class="mb-3">
+                        Curevita Innovation of BioData Intelligence (CIBDI) is an international, peer-
+                        reviewed, multidisciplinary journal dedicated to pioneering research at the
+                        intersection of Biology, Artificial Intelligence, and Data Science.
+                    </p>
+                    
+                    <p class="mb-3">
+                        Curevita Innovation of BioData Intelligence signifies a pioneering platform that
+                        integrates biological sciences with advanced computational intelligence. It
+                        embodies the fusion of biosciences, big data analytics, and artificial intelligence
+                        to decode complex biological patterns, enhance healthcare decision-making, and
+                        accelerate discoveries in medicine, biotechnology, and environmental health.
+                    </p>
+
+                    <p class="mb-3">
+                        Our mission is to accelerate biological innovation by integrating cutting-edge
+                        computational methods with advancements in bioinformatics, computational
+                        biology, systems biology, AI-driven healthcare solutions, biological data analytics,
+                        and machine learning applications in life sciences, systems biology, genomics,
+                        proteomics, biomedical engineering, and AI-driven healthcare solutions.
+                    </p>
+
+                    <p class="mb-3">
+                        CIBDI provides a global platform for scientists, researchers, and innovators to
+                        publish original research, reviews, and technical advancements that transform
+                        biological data into actionable knowledge.
+                    </p>
+
+                    <strong>Advancing Biological Discovery through AI and Data Science</strong>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1521737604893-d14cc237f11d.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Collaboration">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="ps-lg-4">
+                    <h3 class="h4 mb-4">Quick Facts</h3>
+
+                    <ul class="list-unstyled mb-4">
+                        <li><strong>Starting Year:</strong> 2025</li>
+                        <li><strong>Frequency of Publication:</strong> Quarterly</li>
+                        <li><strong>Format:</strong> Online</li>
+                        <li><strong>Subject Area:</strong> Computer Science &amp; Data Science</li>
+                        <li><strong>Language:</strong> English</li>
+                    </ul>
+
+                    <h3 class="h4 mb-4">Key Features</h3>
+                    
+                    <div class="features-list">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Multidisciplinary Approach</h5>
+                                <p class="small mb-0">Accepts research papers from all academic disciplines — Engineering, Medical, Pharmacy, Management, Sciences, and Arts.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Language Support</h5>
+                                <p class="small mb-0">Supports publication only in English language.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Rigorous Review Process</h5>
+                                <p class="small mb-0">Peer-reviewed and refereed journal with a quick and transparent review process.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Publication Credentials</h5>
+                                <p class="small mb-0">Each paper receives a unique Crossref DOI and certificate of publication.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Global Indexing</h5>
+                                <p class="small mb-0">Indexed in Google Scholar, Academia.edu, Zenodo, Index Copernicus, and more.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Open Access</h5>
+                                <p class="small mb-0">Open access model — published papers are globally accessible without restriction.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Author Support</h5>
+                                <p class="small mb-0">Authors receive email updates at every stage of review and publication.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Submission Tracking</h5>
+                                <p class="small mb-0">Online dashboard to track submission, review, and publication status in real time.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">24/7 Assistance</h5>
+                                <p class="small mb-0">Support available through email, phone, WhatsApp, and social media channels.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Secure Platform</h5>
+                                <p class="small mb-0">SSL-secured website for safe browsing and document submission.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1657.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Publications">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mission Statement -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0 p-4">
+                    <div class="card-body text-center">
+                        <h3 class="h4 mb-3">Our Mission</h3>
+                        <p class="lead mb-0">
+                            Curevita Innovation of BioData Intelligence is a multidisciplinary journal committed to advancing
+                            scientific innovation and global research collaboration. We connect scholars across disciplines
+                            to promote impactful, peer-reviewed publications that link theoretical research with real-world
+                            application.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-hero {
+        background: linear-gradient(rgba(0, 82, 147, 0.9), rgba(0, 82, 147, 0.9));
+    }
+    
+    .features-list .d-flex {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+    
+    .features-list .d-flex:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'feri/base.html' %}
+
+{% block title %}About the Journal - Frontiers in Environmental Revolutionary Innovation (FERI){% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<!-- Hero Section -->
+<section class="about-hero py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='assets/img/research-hero.jpg') }}') no-repeat center center; background-size: cover;">
+    <div class="container text-center py-4">
+        <h1 class="display-5 fw-bold mb-2 text-white">About FERI Journal</h1>
+        <h4 class="mb-3 text-light">Frontiers in Environmental Revolutionary Innovation, Starting from 2025</h4>
+        <p class="lead mb-4 text-light">
+            A peer-reviewed international journal devoted to advancing research and knowledge at the intersection of ecology, vitality sciences, environmental health, and sustainable innovation.
+        </p>
+    </div>
+</section>
+
+<!-- Main About Section -->
+<section id="about" class="about section py-5">
+    <div class="container">
+        <div class="row gy-4 align-items-center">
+            <!-- Left Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm mb-4">
+                    <img src="{{ url_for('static', filename='assets/img/about.jpg') }}" class="card-img-top rounded-top" alt="FERI Journal">
+                </div>
+                
+                <div class="about-content">
+                    <h3 class="h4 mb-3">About FERI</h3>
+                    <p class="mb-3">
+                        <strong>Frontiers in Environmental Revolutionary Innovation (FERI)</strong> is a peer-reviewed international journal devoted 
+                        to advancing research and knowledge at the intersection of ecology, vitality sciences, environmental health, and 
+                        sustainable innovation.
+                    </p>
+                    
+                    <p class="mb-3">
+                        It provides an open platform for scholars, practitioners, policymakers, and innovators to share insights that build 
+                        resilient ecosystems, healthy communities, and sustainable futures.
+                    </p>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1521737604893-d14cc237f11d.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Collaboration">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="ps-lg-4">
+                    <h3 class="h4 mb-4">Quick Facts</h3>
+
+                    <ul class="list-unstyled mb-4">
+                        <li><strong>Starting Year:</strong> 2025</li>
+                        <li><strong>Frequency of Publication:</strong> Quarterly</li>
+                        <li><strong>Format:</strong> Online</li>
+                        <li><strong>Subject Area:</strong> Environmental Health</li>
+                        <li><strong>Language:</strong> English</li>
+                    </ul>
+
+                    <h3 class="h4 mb-4">Meaning of the Title</h3>
+                    
+                    <div class="features-list">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Frontiers</h5>
+                                <p class="small mb-0">Represents the cutting edge, the exploration of new knowledge, and the advancement of ideas in science, technology, and society.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Ecovitality</h5>
+                                <p class="small mb-0">A unique concept that combines ecology and vitality. It signifies the strength, health, and dynamic life-force of ecosystems, highlighting the interconnectedness of environmental sustainability, biodiversity, and human well-being.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 text-primary me-3">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="h6 mb-1">Resilient Innovation</h5>
+                                <p class="small mb-0">Refers to creative, adaptive, and forward-looking solutions that not only address present challenges but are also strong enough to withstand future uncertainties, climate change impacts, and socio-economic pressures.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1657.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Publications">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mission & Vision Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-white border-0 shadow-sm p-4">
+                    <div class="card-body">
+                        <h3 class="h4 mb-4 text-center">Mission & Vision</h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <h5 class="fw-bold text-primary">🌍 Mission</h5>
+                                <p>To foster transformative research that strengthens the resilience of ecosystems and societies against environmental challenges.</p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <h5 class="fw-bold text-success">🌱 Vision</h5>
+                                <p>A sustainable, healthy, and resilient planet where innovation and ecological balance coexist.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overall Meaning -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0 p-4">
+                    <div class="card-body text-center">
+                        <h3 class="h4 mb-3">Overall Meaning</h3>
+                        <p class="lead mb-3">
+                            ✨ “Frontiers in Environmental Revolutionary Innovation” embodies the pursuit of pioneering research, knowledge, and practices 
+                            that enhance the vitality of ecosystems while fostering innovative, adaptive, and sustainable solutions for a resilient future.
+                        </p>
+                        <p class="lead mb-0">
+                            📌 Published by <strong>Curevita Research</strong>, FERI fosters dialogue between science, society, and policy by bridging 
+                            traditional knowledge with next-generation innovation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-hero {
+        background: linear-gradient(rgba(0, 82, 147, 0.9), rgba(0, 82, 147, 0.9));
+    }
+    
+    .features-list .d-flex {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+    
+    .features-list .d-flex:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+</style>
+{% endblock %}

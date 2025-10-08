@@ -1,0 +1,80 @@
+{% extends "basecode.html" %}
+{% block title %}Edit Research Paper{% endblock %}
+
+{% block content %}
+<h2>Edit Research Paper</h2>
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+      <label class="form-label">Journal</label>
+      <select class="form-select" name="journal_id" required>
+          <option value="">Select Journal</option>
+          {% for journal in journals %}
+              <option value="{{ journal.id }}" {% if paper.journal_id == journal.id %}selected{% endif %}>
+                  {{ journal.full_name }}
+              </option>
+          {% endfor %}
+      </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Main Heading <span class="text-danger">*</span></label>
+    <input class="form-control" name="main_heading" value="{{ paper.main_heading }}" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Sub Heading <span class="text-danger">*</span></label>
+      <input class="form-control" name="sub_heading" value="{{ paper.sub_heading }}" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Title <span class="text-danger">*</span></label>
+      <input class="form-control" name="title" value="{{ paper.title }}" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Authors <span class="text-danger">*</span></label>
+      <input class="form-control" name="authors" value="{{ paper.authors }}" required>
+  </div>
+  <div class="row">
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Volume <span class="text-danger">*</span></label>
+        <input class="form-control" name="volume" value="{{ paper.volume }}" required>
+    </div>
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Issue <span class="text-danger">*</span></label>
+        <input class="form-control" name="issue" value="{{ paper.issue }}" required>
+    </div>
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Year <span class="text-danger">*</span></label>
+        <input class="form-control" name="year" value="{{ paper.year }}" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Abstract</label>
+    <textarea class="form-control" name="abstract" rows="4">{{ paper.abstract }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Replace PDF (optional)</label>
+    <input type="file" class="form-control" name="pdf_file" accept="application/pdf">
+    {% if paper.pdf_filename %}
+      <small class="text-muted">Current file: {{ paper.pdf_filename }} — <a href="{{ url_for('download_pdf', paper_id=paper.id) }}">Download</a></small>
+    {% endif %}
+  </div>
+
+  <div class="mt-2">
+      {% if paper.image_filename %}
+          <img src="{{ url_for('static', filename='assets/img/' ~ paper.image_filename) }}" 
+              alt="Research Paper Image" width="200">
+      {% else %}
+          <img src="{{ url_for('static', filename='assets/img/default.png') }}" 
+              alt="No Image Available" width="200">
+      {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Citation</label>
+    <input class="form-control" name="citation" value="{{ paper.citation }}">
+  </div>
+
+  <button class="btn btn-primary" type="submit">Save Changes</button>
+  <a class="btn btn-secondary" href="{{ url_for('list_papers') }}">Cancel</a>
+</form>
+{% endblock %}

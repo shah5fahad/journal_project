@@ -1,0 +1,138 @@
+{% extends 'fhim/base.html' %}
+
+{% block title %}About FHIMA - Frontiers of Health Innovations and Medical Advances{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<!-- Hero Section -->
+<section class="about-hero py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='assets/img/research-hero.jpg') }}') no-repeat center center; background-size: cover;">
+    <div class="container text-center py-4">
+        <h1 class="display-5 fw-bold mb-2 text-white">About FHIMA</h1>
+        <h1 class="display-5 fw-bold mb-2 text-white">Frontiers of Health Innovations and Medical Advances</h1>
+        <h4 class="mb-3 text-light">Starting Year from 2025</h4>
+        <p class="lead mb-4 text-light">Bridging Modern Science and Holistic Health for a Better Tomorrow</p>
+    </div>
+</section>
+
+<!-- Main About Section -->
+<section id="about" class="about section py-5">
+    <div class="container">
+        <div class="row gy-4 align-items-start">
+            <!-- Left Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm mb-4">
+                    <img src="{{ url_for('static', filename='assets/img/about.jpg') }}" class="card-img-top rounded-top" alt="About FHIMA">
+                </div>
+
+                <div class="about-content">
+                    <h3 class="h4 mb-3">About the Journal</h3>
+                    <p class="mb-3">
+                        Frontiers of Health Innovations and Medical Advances (FHIMA) is an international, peer-reviewed,
+                        multidisciplinary journal committed to publishing high-quality research, reviews, and case studies that
+                        explore transformative developments in healthcare, medical science, and allied health practices. FHIMA
+                        serves as a global platform for scientists, clinicians, policymakers, and innovators to share
+                        evidence-based knowledge that drives progress in health systems and patient care.
+                    </p>
+
+                    <p class="mb-3">
+                        FHIMA represents the progressive boundary where cutting-edge research, breakthrough technologies,
+                        and transformative practices in health and medicine converge. The journal highlights pioneering solutions
+                        that improve human well-being — from preventive healthcare and diagnostics to therapeutic interventions,
+                        digital health, biotechnology, and integrative medicine.
+                    </p>
+
+                    <p class="mb-3">
+                        The journal welcomes contributions from diverse domains including clinical medicine, public health,
+                        digital health technologies, biomedical research, nursing, physiotherapy, paramedical sciences, yoga and
+                        meditation, homeopathy, and Ayurveda. FHIMA particularly encourages interdisciplinary research that
+                        bridges modern scientific advancements with holistic and traditional approaches to health and wellness.
+                    </p>
+
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1521737604893-d14cc237f11d.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Collaboration">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="ps-lg-4">
+                    <h3 class="h4 mb-4">Quick Facts</h3>
+
+                    <ul class="list-unstyled mb-4">
+                        <li><strong>Starting Year:</strong> 2025</li>
+                        <li><strong>Frequency of Publication:</strong> Quarterly</li>
+                        <li><strong>Format:</strong> Online</li>
+                        <li><strong>Subject Area:</strong> Health &amp; Medical Science</li>
+                        <li><strong>Language:</strong> English</li>
+                    </ul>
+
+                    <h3 class="h4 mb-3">Mission Statement</h3>
+                    <p class="mb-3">
+                        The mission of FHIMA is to advance global health by publishing innovative, evidence-based research
+                        that integrates modern medical science with holistic and traditional healthcare practices. The journal
+                        aims to foster collaboration, inspire innovation, and promote sustainable healthcare solutions to
+                        address contemporary and future health challenges.
+                    </p>
+
+                    <h3 class="h4 mb-3">Vision Statement</h3>
+                    <p class="mb-3">
+                        To be a leading international journal that bridges the gap between cutting-edge medical science and
+                        holistic health traditions, fostering a healthier, more equitable world through innovation, integration,
+                        and knowledge dissemination.
+                    </p>
+
+                    <h3 class="h4 mb-3">Aims &amp; Objectives</h3>
+                    <ul class="mb-4">
+                        <li>To provide a credible platform for publishing high-quality research in health and medical sciences.</li>
+                        <li>To encourage interdisciplinary studies that unite modern healthcare and traditional healing systems.</li>
+                        <li>To promote innovation in healthcare technologies, policies, and practices.</li>
+                        <li>To support evidence-based approaches for improving patient care and community health.</li>
+                        <li>To serve as a resource for healthcare professionals, researchers, and policymakers worldwide.</li>
+                    </ul>
+
+                    <div class="card border-0 shadow-sm mt-4">
+                        <img src="{{ url_for('static', filename='assets/img/photo-1657.jpg') }}" 
+                             class="card-img-top rounded" alt="Research Publications">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Mission Box -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card bg-light border-0 p-4">
+                    <div class="card-body text-center">
+                        <h3 class="h4 mb-3">Our Purpose</h3>
+                        <p class="lead mb-0">
+                            With an emphasis on innovation, FHIMA promotes sustainable, culturally inclusive solutions that
+                            are adaptable to global healthcare challenges. Guided by rigorous peer review and ethical publication
+                            standards, the journal inspires collaboration, informs policy, and advances the frontiers of knowledge
+                            in health and medical sciences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-hero {
+        background: linear-gradient(rgba(0, 82, 147, 0.9), rgba(0, 82, 147, 0.9));
+    }
+    
+    .features-list .d-flex {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+    
+    .features-list .d-flex:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+</style>
+{% endblock %}

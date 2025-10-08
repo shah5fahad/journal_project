@@ -1,0 +1,25 @@
+{% extends "basecode.html" %}
+{% block title %}Editor Board{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4>Dynamic Editor Board</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('editor') }}">
+            <div class="mb-3">
+                <textarea class="form-control" id="editor_content" name="editor_content" rows="10">{{ content }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Content</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor_content');
+</script>
+{% endblock %}

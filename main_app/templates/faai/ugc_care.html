@@ -1,0 +1,174 @@
+{% extends 'faai/base.html' %}
+
+{% block title %}NAAS Guidelines - Frontiers of Agri & Animal Innovation{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .section-title {
+      text-align: center;
+      margin: 40px 0 30px;
+    }
+    .section-title h2 {
+      color: #1a237e;
+      font-weight: 600;
+    }
+    .card {
+      margin-bottom: 20px;
+      border-left: 4px solid #1a237e;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 4px;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-title {
+      color: #1a237e;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .card-title i {
+      margin-right: 10px;
+    }
+    .note-box {
+      background-color: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 25px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 8px;
+      position: relative;
+      line-height: 1.6;
+    }
+    ul li:before {
+      content: "";
+      color: #1a237e;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    .icon-blue {
+      color: #1a237e;
+    }
+</style>
+
+<div class="container">
+  <div class="section-title">
+    <h2>NAAS Guidelines</h2>
+    <p>Promoting Academic Integrity & Research Excellence</p>
+  </div>
+
+  <!-- Box 1: Intro -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-info-circle icon-blue"></i> Introduction</h5>
+      <p class="card-text">FAAI - Frontiers of Agri & Animal Innovation strictly follows the University Grants Commission (UGC) – Consortium for Academic and Research Ethics (CARE) protocols to promote academic integrity and publication ethics.</p>
+    </div>
+  </div>
+
+  <!-- Box 2: Quality and Ethics in Publication -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-check-circle icon-blue"></i> Quality and Ethics in Publication</h5>
+      <ul>
+        <li>Manuscripts must reflect original, unpublished research.</li>
+        <li>Plagiarism (including self-plagiarism) is strictly prohibited.</li>
+        <li>All submissions must undergo peer review, preferably double-blind.</li>
+        <li>Journals must maintain transparency in editorial and review processes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 3: Authorship and Contribution -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-users icon-blue"></i> Authorship and Contribution</h5>
+      <ul>
+        <li>Authorship must be based on a substantial contribution to the research.</li>
+        <li>Any form of guest, ghost, or gift authorship is unethical and unacceptable.</li>
+        <li>The corresponding author must ensure that all co-authors agree with the content and submission.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 4: Citation and Referencing -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-book icon-blue"></i> Citation and Referencing</h5>
+      <ul>
+        <li>Authors must properly acknowledge all sources and influences.</li>
+        <li>Use standard citation formats (e.g., APA, MLA, IEEE) according to the field.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 5: FAAI-Journal Transparency -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-eye icon-blue"></i> FAAI-Journal Transparency</h5>
+      <ul>
+        <li>ISSN (print/online)</li>
+        <li>Peer-review process</li>
+        <li>Editorial board details</li>
+        <li>APC (Article Processing Charges) if any</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 6: Misconduct and Retraction -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-ban icon-blue"></i> Misconduct and Retraction</h5>
+      <ul>
+        <li>Fabrication, falsification, or manipulation of data is prohibited.</li>
+        <li>Papers may be retracted in case of proven misconduct, plagiarism, or ethical violations.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 7: Open Access and Licensing -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-lock-open icon-blue"></i> Open Access and Licensing</h5>
+      <ul>
+        <li>Journals should indicate whether they are open-access, hybrid, or subscription-based.</li>
+        <li>Licensing (such as Creative Commons) must be clearly stated.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Box 8: Publication Fees -->
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><i class="fas fa-rupee-sign icon-blue"></i> Publication Fees</h5>
+      <ul>
+        <li>APCs, DOI.</li>
+        <li>Journals must display all charges on their websites.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Note Box -->
+  <div class="note-box">
+    <strong><i class="fas fa-exclamation-circle"></i> Important Note:</strong><br>
+    All researchers and authors are expected to strictly adhere to these NAAS guidelines to maintain the highest standards of academic integrity and research quality. Violations may result in manuscript rejection or retraction of published articles.
+  </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+{% endblock %}

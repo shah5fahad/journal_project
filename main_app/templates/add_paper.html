@@ -1,0 +1,67 @@
+{% extends "basecode.html" %}
+{% block title %}Add Research Paper{% endblock %}
+
+{% block content %}
+<h2>Add Research Paper</h2>
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+          <label class="form-label">Journal</label>
+          <select class="form-select" name="journal_id" required>
+              <option value="">Select Journal</option>
+              {% for journal in journals %}
+                  <option value="{{ journal.id }}">{{ journal.full_name }}</option>
+              {% endfor %}
+          </select>
+    </div>
+
+  <div class="mb-3">
+    <label class="form-label">Main Heading <span class="text-danger">*</span></label>
+    <input class="form-control" name="main_heading" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Sub Heading <span class="text-danger">*</span></label>
+      <input class="form-control" name="sub_heading" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Title <span class="text-danger">*</span></label>
+      <input class="form-control" name="title" required>
+  </div>
+  <div class="mb-3">
+      <label class="form-label">Authors <span class="text-danger">*</span></label>
+      <input class="form-control" name="authors" required>
+  </div>
+  <div class="row">
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Volume <span class="text-danger">*</span></label>
+        <input class="form-control" name="volume" required>
+    </div>
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Issue <span class="text-danger">*</span></label>
+        <input class="form-control" name="issue" required>
+    </div>
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Year <span class="text-danger">*</span></label>
+        <input class="form-control" name="year" required>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Abstract</label>
+    <textarea class="form-control" name="abstract" rows="4"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">PDF File (required)</label>
+    <input type="file" class="form-control" name="pdf_file" accept="application/pdf" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Paper Image</label>
+    <input type="file" class="form-control" name="image_filename" accept="image/*">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Citation</label>
+    <input class="form-control" name="citation">
+  </div>
+
+  <button class="btn btn-success" type="submit">Add Paper</button>
+  <a class="btn btn-secondary" href="{{ url_for('list_papers') }}">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'fhim/base.html' %}
+
+{% block title %}Peer-Reviewed Paper - Frontiers of Health Innovations and Medical Advances{% endblock %}
+
+{% block content %}
+<br><br><br><br><br>
+
+<section id="peer-review" class="py-5 bg-light">
+  <div class="container">
+    <!-- Section Title -->
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="fw-bold ">Peer-Reviewed Paper</h2>
+      <p class="lead text-muted">
+        FHIMA is a rigorously peer-reviewed, open-access, and multidisciplinary international journal 
+        dedicated to publishing high-quality research across diverse domains.
+      </p>
+    </div>
+
+    <div class="row g-5">
+      <!-- Left Column -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="card shadow border-0 h-100">
+          <img src="{{ url_for('static', filename='assets/img/Publication01.png') }}" 
+               class="card-img-top rounded-top" alt="Peer Review">
+          <div class="card-body">
+            <h4 class="fw-semibold mb-3">🔍 Peer-Review Policy</h4>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Objective evaluation by domain experts</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Confidentiality of author and reviewer identities</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Constructive feedback for manuscript improvement</li>
+            </ul>
+
+            <h4 class="fw-semibold mt-4">📋 Aligned with UGC-CARE Guidelines</h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Original and plagiarism-free submissions</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Transparent editorial and review process</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Ethical authorship and publication norms</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Indexed and digitally identifiable via DOI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+        <div class="card shadow border-0 h-100">
+          <div class="card-body">
+            <h4 class="fw-semibold mb-3">🧾 Key Features</h4>
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>ISSN & DOI registered articles</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Editorial board of qualified scholars</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Nominal Article Processing Charges (APC)</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Quarterly publication cycle</li>
+              <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Support for student, early-career, and interdisciplinary research</li>
+            </ul>
+            <div class="text-center">
+              <img src="{{ url_for('static', filename='assets/img/Peer_review02.png') }}" 
+                   class="img-fluid rounded shadow-sm" alt="Support and Features">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

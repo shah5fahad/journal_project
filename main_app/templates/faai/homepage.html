@@ -1,0 +1,1356 @@
+{% extends 'faai/base.html' %}
+
+{% block title %}Homepage - Frontiers of Agri & Animal Innovation{% endblock %}
+
+{% block content %}
+<main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section accent-background top_background_img">
+        <div
+            class="container position-relative"
+            data-aos="fade-up"
+            data-aos-delay="100"
+        >
+            <div class="row gy-5 justify-content-between">
+                <div
+                    class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+                    >
+                    <div style="text-align: center; color: white; font-size: 28px; line-height: 1.2; font-family: monospace; font-weight: bold;">
+                        International Multi-Disciplinary Journal
+                    </div>
+                    <div style="text-align: center; color: white; font-size: 19px; margin-top: 8px; font-family: cursive;">
+                        A peer-reviewed and refereed online journal — openly
+                        accessible, widely indexed, multidisciplinary, and
+                        globally recognized for academic and scholarly
+                        excellence.
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2">
+                    <img
+                    src="{{ url_for('static', filename='assets/faai/img/image-3.png') }}"
+                    class="img-fluid"
+                    alt=""
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="icon-boxes position-relative"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
+            <div class="container position-relative">
+                <div class="row gy-4 mt-5">
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/faai/peer_reviewed" class="stretched-link"
+                                >Peer-Reviewed Papers</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon"><i class="bi bi-globe"></i></div>
+                        <h4 class="title">
+                            <a href="#global_index" class="stretched-link"
+                                >Global Indexing</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-cloud-upload"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="#" class="stretched-link"
+                                >Easy Online Submission</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="/faai/ugc_care" class="stretched-link"
+                                >NAAS Guidelines</a
+                            >
+                        </h4>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reward-section" class="call-to-action section dark-background">
+        <div class="container py-2">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="reward-header">
+                    <div class="reward-badge" aria-hidden="true">
+                        <!-- Trophy icon -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4Z" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M7 7H5a3 3 0 0 0 3 3M17 7h2a3 3 0 0 1-3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 id="opportunities-title" class="opportunities-title">OPPORTUNITIES &amp; REWARDS</h1>
+                        <p class="opportunities-subtitle">Grow your impact with access, recognition, and expert guidance.</p>
+                    </div>
+                </div>
+                <div class="reward-content">
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Ticket/Pass icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9a3 3 0 1 0 0 6v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a3 3 0 1 1 0-6V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Free Participation</h3>
+                        <p>Access to workshops, FDPs, webinars, and symposia organized by Curevita Research.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Book/Bookmark icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 4h7a4 4 0 0 1 4 4v12l-4-2-4 2V8a4 4 0 0 0-4-4Z" stroke="white" stroke-width="1.5"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Knowledge Access</h3>
+                        <p>Complimentary subscription to eNews Later and current affairs updates.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Award/Medal icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M9 14v7l3-2 3 2v-7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Recognition &amp; Rewards</h3>
+                        <p>Best Paper Awards with special certificates; recommendation rewards for high-impact research enhancing academic, research, and industry careers.</p>
+                        </div>
+                    </article>
+            
+                    <article class="reward-item">
+                        <div class="reward-icon" aria-hidden="true">
+                        <!-- Users/Handshake icon -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm8 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="white" stroke-width="1.5"/>
+                            <path d="M3 21v-1a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v1" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        </div>
+                        <div>
+                        <h3>Mentorship &amp; Guidance</h3>
+                        <p>Early-career authors receive mentorship from leading scientists, professors, and industry experts.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Our Services</h2>
+            <p>
+                Explore our key offerings that support authors, researchers,
+                and the academic community globally.
+            </p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+            <div class="row gy-4">
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-journal-check"></i>
+                    </div>
+                    <h3>Peer-Reviewed Publication</h3>
+                    <p>
+                        All submitted papers undergo rigorous peer review
+                        ensuring high academic quality and research
+                        standards.
+                    </p>
+                    <a href="/faai/peer_reviewed" class="readmore stretched-link">
+                        Read more <i class="bi bi-arrow-right"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-cloud-upload"></i>
+                    </div>
+                    <h3>Easy Online Submission</h3>
+                    <p>
+                        Submit your research online using our simple and
+                        intuitive paper submission platform.
+                    </p>
+                    <a href="#" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h3>Global Indexing</h3>
+                    <p>
+                        Our journal is indexed by major research databases
+                        including Google Scholar, Academia, and more.
+                    </p>
+                    <a href="#global_index" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-badge-ad"></i>
+                    </div>
+                    <h3>DOI Allocation</h3>
+                    <p>
+                        Each published paper receives a unique CrossRef DOI
+                        for better visibility and citation tracking.
+                    </p>
+                    <a href="/faai/doi_allocation" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3>NAAS Guidelines</h3>
+                    <p>
+                        Our publication follows NAAS recommendations and
+                        maintains compliance with ethical research practices.
+                    </p>
+                    <a href="/faai/ugc_care" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+
+                <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="600"
+                >
+                    <div class="service-item position-relative">
+                    <div class="icon">
+                        <i class="bi bi-chat-square-text"></i>
+                    </div>
+                    <h3>24x7 Support</h3>
+                    <p>
+                        Dedicated support through email, phone, and WhatsApp
+                        to assist authors at every stage of publication.
+                    </p>
+                    <a href="#contact" class="readmore stretched-link"
+                        >Read more <i class="bi bi-arrow-right"></i
+                    ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- global_index Section -->
+    <section id="global_index" class="global_index section">  
+        <div  class="container section-title" data-aos="fade-up">
+            <!-- Centered Heading -->
+            <h2 class="text-center fw-bold mb-3">Global Indexing</h2>  
+            <!-- First Row -->
+            <div class="row justify-content-center mb-2">  
+                    <div class="col-6 col-md-3 text-center p-2">  
+                    <img src="{{ url_for('static', filename='assets/img/google-scholar.png') }}" class="img-fluid" style="max-height: 80px;" alt="Google Scholar">  <!-- max-height से image की ऊंचाई कम की -->
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/research-gate.png') }}" class="img-fluid" style="max-height: 80px;" alt="Research Gate">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/arxiv01.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="ArXiv">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/openAire.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="OpenAIRE">
+                    </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="row justify-content-center">
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/DOI_logo.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOI">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/logo-crossref.png') }}" class="img-fluid" style="max-height: 80px;" alt="Crossref">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/zonodo1.jpg') }}" class="img-fluid" style="max-height: 80px;" alt="Zenodo">
+                    </div>
+                    <div class="col-6 col-md-3 text-center p-2">
+                    <img src="{{ url_for('static', filename='assets/img/doaj.png') }}" class="img-fluid" style="max-height: 80px;" alt="DOAJ">
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Services Section -->
+    <section
+    id="call-to-action"
+    class="call-to-action section dark-background"
+    >
+        <div class="container">
+            <img
+                src="{{ url_for('static', filename='assets/img/science.webp') }}"
+                alt=""
+            />
+            <div
+                class="content row justify-content-center"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="col-xl-10">
+                    <div class="text-center">
+                    <h4>
+                        Submit Research Work for Consideration of Publication
+                    </h4>
+                    <a class="cta-btn" href="/faai/current_issue">Submit Papers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Editorial Board</h2>
+        <p>
+            Meet our esteemed editors who uphold our
+            commitment to academic excellence.
+        </p>
+    </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+                {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                    "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                },
+                "breakpoints": {
+                    "320": {
+                        "slidesPerView": 1,
+                        "spaceBetween": 40
+                    },
+                    "1200": {
+                        "slidesPerView": 3,
+                        "spaceBetween": 10
+                    }
+                }
+                }
+            </script>
+            <div class="swiper-wrapper">
+                {% for editor in editors %}
+                  {% if editor.code == "01" %}
+                    <div class="swiper-slide">
+                      <div class="testimonial-item">
+                        <h3>
+                          {{ editor.name }}
+                          {% if editor.link %}
+                          {% if "linkedin" in editor.link %}
+                              <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                                  <i class="bi bi-linkedin"></i>
+                              </a>
+                          {% else %}
+                              <a href="{{ editor.link }}" target="_blank" title="Visit">
+                                <i class="bi bi-link-45deg"></i>
+                              </a>
+                          {% endif %}
+                      {% endif %}
+                      
+                        </h3>
+                        <h4>{{ editor.designation }}</h4>
+              
+                        <div class="stars">
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                          <i class="bi bi-star-fill"></i>
+                        </div>
+              
+                        {% if editor.quote %}
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>"{{ editor.quote }}"</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              
+            <!-- End testimonial item -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    </section>
+    <!-- /Testimonials Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Reviewer Team</h2>
+        <p>
+            Meet our dedicated reviewers who ensure the quality and
+            integrity of our journal publications.
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Dr. Niharika Bhawsar -->
+            {% for editor in editors %}
+                  {% if editor.code == "02" %}
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+                <h4>{{ editor.name }}</h4>
+                <span>{{ editor.designation}}{{editor.quote}}</span>
+                <div class="social">
+                    {% if editor.link %}
+                    {% if "linkedin" in editor.link %}
+                        <a href="{{ editor.link }}" target="_blank" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ editor.link }}" target="_blank" title="Visit">
+                          <i class="bi bi-link-45deg"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                </div>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+        </div>
+    </div>
+    </section>
+    <!-- /Team Section -->
+    
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Left Content -->
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="content px-xl-5">
+                <h3>
+                    <span>Why Publish </span><strong>With Us?</strong>
+                </h3>
+                <p>
+                    Publishing with our journal gives your research
+                    global visibility, credibility through peer review,
+                    and indexing in leading academic databases.
+                </p>
+                </div>
+            </div>
+
+            <!-- FAQ Right Side -->
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-container">
+                <div class="faq-item faq-active">
+                    <h3>
+                        <span class="num">1.</span>
+                        <span>International Peer Review Panel</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            All submitted manuscripts undergo rigorous peer
+                            review by experts from our international
+                            editorial and reviewer panel.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">2.</span>
+                        <span>Fast Turnaround Time</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            We aim to complete the review and publication
+                            process within a short span, ensuring timely
+                            dissemination of your research.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">3.</span>
+                        <span>Open Access for Maximum Visibility</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            All articles are openly accessible to readers
+                            across the globe, ensuring high visibility and
+                            citation potential.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">4.</span>
+                        <span>Indexed in Major Databases</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            Our journal is indexed in multiple research
+                            databases and directories, expanding the reach
+                            of your research work.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">5.</span>
+                        <span>DOI for Each Published Article</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            Every published paper is assigned a unique
+                            Digital Object Identifier (DOI) for easy
+                            citation and traceability.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+
+                <div class="faq-item">
+                    <h3>
+                        <span class="num">6.</span>
+                        <span>Certificate of Publication</span>
+                    </h3>
+                    <div class="faq-content">
+                        <p>
+                            We provide an official Certificate of
+                            Publication to the corresponding author for
+                            academic and professional use.
+                        </p>
+                    </div>
+                    <i class="faq-toggle bi bi-chevron-right"></i>
+                </div>
+                <!-- End Faq item-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- /Faq Section -->
+
+    <!-- Recent Posts Section -->
+    <section id="publication-guidelines" class="recent-posts section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Scope Of Journal</h2>
+        <p>
+            Frontiers of Agri & Animal Innovation (FAAI)  - National Core Focus Areas 
+        </p>
+    </div>
+    <!-- National Significance Section -->
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Box 1: Health & Biomedical Sciences -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <article>
+                <p class="post-category">Crop Science & Agricultural Innovation</p>
+                <h2 class="title">
+                    <a href="#">Crop Science & Agricultural Innovation</a>
+                </h2>
+                <ul>
+                    <li>Development of climate-resilient, high-yield, and disease-resistant crop varieties</li>
+                    <li>Precision farming, soil health management, and AI-driven agronomy.</li>
+                    <li>Integrated pest management and eco-friendly fertilizers tailored for Indian farming systems.</li>
+                    
+                    
+                </ul>
+            </article>
+            </div>
+
+            <!-- Box 2: Agriculture, Animal & Life Sciences -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <article>
+                <p class="post-category">Agriculture, Animal & Life Sciences</p>
+                <h2 class="title">
+                    <a href="#">Animal Husbandry & Veterinary Sciences</a>
+                </h2>
+                <ul>
+                    <li>Innovations in dairy, poultry, fisheries, and small ruminant production.</li>
+                    <li>Genetic improvement, disease diagnostics, and advanced veterinary care.</li>
+                    <li>Nutrition strategies to enhance productivity while ensuring animal welfare.</li>
+                   
+                </ul>
+            </article>
+            </div>
+
+            <!-- Box 3: Engineering, Data Science & Technology -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+                <p class="post-category">Agri-Biotechnology & Genomics</p>
+                <h2 class="title">
+                    <a href="#">Agri-Biotechnology & Genomics</a>
+                </h2>
+                <ul>
+                    <li>Application of biotechnology, genomics, and bioinformatics for crop and livestock improvement.</li>
+                    <li>Research on sustainable breeding practices and molecular tools for disease resistance.</li>
+                    
+                </ul>
+            </article>
+            </div>
+
+            <!-- Box 4: Environmental & Ecological Sciences -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <article>
+                <p class="post-category">Agri-Tech & Digital Transformation</p>
+                <h2 class="title">
+                    <a href="#">Agri-Tech & Digital Transformation</a>
+                </h2>
+                <ul>
+                    <li>Use of IoT, drones, robotics, and AI in farm and livestock management.</li>
+                    <li>Mobile applications and decision-support tools for farmers across rural India.</li>
+                    <li>Smart supply chain management and traceability solutions.</li>
+                </ul>
+            </article>
+            </div>
+
+            <!-- Box 5: Social Sciences, Humanities & Policy Studies -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <article>
+                <p class="post-category">Sustainable & Climate-Smart Practices</p>
+                <h2 class="title">
+                    <a href="#">Sustainable & Climate-Smart Practices</a>
+                </h2>
+                <ul>
+                    <li>Agroecology, organic farming, regenerative agriculture, and circular bioeconomy.</li>
+                    <li>Climate adaptation strategies in drought, flood, and heat-prone regions of India.</li>
+                    <li>Water-efficient irrigation systems and renewable energy in agri-animal systems.</li>
+                    
+                </ul>
+            </article>
+            </div>
+
+            <!-- Box 6: Interdisciplinary Innovations -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <p class="post-category">Food Security, Nutrition & Value Chains</p>
+                <h2 class="title">
+                    <a href="#">Food Security, Nutrition & Value Chains</a>
+                </h2>
+                <ul>
+                    <li>Innovations in post-harvest technologies, cold chain management, and food safety.</li>
+                    <li>Strengthening rural value chains, agri-entrepreneurship, and farmer-producer organizations (FPOs).</li>
+                    <li>Linking agri-animal innovation to nutrition security and rural livelihoods.</li>
+                   
+                </ul>
+            </article>
+            </div>
+
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <p class="post-category">Policy, Governance & Rural Innovation Systems</p>
+                <h2 class="title">
+                    <a href="#">Policy, Governance & Rural Innovation Systems</a>
+                </h2>
+                <ul>
+                    <li>Analyses of national agriculture and livestock policies.</li>
+                    <li>Impact of flagship initiatives like Rashtriya Gokul Mission, National Dairy Plan, and PM-Kisan on innovation.</li>
+                    <li>Case studies of rural cooperatives, grassroots enterprises, and indigenous knowledge systems.</li>
+                   
+                </ul>
+            </article>
+            </div>
+
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <article>
+                <p class="post-category">Membership Policy</p>
+                <h2 class="title">
+                    <a href="#">Membership Privileges</a>
+                </h2>
+                <ul>
+                    <li><strong>Publication Support:</strong> Up to four (4) articles published free of cost annually.</li>
+                    <li><strong>Academic Engagement:</strong> Exclusive access to Curevita’s research webinars, workshops, faculty development programs (FDPs), seminars, and symposia.</li>
+                    <li><strong>Leadership Opportunities:</strong> Participation in editorial boards and scholarly committees within Curevita Journals.</li>
+                </ul>
+            </article>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12" data-aos="fade-up" data-aos-delay="700">
+            <article class="p-4 shadow-sm rounded bg-light">
+                <p class="post-category text-primary fw-bold">National Relevance</p>
+                <h2 class="title">
+                    <a>Strengthening India’s Research & Innovation Ecosystem</a>
+                </h2>
+                <ul>
+                    <li>
+                        <strong>Food & Nutrition Security:</strong> Addressing India’s dual challenge of feeding a large population while ensuring dietary diversity and nutritional adequacy.
+                    </li>
+                    <li>
+                        <strong>Farmer Empowerment:</strong> Promoting innovations that enhance smallholder productivity, reduce input costs, and improve market access.
+                    </li>
+                    <li>
+                        <strong>Sustainability Goals:</strong> Aligning research with India’s commitments to climate change adaptation, biodiversity conservation, and sustainable development.
+                    </li>
+                    <li>
+                        <strong>Livelihood & Rural Development:</strong> Strengthening the agri-animal sector as a backbone of rural employment and income generation.
+                    </li>
+                    <li>
+                        <strong>Indigenous Knowledge & Grassroots Innovation:</strong> Documenting and validating time-tested traditional practices alongside modern science.
+                    </li>
+                </ul>
+            </article>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center vertical-center my-5" data-aos="fade-up">
+        <p>
+            Frontiers of Agri & Animal Innovation (FAAI) - Cutting-edge research and fostering global collaboration in areas such as.
+        </p>
+    </div>
+    <div class="container">
+    <div class="row gy-4">
+        <!-- Box 1: International Scope -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/international-scope.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">International Scope</p>
+                <h2 class="title">
+                    <a href="#">Cutting-edge Research & Global Collaboration</a>
+                </h2>
+                <ul>
+                    <li>Sustainable Agriculture, Precision Farming & Agri-Tech</li>
+                    <li>Animal Health, Welfare & Nutrition</li>
+                    <li>Livestock Breeding & Genetics</li>
+                    <li>Soil, Water & Crop Management</li>
+                    <li>Dairy & Poultry Science</li>
+                    <li>Climate-Resilient Farming Systems</li>
+                    <li>Veterinary Science & One Health</li>
+                    <li>Agri-Biotechnology & Innovation Policy</li>
+                    <li>Rural Development & Agri-Economics</li>
+                    <li>Agri-Animal Interface & Biome Sustainability</li>
+                    <li>Livestock Nutrition, Genetics & Welfare</li>
+                    <li>Crop-Livestock Integrated Production Systems</li>
+                    <li>Soil-Plant-Animal-Microbe Interactions</li>
+                    <li>Agrobiodiversity & Ecosystem Services</li>
+                    <li>Climate-Smart Agriculture & Resilience</li>
+                    <li>Animal Biotech Sustainability</li>
+                    <li>AI in Agriculture & Animal Science</li>
+                    <li>Big Data, IoT & Predictive Analytics in Agro-Animal Systems</li>
+                    <li>Remote Sensing & Smart Farming Technologies</li>
+                    <li>Biome Informatics & Computational Modelling</li>
+                    <li>Microbiome Research in Agri-Vet Context</li>
+                    <li>Zoonoses, Biosecurity & Health Informatics</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 2: Food & Lifestyle Disorders -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/food-lifestyle.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Food & Lifestyle Disorders</p>
+                <h2 class="title">
+                    <a href="#">Agriculture & Animal Products Impact</a>
+                </h2>
+                <ul>
+                    <li>Nutritional composition and health impacts of crops, livestock, dairy, poultry, and fisheries products</li>
+                    <li>Food safety, quality, and contamination issues from farm to table</li>
+                    <li>Role of animal proteins, fats, and bioactive compounds in metabolic health</li>
+                    <li>Agricultural biodiversity, functional foods, and nutraceuticals</li>
+                    <li>Diet-related non-communicable diseases (obesity, diabetes, cardiovascular disorders)</li>
+                    <li>Influence of food processing, preservation, and value addition on health outcomes</li>
+                    <li>Sustainable agriculture, organic production, and healthy diets</li>
+                    <li>Public health implications of changing agri-livestock production trends</li>
+                    <li>Socio-economic, cultural, and environmental factors affecting agri-animal consumption</li>
+                    <li>Policy & extension strategies for promoting healthy eating patterns</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 3: Animal Science & Technology -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/animal-science.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Animal Science & Technology</p>
+                <h2 class="title">
+                    <a href="#">Livestock & Veterinary Innovations</a>
+                </h2>
+                <ul>
+                    <li>Livestock breeding, genetics, and reproduction technologies</li>
+                    <li>Animal nutrition, feed formulation, and precision feeding systems</li>
+                    <li>Livestock housing, welfare, and health management</li>
+                    <li>Dairy and meat production systems, processing, and quality control</li>
+                    <li>Waste management and environmental impact mitigation</li>
+                    <li>Emerging technologies in veterinary science and livestock automation</li>
+                </ul>
+            </article>
+        </div>
+
+        <!-- Box 4: Agricultural Engineering -->
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <article>
+                <div class="post-img">
+                    <img src="assets/img/blog/agri-engineering.jpg" alt="" class="img-fluid" />
+                </div>
+                <p class="post-category">Agricultural Engineering</p>
+                <h2 class="title">
+                    <a href="#">Smart Farming & Agri-Tech Solutions</a>
+                </h2>
+                <ul>
+                    <li>Farm machinery design, testing, and automation</li>
+                    <li>Precision agriculture using GPS, sensors, and drones</li>
+                    <li>Remote sensing and GIS applications</li>
+                    <li>Post-harvest engineering, storage, and value addition</li>
+                    <li>Soil and water engineering, irrigation, and drainage technologies</li>
+                    <li>Renewable energy in agriculture (biogas, solar, biofuels)</li>
+                    <li>Controlled environment agriculture & greenhouse technology</li>
+                    <li>Hydroponics and modern farming systems</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</div>
+
+    </section>
+    <!-- /Recent Posts Section -->
+<section id="submission-guidelines" class="recent-posts section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Sustainability, Innovation & Policy</h2>
+        <p>
+            Advancing sustainable agriculture, agri-business models, and innovative practices for global food and livestock systems
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Box 1: Sustainability & Innovation -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="100"
+            >
+                <article>
+                    <div class="post-img">
+                        <img src="assets/img/blog/sustainability.jpg" alt="" class="img-fluid" />
+                    </div>
+                    <p class="post-category">Sustainability & Innovation</p>
+                    <h2 class="title">
+                        <a href="#">Climate-Smart Strategies</a>
+                    </h2>
+                    <ul>
+                        <li>Climate-smart agriculture and adaptation strategies</li>
+                        <li>Integration of AI, IoT, and robotics in agriculture and livestock systems</li>
+                        <li>Circular economy approaches in farming</li>
+                        <li>Policy, socio-economic analysis, and technology adoption studies</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 2: Animal & Agricultural Business -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
+                <article>
+                    <div class="post-img">
+                        <img src="assets/img/blog/agri-business.jpg" alt="" class="img-fluid" />
+                    </div>
+                    <p class="post-category">Animal & Agricultural Business</p>
+                    <h2 class="title">
+                        <a href="#">Innovation & Value Chains</a>
+                    </h2>
+                    <ul>
+                        <li>Agribusiness Management & Policy – Business models, strategic planning, policy analysis, rural development strategies, and farm management practices</li>
+                        <li>Animal Business & Value Chains – Livestock production economics, dairy & meat industry management, feed & nutrition business, and animal-based product marketing</li>
+                        <li>Agricultural Marketing & Trade – Domestic & international trade, commodity pricing, supply chain optimization, export potential, and market intelligence</li>
+                        <li>Sustainability & Innovation – Green business practices, climate-smart agriculture, resource efficiency, and adoption of agri-tech in business operations</li>
+                    </ul>
+                </article>
+            </div>
+
+            <!-- Box 3: Finance & Entrepreneurship -->
+            <div
+                class="col-xl-4 col-md-6"
+                data-aos="fade-up"
+                data-aos-delay="300"
+            >
+                <article>
+                    <div class="post-img">
+                        <img src="assets/img/blog/finance-entrepreneurship.jpg" alt="" class="img-fluid" />
+                    </div>
+                    <p class="post-category">Finance & Entrepreneurship</p>
+                    <h2 class="title">
+                        <a href="#">Agri-Investments & Start-ups</a>
+                    </h2>
+                    <ul>
+                        <li>Finance & Investment – Agri-finance models, risk management, insurance schemes, micro-financing, and investment strategies for farming and livestock enterprises</li>
+                        <li>Entrepreneurship & Start-ups – Agri-entrepreneurship, rural start-up ecosystems, innovations in food processing, and farm-to-fork business models</li>
+                        <li>Consumer Trends & Agribusiness Ethics – Consumer behavior, food quality standards, branding, certifications, and ethical trade in agriculture and animal products</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+        <!-- End row -->
+    </div>
+    <!-- End container -->
+</section>
+
+    <section id="publication-policies" class="recent-posts section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Publication Policies</h2>
+        <p>
+            FAAI follows the guidelines of SCOPUS, NAAS & ICAR-NAAS for publishing high-quality scientific research in agricultural and animal sciences.
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container">
+        <div class="row gy-4">
+
+            <!-- Box 1: Journal Selection Criteria -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="post-box">
+                    <h4>Journal Selection Criteria</h4>
+                    <p>
+                        Research papers must be submitted to a peer-reviewed journal following standard scientific guidelines.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 2: Manuscript Structure -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="post-box">
+                    <h4>Manuscript Structure</h4>
+                    <p>
+                        Manuscripts should follow the standard scientific format:
+                        <ul>
+                            <li>Title: Clear, concise, informative</li>
+                            <li>Authors and Affiliations</li>
+                            <li>Abstract (200–250 words)</li>
+                            <li>Keywords (4–6)</li>
+                            <li>Introduction</li>
+                            <li>Materials and Methods</li>
+                            <li>Results and Discussion</li>
+                            <li>Conclusion</li>
+                            <li>References (APA, Harvard, or journal-specific)</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 3: Research Content Guidelines -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="post-box">
+                    <h4>Research Content Guidelines</h4>
+                    <p>
+                        <ul>
+                            <li>Original research with clear objectives, methodology, analysis, and implications</li>
+                            <li>Replicated field/lab studies are preferred</li>
+                            <li>Statistical validation is required</li>
+                            <li>Use recent literature (last 5–7 years)</li>
+                            <li>Ethical standards must be followed for animal/human experiments</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 4: Data Presentation -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="post-box">
+                    <h4>Data Presentation</h4>
+                    <p>
+                        <ul>
+                            <li>Use clear tables, graphs, and figures</li>
+                            <li>Units should be in SI format</li>
+                            <li>Mention software used for analysis (e.g., SPSS, R, SAS)</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 5: References & Citation -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="post-box">
+                    <h4>References & Citation</h4>
+                    <p>
+                        <ul>
+                            <li>Prefer recent (up to 10 years) and relevant references</li>
+                            <li>Avoid excessive self-citations</li>
+                            <li>Use proper citation tools (Mendeley, EndNote, Zotero)</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 6: NAAS Score Usage -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                <div class="post-box">
+                    <h4>NAAS Score Usage</h4>
+                    <p>
+                        When submitting for evaluation (e.g., promotion, grant), authors should highlight the NAAS score of the publication.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 7: Ethical Compliance -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+                <div class="post-box">
+                    <h4>Ethical Compliance</h4>
+                    <p>
+                        <ul>
+                            <li>Declaration of plagiarism check</li>
+                            <li>Disclosure of conflicts of interest</li>
+                            <li>Follow ICAR/University/Journal ethical norms</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 8: Submission Standards -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
+                <div class="post-box">
+                    <h4>Submission Standards</h4>
+                    <p>
+                        <ul>
+                            <li>Submit as per journal guidelines (word limit, file format, author template)</li>
+                            <li>Include author contributions, funding sources, and acknowledgments</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 9: Publication Fee -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
+                <div class="post-box">
+                    <h4>Publication Fee</h4>
+                    <p>
+                        A nominal Article Processing Charge (APC) of 10,000 INR, and for international authors 148 USD, may apply to support open-access dissemination.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="document-upload" class="section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Document Upload Instructions</h2>
+        <p>
+            For Authors of Frontiers of Agri & Animal Innovation (FAAI)
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="row gy-4">            
+            <!-- Online Upload -->
+            <div class="col-lg-6">
+                <div class="box p-3 shadow rounded bg-light">
+                    <h4>Online Upload</h4>
+                    <p>
+                        Fill in the form and upload files under the following
+                        fields:
+                    </p>
+                    <ul>
+                        <li><strong>Author Name & Manuscript Title</strong></li>
+                        <li>
+                            <strong>Upload Field 1:</strong> Copyright Form
+                        </li>
+                        <li>
+                            <strong>Upload Field 2:</strong> Payment Receipt
+                        </li>
+                        <li>
+                            <strong>Format accepted:</strong> DOCX
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Important Notes -->
+            <div class="col-lg-6">
+                <div class="box p-4 shadow rounded bg-light">
+                <h4>Important Notes</h4>
+                <ul>
+                    <li>
+                        ✔ Ensure the Copyright Form is signed by all
+                        contributing authors.
+                    </li>
+                    <li>
+                        ✔ Use clear scans or photographs of documents if
+                        not in digital format.
+                    </li>
+                    <li>
+                        ✔ Double-check your manuscript ID or title is
+                        clearly mentioned in all files or filenames.
+                    </li>
+                    <li>
+                        ✔ Retain a copy of both documents for your
+                        records.
+                    </li>
+                </ul>
+                </div>
+            </div>
+            <!-- Required Documents -->
+            
+        </div>
+    </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Join As A Reviewer</h2>
+        <p>
+            For queries related to submission, review process, or
+            publication
+        </p>
+    </div>
+    <!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gx-lg-0 gy-4">
+            <div class="col-lg-4">
+                <div
+                class="info-container d-flex flex-column align-items-center justify-content-center"
+                >
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    <i
+                        class="bi bi-building flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Publisher</h3>
+                        {% if contact %}
+                        <p>{{ contact.name}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+                    <i class="bi bi-telephone flex-shrink-0"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    <i class="bi bi-envelope flex-shrink-0"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        {% if contact %}
+                        <a class="text-light" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+
+                <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                >
+                    <i
+                        class="bi bi-globe flex-shrink-0 me-3 fs-4 text-white"
+                    ></i>
+                    <div>
+                        <h3>Website</h3>
+                        {% if contact %}
+                        <a class="text-light" href="{{contact.company_website}}" target="_blank">{{contact.company_website}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End Info Item -->
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <form
+                action="forms/contact.php"
+                method="post"
+                class="php-email-form"
+                data-aos="fade"
+                data-aos-delay="100"
+                >
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Your Name"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            placeholder="Your Email"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="subject"
+                            placeholder="Subject"
+                            required=""
+                        />
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea
+                            class="form-control"
+                            name="message"
+                            rows="8"
+                            placeholder="Message"
+                            required=""
+                        ></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">
+                            Your message has been sent. Thank you!
+                        </div>
+
+                        <button type="submit">Send Message</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <!-- End Contact Form -->
+        </div>
+    </div>
+    </section>
+    <!-- /Contact Section -->
+</main>
+{% endblock %}

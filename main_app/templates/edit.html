@@ -1,0 +1,58 @@
+{% extends "basecode.html" %}
+{% block title %}Edit Editor{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h2 class="mb-4 text-warning">
+        <i class="bi bi-pencil-square"></i> Edit Editor
+    </h2>
+
+    <form method="POST" action="{{ url_for('edit_editor', id=editor.id) }}">
+        <div class="mb-3">
+        <label class="form-label">Journal</label>
+        <select name="journal_id" class="form-select" required>
+            {% for journal in journals %}
+                <option value="{{ journal.id }}" {% if editor.journal_id == journal.id %}selected{% endif %}>{{ journal.full_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+        <div class="mb-3">
+            <label class="form-label">Select Category<span class="text-danger">*</span></label>
+            <select name="code" class="form-control" required>
+                <option value="" {% if not editor.code %}selected{% endif %}>-- Select --</option>
+                <option value="01" {% if editor.code == '01' %}selected{% endif %}>Editorial Board</option>
+                <option value="02" {% if editor.code == '02' %}selected{% endif %}>Reviewer Team</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Name <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" value="{{ editor.name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Designation</label>
+            <input type="text" name="designation" class="form-control" value="{{ editor.designation }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Link</label>
+            <input type="url" name="link" class="form-control" value="{{ editor.link }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Quote</label>
+            <textarea name="quote" class="form-control" rows="3">{{ editor.quote }}</textarea>
+        </div>
+
+        
+        
+
+        <button type="submit" class="btn btn-warning">
+            <i class="bi bi-arrow-repeat"></i> Update
+        </button>
+        <a href="{{ url_for('listedi') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+    </form>
+</div>
+{% endblock %}
