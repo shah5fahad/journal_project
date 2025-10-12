@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: crin_project
-    env: python
-    plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
-    branch: main
-    autoDeploy: true

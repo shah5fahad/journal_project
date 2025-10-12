@@ -1,37 +1,24 @@
 import os, secrets
-from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_mail import Mail, Message
+from flask import render_template, request, redirect, url_for, flash, session
+from flask_mail import Message
 from werkzeug.security import generate_password_hash
 from functools import wraps
-from models import db, EditorBoard, ContactDetail, ResearchPaper, User, JournalMaster
-from dotenv import load_dotenv
+from main_app.models import EditorBoard, ContactDetail, ResearchPaper, User, JournalMaster
+from main_app.extensions import db, mail, app
 
-# Load environment variables from .env file
-load_dotenv()
 
-# ----------------------------------
-# App Config
-# ----------------------------------
-app = Flask(__name__)
-
-# Secret key
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-
-# Database
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-# Mail (set real creds in env for production)
-app.config["MAIL_SERVER"] = os.getenv("MAIL_SERVER")
-app.config["MAIL_PORT"] = int(os.getenv("MAIL_PORT"))
-app.config["MAIL_USE_TLS"] = os.getenv("MAIL_USE_TLS").lower() == "true"
-app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.getenv("MAIL_DEFAULT_SENDER")
-
-# Init extensions
-db.init_app(app)
-mail = Mail(app)
+# Automatically create tables and admin user
+with app.app_context():
+    db.create_all()
+    admin = User.query.filter_by(username="admin").first()
+    if not admin:
+        admin = User(username="admin", email="admin@example.com", role="admin")
+        admin.set_password("admin123")
+        db.session.add(admin)
+        db.session.commit()
+        print("Admin user created: username='admin', password='admin123'")
+    else:
+        print("Admin user already exists")
 
 users = {
     "admin": {
@@ -650,22 +637,6 @@ def login():
     return render_template("login.html")
 
 
-# ðŸ”¹ Automatically create tables and admin user
-with app.app_context():
-    db.create_all()  # create all tables if not exist
-
-    # Check if admin user already exists
-    admin = User.query.filter_by(username="admin").first()
-    if not admin:
-        admin = User(username="admin", email="admin@example.com", role="admin")
-        admin.set_password("admin123")  # set hashed password
-        db.session.add(admin)
-        db.session.commit()
-        print("âœ… Admin user created: username='admin', password='admin123'")
-    else:
-        print("â„¹ï¸ Admin user already exists")
-
-
 @app.route("/logout")
 @login_required
 def logout():
@@ -861,7 +832,7 @@ def add_editor():
         db.session.commit()
         flash("Editor record added.", "success")
         return redirect(url_for("listedi"))
-    return render_template("add.html", journals=journals, users=users, current_user=current_user, is_admin=is_admin)
+    return render_template("add.html", journals=journals, current_user=current_user, is_admin=is_admin)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
@@ -881,7 +852,7 @@ def edit_editor(id):
         db.session.commit()
         flash("Editor record updated.", "success")
         return redirect(url_for("listedi"))
-    return render_template("edit.html", editor=editor, journals=journals, users=users, current_user=current_user, is_admin=is_admin)
+    return render_template("edit.html", editor=editor, journals=journals, current_user=current_user, is_admin=is_admin)
 
 
 @app.route("/delete/<int:id>", methods=["POST", "GET"])
@@ -903,7 +874,7 @@ def list_contacts():
     current_user = User.query.filter_by(username=session["username"]).first()
     is_admin = current_user.role == "admin"
     contacts = ContactDetail.query.order_by(ContactDetail.id.asc()).all()
-    return render_template("contacts/list.html", contacts=contacts, users=users, current_user=current_user, is_admin=is_admin)
+    return render_template("contacts/list.html", contacts=contacts, current_user=current_user, is_admin=is_admin)
 
 
 @app.route("/contacts/add", methods=["GET", "POST"])
@@ -931,7 +902,7 @@ def add_contact():
         db.session.commit()
         flash("Contact added successfully!", "success")
         return redirect(url_for("list_contacts"))
-    return render_template("contacts/add.html", users=users, journals=journals, current_user=current_user, is_admin=is_admin)
+    return render_template("contacts/add.html", journals=journals, current_user=current_user, is_admin=is_admin)
 
 
 @app.route("/contacts/edit/<int:id>", methods=["GET", "POST"])
@@ -957,7 +928,7 @@ def edit_contact(id):
         flash("Contact updated successfully!", "success")
         return redirect(url_for("list_contacts"))
     return render_template(
-        "contacts/edit.html", contact=contact, users=users, journals=journals, current_user=current_user, is_admin=is_admin
+        "contacts/edit.html", contact=contact, journals=journals, current_user=current_user, is_admin=is_admin
     )
 
 
@@ -982,7 +953,7 @@ def list_papers():
     current_user = User.query.filter_by(username=session["username"]).first()
     is_admin = current_user.role == "admin"
     papers = ResearchPaper.query.order_by(ResearchPaper.id.desc()).all()
-    return render_template("list_papers.html", papers=papers, users=users, current_user=current_user, is_admin=is_admin)
+    return render_template("list_papers.html", papers=papers, current_user=current_user, is_admin=is_admin)
 
 # -------------------------
 # Research Paper: CRUD (improved)

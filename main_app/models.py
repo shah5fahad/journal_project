@@ -1,10 +1,7 @@
 import os
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from datetime import datetime
-
-db = SQLAlchemy()
+from main_app.extensions import db
 
 
 class JournalMaster(db.Model):
@@ -16,19 +13,11 @@ class JournalMaster(db.Model):
     )
     full_name = db.Column(db.String(250), nullable=False, unique=True)
     short_name = db.Column(db.String(100), nullable=True)
-    domain_name = db.Column(db.String(200), nullable=True)
-    url = db.Column(db.String(300), nullable=True)
-    hosting_provider = db.Column(db.String(200), nullable=True)
-    issn = db.Column(db.String(50), nullable=True)
-    publisher = db.Column(db.String(200), nullable=True)
-
-    country = db.Column(db.String(100), nullable=True)
-    category = db.Column(db.String(200), nullable=True)
-    impact_factor = db.Column(db.String(50), nullable=True)
-    status = db.Column(db.String(20), default="Active")
     logo_filename = db.Column(db.String(200), nullable=True)
     contact_email = db.Column(db.String(200), nullable=True)
+    status = db.Column(db.Boolean, default=True)
     about = db.Column(db.Text, nullable=True)
+    url = db.Column(db.String(300), nullable=True)
 
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
@@ -81,7 +70,7 @@ class ContactDetail(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(200), nullable=False, unique=True)
+    email = db.Column(db.String(200), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
     address = db.Column(db.String(500))
     linkedin = db.Column(db.String(500))
@@ -109,14 +98,15 @@ class ResearchPaper(db.Model):
     sub_heading = db.Column(db.String(500), nullable=False)
     title = db.Column(db.String(300), nullable=False)
     authors = db.Column(db.String(300), nullable=False)
-    journal = db.Column(db.String(200), nullable=False)
     volume = db.Column(db.String(50), nullable=True)
     issue = db.Column(db.String(50), nullable=True)
     year = db.Column(db.Integer, nullable=True)
     abstract = db.Column(db.Text, nullable=False)
     pdf_filename = db.Column(db.String(200), nullable=True)
     citation = db.Column(db.Text, nullable=True)
-    image_filename = db.Column(db.String(200), nullable=True)  # new field for image
+    image_filename = db.Column(db.String(200), nullable=True)
+    is_current = db.Column(db.Boolean, default=True)
+    is_archive = db.Column(db.Boolean, default=False)
     journal_id = db.Column(
         db.Integer, db.ForeignKey("journal_master.id"), nullable=False
     )
