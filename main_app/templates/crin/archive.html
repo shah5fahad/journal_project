@@ -1,0 +1,121 @@
+{% extends 'crin/base.html' %}
+
+{% block title %}Archive Research Issues - Curevita Research International Nexus{% endblock %}
+
+{% block content %}
+<br><br><br><br>
+<style>
+    .research-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px;
+        margin-top: 20px;
+    }
+    .page-title {
+        color: #2c3e50;
+        margin-bottom: 40px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #3498db;
+        text-align: center;
+        font-weight: 600;
+    }
+    .research-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #3498db;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .research-card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    .research-card-link:hover .research-card {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        border-left: 4px solid #2980b9;
+    }
+    .research-card-link:active .research-card {
+        transform: translateY(-2px);
+    }
+    .research-title {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    .research-description {
+        color: #555;
+        margin-bottom: 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex-grow: 1;
+    }
+    .read-more-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        align-self: flex-start;
+    }
+    .research-card-link:hover .read-more-btn {
+        background-color: #2980b9;
+    }
+    .research-meta {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        margin-top: 15px;
+    }
+    @media (max-width: 768px) {
+        .research-card {
+            padding: 20px;
+        }
+        .research-title {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+<div class="research-container">
+    <div class="container section-title" data-aos="fade-up">
+        <h1 lass="fw-bold ">Archive Publication Issues</h1>
+    </div>
+    <div class="row">
+        {% if papers|length > 0 %}
+            {% for paper in papers %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <a href="{{ url_for('crin_paper_detail', paper_id=paper.id) }}" class="research-card-link">
+                    <div class="research-card">
+                        <h3 class="research-title">{{ paper.title }}</h3>
+                        <p class="research-description">
+                            {{ paper.abstract[:200] }}...
+                        </p>
+                        <button class="read-more-btn">Read More</button>
+                        <div class="research-meta">
+                            <span>Published: {{ paper.year or 'N/A' }}</span> | 
+                            <span>Category: {{ paper.journal.full_name or 'N/A' }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center fs-5 fw-bold my-3">
+                <p >No Archive Issues Available</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<br><br><br>
+
+{% endblock %}

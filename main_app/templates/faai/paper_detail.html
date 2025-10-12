@@ -41,8 +41,7 @@
 /* Card Header */
 .card-header {
     padding: 30px;
-    background: linear-gradient(135deg, #283846 0%, #3a5168 100%);
-    color: white;
+    background: #f0f7ff;
     text-align: center;
 }
 
@@ -183,7 +182,7 @@
                         </div>
                         <div class="meta-item">
                             <div class="meta-title">Published in</div>
-                            <div class="meta-content">Vol = {{ paper.volume or 'N/A' }}, Issue = {{ paper.issue or 'N/A' }}, {{ paper.year or 'N/A' }}</div>
+                            <div class="meta-content">Vol {{ paper.volume or 'N/A' }}, Issue {{ paper.issue or 'N/A' }}, {{ paper.year or 'N/A' }}</div>
                         </div>
                     </div>
 

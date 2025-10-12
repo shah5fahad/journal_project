@@ -178,6 +178,22 @@ def cibdi_current_issue():
     )
     return render_template("cibdi/Current_issue.html", papers=papers, contact=contact)
 
+@app.route("/cibdi/archive")
+def cibdi_archive():
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "001", ResearchPaper.is_archive == True)
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    contact = (
+        ContactDetail.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "001")
+        .order_by(ContactDetail.id.desc())
+        .first()
+    )
+    return render_template("cibdi/archive.html", papers=papers, contact=contact)
+
 
 @app.route("/cibdi/paper/<int:paper_id>")
 def cibdi_paper_detail(paper_id):
@@ -280,6 +296,22 @@ def crin_current_issue():
         .all()
     )
     return render_template("crin/Current_issue.html", papers=papers, contact=contact)
+
+@app.route("/crin/archive")
+def crin_archive():
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "002", ResearchPaper.is_archive == True)
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    contact = (
+        ContactDetail.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "002")
+        .order_by(ContactDetail.id.desc())
+        .first()
+    )
+    return render_template("crin/archive.html", papers=papers, contact=contact)
 
 
 @app.route("/crin/paper/<int:paper_id>")
@@ -387,6 +419,22 @@ def faai_current_issue():
     )
     return render_template("faai/Current_issue.html", papers=papers, contact=contact)
 
+@app.route("/faai/archive")
+def faai_archive():
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "003", ResearchPaper.is_archive == True)
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    contact = (
+        ContactDetail.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "003")
+        .order_by(ContactDetail.id.desc())
+        .first()
+    )
+    return render_template("faai/archive.html", papers=papers, contact=contact)
+
 
 @app.route("/faai/paper/<int:paper_id>")
 def faai_paper_detail(paper_id):
@@ -490,6 +538,22 @@ def feri_current_issue():
         .all()
     )
     return render_template("feri/Current_issue.html", papers=papers, contact=contact)
+
+@app.route("/feri/archive")
+def feri_archive():
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "004", ResearchPaper.is_archive == True)
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    contact = (
+        ContactDetail.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "004")
+        .order_by(ContactDetail.id.desc())
+        .first()
+    )
+    return render_template("feri/archive.html", papers=papers, contact=contact)
 
 
 @app.route("/feri/paper/<int:paper_id>")
@@ -595,6 +659,22 @@ def fhim_current_issue():
         .first()
     )
     return render_template("fhim/Current_issue.html", papers=papers, contact=contact)
+
+@app.route("/fhim/archive")
+def fhim_archive():
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "005", ResearchPaper.is_archive == True)
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    contact = (
+        ContactDetail.query.join(JournalMaster)
+        .filter(JournalMaster.journal_id == "005")
+        .order_by(ContactDetail.id.desc())
+        .first()
+    )
+    return render_template("fhim/archive.html", papers=papers, contact=contact)
 
 
 @app.route("/fhim/paper/<int:paper_id>")
