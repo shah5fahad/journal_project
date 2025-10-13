@@ -225,7 +225,7 @@ with app.app_context():
                 },
                 {
                     "name": "Dr Kuldeep Kumar Verma",
-                    "designation": "Assistant Professor & Assistant Examination In-charge (PGS), Department of Livestock Production Management, Faculty of Veterinary & Animal Sciences, Institute of Agricultural Sciences, Rajiv Gandhi South Campus, Banaras Hindu University (BHU), Barkachha, Mirzapur-231 001, UP, India",
+                    "designation": "Assistant Professor & Asst. Exam In-charge (PGS), Dept. of Livestock Production Management, Faculty of Veterinary & Animal Sciences, IAS, Rajiv Gandhi South Campus, BHU, Barkachha, Mirzapur-231001, UP, India.",
                     "link": "",
                     "quote": "Advancing veterinary and animal sciences education at BHU, Dr Kuldeep Kumar Verma drives innovation and excellence in livestock production management.",
                     "code": "01"
