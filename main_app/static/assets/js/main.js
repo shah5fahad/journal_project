@@ -214,5 +214,28 @@
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+  
+  // Contact us form
+  document.querySelector("#contact_us_form").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
+      const name = document.querySelector('#contact_us_form #feedback_user_name').value.trim();
+      const email = document.querySelector('#contact_us_form #feedback_user_email').value.trim();
+      const subject = document.querySelector('#contact_us_form #feedback_user_subject').value.trim();
+      const message = document.querySelector('#contact_us_form #feedback_user_message').value.trim();
+
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.success);
+        document.querySelector("form").reset();
+      } else {
+        alert(result.error || "Something went wrong!");
+      }
+    });
 })();

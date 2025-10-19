@@ -1215,64 +1215,56 @@
             </div>
 
             <div class="col-lg-8">
-                <form
-                action="forms/contact.php"
-                method="post"
-                class="php-email-form"
-                data-aos="fade"
-                data-aos-delay="100"
-                >
-                <div class="row gy-4">
-                    <div class="col-md-6">
-                        <input
-                            type="text"
-                            name="name"
-                            class="form-control"
-                            placeholder="Your Name"
-                            required=""
-                        />
-                    </div>
-
-                    <div class="col-md-6">
-                        <input
-                            type="email"
-                            class="form-control"
-                            name="email"
-                            placeholder="Your Email"
-                            required=""
-                        />
-                    </div>
-
-                    <div class="col-md-12">
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="subject"
-                            placeholder="Subject"
-                            required=""
-                        />
-                    </div>
-
-                    <div class="col-md-12">
-                        <textarea
-                            class="form-control"
-                            name="message"
-                            rows="8"
-                            placeholder="Message"
-                            required=""
-                        ></textarea>
-                    </div>
-
-                    <div class="col-md-12 text-center">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">
-                            Your message has been sent. Thank you!
+                <form id="contact_us_form" class="php-email-form aos-init aos-animate">
+                    <div class="row gy-4">
+                        <div class="col-md-6">
+                            <input
+                                id="feedback_user_name"
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                placeholder="Your Name"
+                                required=""
+                            />
                         </div>
 
-                        <button type="submit">Send Message</button>
+                        <div class="col-md-6">
+                            <input
+                                id="feedback_user_email"
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                placeholder="Your Email"
+                                required=""
+                            />
+                        </div>
+
+                        <div class="col-md-12">
+                            <input
+                                id="feedback_user_subject"
+                                type="text"
+                                class="form-control"
+                                name="subject"
+                                placeholder="Subject"
+                                required=""
+                            />
+                        </div>
+
+                        <div class="col-md-12">
+                            <textarea
+                                id="feedback_user_message"
+                                class="form-control"
+                                name="message"
+                                rows="8"
+                                placeholder="Message"
+                                required=""
+                            ></textarea>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <button type="submit">Send Message</button>
+                        </div>
                     </div>
-                </div>
                 </form>
             </div>
             <!-- End Contact Form -->

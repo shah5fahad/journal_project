@@ -1,10 +1,11 @@
 import os, secrets
-from flask import render_template, request, redirect, url_for, flash, session
+from flask import render_template, request, redirect, url_for, flash, session, jsonify
 from flask_mail import Message
 from werkzeug.security import generate_password_hash
 from functools import wraps
-from main_app.models import EditorBoard, ContactDetail, ResearchPaper, User, JournalMaster
+from main_app.models import EditorBoard, ContactDetail, ResearchPaper, User, JournalMaster, UserFeedback
 from main_app.extensions import db, mail, app
+from datetime import datetime, timedelta
 
 
 # Automatically create tables and admin user
@@ -1278,3 +1279,65 @@ def delete_paper(id):
     db.session.commit()
     flash("Research Paper deleted successfully.", "danger")
     return redirect(url_for("list_papers"))
+
+
+@app.route("/api/feedback", methods=["POST"])
+def add_feedback():
+    data = request.get_json()
+
+    name = data.get("name")
+    email = data.get("email")
+    subject = data.get("subject", "")
+    message = data.get("message", "")
+
+    if not name.strip() or not email.strip() or not message.strip():
+        return jsonify({"error": "All required fields must be filled."}), 400
+
+    # Check if user has sent feedback in the last 1 hour
+    one_hour_ago = datetime.now() - timedelta(hours=1)
+    recent_feedback = UserFeedback.query.filter(
+        UserFeedback.email == email,
+        UserFeedback.created_at >= one_hour_ago
+    ).first()
+
+    if recent_feedback:
+        return jsonify({"error": "You can only send feedback once in a hour."}), 429
+
+    # Save feedback in database
+    new_feedback = UserFeedback(
+        name=name,
+        email=email,
+        subject=subject,
+        message=message
+    )
+    db.session.add(new_feedback)
+    db.session.commit()
+
+    # Send confirmation mail
+    try:
+        msg = Message(
+            subject="Your Contact Request Has Been Received",
+            sender="no-reply@yourdomain.com",
+            recipients=[email],
+        )
+        msg.body = f"""
+            Dear {name},
+
+            Thank you for reaching out to us!
+
+            We have successfully received your query:
+            "{message}"
+
+            Our support team will review it and get back to you shortly.
+
+            Best regards,
+            Support Team
+            Curevita Journals
+        """
+        mail.send(msg)
+        new_feedback.status = True
+        db.session.commit()
+    except Exception as e:
+        print("Mail sending failed:", e)
+
+    return jsonify({"success": "Query received successfully."}), 201

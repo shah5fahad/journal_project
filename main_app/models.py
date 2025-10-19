@@ -128,3 +128,18 @@ class ResearchPaper(db.Model):
 
     def __repr__(self):
         return f"<ResearchPaper id={self.id} title={self.title!r}>"
+
+
+class UserFeedback(db.Model):
+    __tablename__ = 'user_feedback'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.Text, nullable=False)
+    status = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    subject = db.Column(db.String(500), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    
+    def __repr__(self):
+        return f"<UserFeedback {self.id} - {self.name} - Email {self.email}>"

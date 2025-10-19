@@ -16,7 +16,7 @@
       --secondary: #f39c12;
       --accent1: #ffffff84;
       --accent2: #4e7b85ff;
-      --accent3: #2ecc71;
+      --accent3: #0a0f33;
       --accent4: #9b59b6;
       --light: #ecf0f1;
       --dark: #2c3e50;
@@ -475,7 +475,7 @@
     /* Journal-specific colors */
     .fhima { background: linear-gradient(135deg, var(--accent1) 0%, #4b4a5d83 100%); }
     .crin { background: linear-gradient(135deg, var(--accent2) 0%, #bfbddf83 100%); }
-    .cibdi { background: linear-gradient(135deg, var(--accent3) 0%, #2827ae 100%); }
+    .cibdi { background: linear-gradient(135deg, var(--accent3) 0%, #163a0d 100%); }
     .faai { background: linear-gradient(135deg, var(--secondary) 0%, #00d397 100%); }
     
     /* CTA Section */
@@ -661,6 +661,44 @@
       margin-left: 2px;
       color: var(--nav-hover-color);
     }
+
+    .img-fluid {
+      max-height: 100px !important;
+    }
+
+    .journals-grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .journals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 1200px) {
+      .journals-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .journals-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .journal-header {
+        padding: 30px 15px;
+      }
+      
+      .journal-body {
+        padding: 20px;
+      }
+    }
     
     /* Animations */
     @keyframes fadeInUp {
@@ -755,107 +793,93 @@
   <section id="journals" class="journals-section py-5">
     <div class="container">
       <h2 class="text-center section-title mb-4" data-aos="fade-up">Our Journals</h2>
-      <!-- Slider main container -->
-      <div class="swiper journals-slider">
-        <div class="swiper-wrapper">
+      <div class="journals-grid-container">
+        <div class="journals-grid">
           <!-- FHIMA Journal -->
-          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="100">
-            <div class="journal-card">
-              <a class="text-decoration-none" href="/fhim/home" target="_blank">
-                <div class="journal-header fhima" style="padding-top: 75px; padding-bottom: 75px;">
-                  <div class="journal-icon">
-                    <img src="{{ url_for('static', filename='assets/cibdi/img/fhim_logo.png') }}" class="img-fluid" alt="FHIMA" />
-                  </div>
-                  <h3 class="journal-title text-primary">FHIMA</h3>
+          <div class="journal-card" data-aos="fade-up" data-aos-delay="100">
+            <a class="text-decoration-none" href="/fhim/home" target="_blank">
+              <div class="journal-header fhima">
+                <div class="journal-icon">
+                  <img src="{{ url_for('static', filename='assets/cibdi/img/fhim_logo.png') }}" class="img-fluid" alt="FHIMA" />
                 </div>
-                <div class="journal-body">
-                  <h4>Frontiers of Health Innovations and Medical Advances</h4>
-                  <p class="text-muted">International peer-reviewed journal Publishing cutting-edge research in medical technology, healthcare innovations, and clinical advancements.</p>
-                  <button class="journal-btn">Learn More</button>
-                </div>
-              </a>
-            </div>
+                <h3 class="journal-title text-primary">FHIMA</h3>
+              </div>
+              <div class="journal-body">
+                <h4>Frontiers of Health Innovations and Medical Advances</h4>
+                <p class="text-muted">International peer-reviewed journal Publishing cutting-edge research in medical technology, healthcare innovations, and clinical advancements.</p>
+                <button class="journal-btn">Learn More</button>
+              </div>
+            </a>
           </div>
 
           <!-- FERI Journal -->
-          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
-            <div class="journal-card">
-              <a class="text-decoration-none" href="/feri/home" target="_blank">
-                <div class="journal-header faai" style="padding-top: 75px; padding-bottom: 75px;">
-                  <div class="journal-icon">
-                    <img src="{{ url_for('static', filename='assets/cibdi/img/feri_logo.png') }}" class="img-fluid" alt="FERI" />
-                  </div>
-                  <h3 class="journal-title">FERI</h3>
+          <div class="journal-card" data-aos="fade-up" data-aos-delay="200">
+            <a class="text-decoration-none" href="/feri/home" target="_blank">
+              <div class="journal-header faai">
+                <div class="journal-icon">
+                  <img src="{{ url_for('static', filename='assets/cibdi/img/feri_logo.png') }}" class="img-fluid" alt="FERI" />
                 </div>
-                <div class="journal-body">
-                  <h4>Frontiers in Environmental Revolutionary Innovation</h4>
-                  <p class="text-muted">International peer-reviewed journal advancing research in ecology, vitality sciences, environmental health, and sustainable innovation.</p>
-                  <button class="journal-btn">Learn More</button>
-                </div>
-              </a>
-            </div>
+                <h3 class="journal-title">FERI</h3>
+              </div>
+              <div class="journal-body">
+                <h4>Frontiers in Environmental Revolutionary Innovation</h4>
+                <p class="text-muted">International peer-reviewed journal advancing research in ecology, vitality sciences, environmental health, and sustainable innovation.</p>
+                <button class="journal-btn">Learn More</button>
+              </div>
+            </a>
           </div>
 
           <!-- CRIN Journal -->
-          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="200">
-            <div class="journal-card">
-              <a class="text-decoration-none" href="/crin/home" target="_blank">
-                <div class="journal-header crin">
-                  <div class="journal-icon">
-                    <img src="{{ url_for('static', filename='assets/cibdi/img/crin_logo.png') }}" class="img-fluid" alt="CRIN" />
-                  </div>
-                  <h3 class="journal-title">CRIN</h3>
+          <div class="journal-card" data-aos="fade-up" data-aos-delay="300">
+            <a class="text-decoration-none" href="/crin/home" target="_blank">
+              <div class="journal-header crin">
+                <div class="journal-icon">
+                  <img src="{{ url_for('static', filename='assets/cibdi/img/crin_logo.png') }}" class="img-fluid" alt="CRIN" />
                 </div>
-                <div class="journal-body">
-                  <h4>Curevita Research International Nexus</h4>
-                  <p class="text-muted">A multidisciplinary journal connecting global research across scientific domains and collaborations.</p>
-                  <button class="journal-btn">Learn More</button>
-                </div>
-              </a>
-            </div>
+                <h3 class="journal-title">CRIN</h3>
+              </div>
+              <div class="journal-body">
+                <h4>Curevita Research International Nexus</h4>
+                <p class="text-muted">A multidisciplinary journal connecting global research across scientific domains and collaborations.</p>
+                <button class="journal-btn">Learn More</button>
+              </div>
+            </a>
           </div>
 
           <!-- CIBDI Journal -->
-          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="300">
-            <div class="journal-card">
-              <a class="text-decoration-none" href="/cibdi/home" target="_blank">
-                <div class="journal-header cibdi">
-                  <div class="journal-icon">
-                    <img src="{{ url_for('static', filename='assets/cibdi/img/cibdi_logo.png') }}" class="img-fluid" alt="CIBDI" />
-                  </div>
-                  <h3 class="journal-title">CIBDI</h3>
+          <div class="journal-card" data-aos="fade-up" data-aos-delay="400">
+            <a class="text-decoration-none" href="/cibdi/home" target="_blank">
+              <div class="journal-header cibdi">
+                <div class="journal-icon">
+                  <img src="{{ url_for('static', filename='assets/cibdi/img/cibdi_logo.png') }}" class="img-fluid" alt="CIBDI" />
                 </div>
-                <div class="journal-body">
-                  <h4>Curevita Innovation of BioData Intelligence</h4>
-                  <p class="text-muted">International peer-reviewed journal exploring the intersection of biological data, AI, and computational approaches to solve complex problems.</p>
-                  <button class="journal-btn">Learn More</button>
-                </div>
-              </a>
-            </div>
+                <h3 class="journal-title">CIBDI</h3>
+              </div>
+              <div class="journal-body">
+                <h4>Curevita Innovation of BioData Intelligence</h4>
+                <p class="text-muted">International peer-reviewed journal exploring the intersection of biological data, AI, and computational approaches to solve complex problems.</p>
+                <button class="journal-btn">Learn More</button>
+              </div>
+            </a>
           </div>
 
           <!-- FAAI Journal -->
-          <div class="swiper-slide" data-aos="fade-up" data-aos-delay="400">
-            <div class="journal-card">
-              <a class="text-decoration-none" href="/faai/home" target="_blank">
-                <div class="journal-header faai">
-                  <div class="journal-icon">
-                    <img src="{{ url_for('static', filename='assets/cibdi/img/faai_logo.png') }}" class="img-fluid" alt="FAAI" />
-                  </div>
-                  <h3 class="journal-title">FAAI</h3>
+          <div class="journal-card" data-aos="fade-up" data-aos-delay="500">
+            <a class="text-decoration-none" href="/faai/home" target="_blank">
+              <div class="journal-header faai">
+                <div class="journal-icon">
+                  <img src="{{ url_for('static', filename='assets/cibdi/img/faai_logo.png') }}" class="img-fluid" alt="FAAI" />
                 </div>
-                <div class="journal-body">
-                  <h4>Frontiers of Agri & Animal Innovation</h4>
-                  <p class="text-muted">International peer-reviewed journal advancing research in agricultural sciences, animal husbandry, and sustainable farming practices.</p>
-                  <button class="journal-btn">Learn More</button>
-                </div>
-              </a>
-            </div>
+                <h3 class="journal-title">FAAI</h3>
+              </div>
+              <div class="journal-body">
+                <h4>Frontiers of Agri & Animal Innovation</h4>
+                <p class="text-muted">International peer-reviewed journal advancing research in agricultural sciences, animal husbandry, and sustainable farming practices.</p>
+                <button class="journal-btn">Learn More</button>
+              </div>
+            </a>
           </div>
-
         </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
       </div>
     </div>
   </section>
@@ -1002,7 +1026,7 @@
       <div class="row g-5">
         <div class="col-lg-5" data-aos="fade-right">
           <div class="contact-info">
-            <h4 class="mb-4">Get In Touch</h4>
+            <h4 class="mb-4">Contact Info</h4>
             <div class="d-flex align-items-center mb-4">
               <div class="contact-icon">
                 <i class="fas fa-envelope"></i>
@@ -1042,25 +1066,25 @@
         <div class="col-lg-7" data-aos="fade-left">
           <div class="contact-form">
             <h4 class="mb-4">Send Message</h4>
-            <form>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <input type="text" class="form-control" placeholder="Your Name" required>
+              <form>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input id="feedback_user_name" type="text" class="form-control" placeholder="Your Name" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input id="feedback_user_email" type="email" class="form-control" placeholder="Your Email" required>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <input id="feedback_user_subject" type="text" class="form-control" placeholder="Subject">
+                  </div>
+                  <div class="col-12 mb-3">
+                    <textarea id="feedback_user_message" class="form-control" rows="5" placeholder="Your Message"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-warning w-100 py-3">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                  </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                  <input type="email" class="form-control" placeholder="Your Email" required>
-                </div>
-                <div class="col-12 mb-3">
-                  <input type="text" class="form-control" placeholder="Subject">
-                </div>
-                <div class="col-12 mb-3">
-                  <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-warning w-100 py-3">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
-                </div>
-              </div>
-            </form>
+              </form>
           </div>
         </div>
       </div>
@@ -1094,22 +1118,13 @@
         <div class="col-lg-2 col-md-4 mb-4 mb-md-0 footer-links">
           <h5>Journals</h5>
           <ul>
-            <li><a href="https://fhima.curevitajournals.com/" target="_blank">FHIMA</a></li>
-            <li><a href="https://curevitajournals.com/home" target="_blank">CRIN</a></li>
-            <li><a href="https://cibdi.curevitajournals.com/" target="_blank">CIBDI</a></li>
-            <li><a href="https://faai.curevitajournals.com/" target="_blank">FAAI</a></li>
-            <li><a href="https://feri.curevitajournals.com/" target="_blank">FERI</a></li>
+            <li><a href="/fhim/home" target="_blank">FHIMA</a></li>
+            <li><a href="/crin/home" target="_blank">CRIN</a></li>
+            <li><a href="/cibdi/home" target="_blank">CIBDI</a></li>
+            <li><a href="/faai/home" target="_blank">FAAI</a></li>
+            <li><a href="/feri/home" target="_blank">FERI</a></li>
           </ul>
         </div>
-        <div class="col-lg-4 col-md-4 footer-links">
-          <h5>Contact Info</h5>
-          <ul>
-            <li><i class="fas fa-map-marker-alt me-2"></i> 4/21 LIG, Informal Sector, Vidya Nagar, Bhopal, MP, India</li>
-            <li><a href="tel:+917987082627"><i class="fa-solid fa-phone me-2"></i> +91 79870 82627</a></li>
-            <li><a href="mailto:infocvrb@curevita.org"><i class="fa fa-envelope me-2"></i>infocvrb@curevita.org</a></li>
-          </ul>
-        </div>
-      </div>
       <div class="text-center copyright">
         <p>&copy; 2025 Curevita Research Journals. All Rights Reserved.</p>
       </div>
@@ -1121,28 +1136,6 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      new Swiper('.journals-slider', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          992: { slidesPerView: 3 },
-          1200: { slidesPerView: 4 },
-        },
-      });
-    });
-  </script>
   <script>
     // Initialize AOS
     AOS.init({
@@ -1226,6 +1219,30 @@
     }, { threshold: 0.5 });
     
     observer.observe(document.querySelector('.stats-container'));
+  </script>
+  <script>
+    document.querySelector(".contact-form form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.querySelector('.contact-form #feedback_user_name').value.trim();
+      const email = document.querySelector('.contact-form #feedback_user_email').value.trim();
+      const subject = document.querySelector('.contact-form #feedback_user_subject').value.trim();
+      const message = document.querySelector('.contact-form #feedback_user_message').value.trim();
+
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.success);
+        document.querySelector("form").reset();
+      } else {
+        alert(result.error || "Something went wrong!");
+      }
+    });
   </script>
 </body>
 </html>
