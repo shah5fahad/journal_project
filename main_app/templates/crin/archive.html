@@ -10,6 +10,7 @@
         margin: 0 auto;
         padding: 10px;
         margin-top: 20px;
+        display: none; /* Hidden by default */
     }
     .page-title {
         color: #2c3e50;
@@ -39,9 +40,6 @@
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         border-left: 4px solid #2980b9;
-    }
-    .research-card-link:active .research-card {
-        transform: translateY(-2px);
     }
     .research-title {
         color: #2c3e50;
@@ -75,6 +73,36 @@
         color: #7f8c8d;
         margin-top: 15px;
     }
+    /* Archive Grid */
+    .archive-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+    .archive-item {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 40px 20px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .archive-item:hover {
+        background: #eaf2fb;
+        transform: translateY(-4px);
+    }
+    .archive-item h3 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    .archive-item p {
+        color: #555;
+    }
+
     @media (max-width: 768px) {
         .research-card {
             padding: 20px;
@@ -85,7 +113,18 @@
     }
 </style>
 
-<div class="research-container">
+<!-- ===== Archive Grid (Visible on Page Load) ===== -->
+<div class="archive-grid" id="archiveGrid">
+    <div class="archive-item" id="viewArchiveBtn">
+        <h3>Archived Research</h3>
+        <h4>Volume 1</h4>
+        <p class="p-0 m-0">Year</p>
+        <h5>2025</h5>
+    </div>
+</div>
+
+<!-- ===== Archive Research Container (Hidden initially) ===== -->
+<div class="research-container" id="archiveContent">
     <div class="container section-title" data-aos="fade-up">
         <h1 lass="fw-bold ">Archive Publication Issues</h1>
     </div>
@@ -115,6 +154,20 @@
         {% endif %}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const archiveGrid = document.getElementById('archiveGrid');
+        const archiveContent = document.getElementById('archiveContent');
+        const viewBtn = document.getElementById('viewArchiveBtn');
+
+        viewBtn.addEventListener('click', function () {
+            archiveGrid.style.display = 'none';
+            archiveContent.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+</script>
 
 <br><br><br>
 
