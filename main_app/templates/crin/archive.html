@@ -1,172 +1,468 @@
 {% extends 'crin/base.html' %}
 
-{% block title %}Archive Research Issues - Curevita Research International Nexus{% endblock %}
+{% block title %}
+Archive Research Issues - Curevita Research International Nexus
+{% endblock %}
 
 {% block content %}
-<br><br><br><br>
+
 <style>
-    .research-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 10px;
-        margin-top: 20px;
-        display: none; /* Hidden by default */
-    }
-    .page-title {
-        color: #2c3e50;
-        margin-bottom: 40px;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #3498db;
-        text-align: center;
-        font-weight: 600;
-    }
-    .research-card {
-        background-color: white;
-        border-radius: 8px;
-        padding: 25px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        border-left: 4px solid #3498db;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .research-card-link {
-        text-decoration: none;
-        color: inherit;
-    }
-    .research-card-link:hover .research-card {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        border-left: 4px solid #2980b9;
-    }
-    .research-title {
-        color: #2c3e50;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-    .research-description {
-        color: #555;
-        margin-bottom: 20px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        flex-grow: 1;
-    }
-    .read-more-btn {
-        background-color: #3498db;
-        color: white;
-        border: none;
-        padding: 8px 20px;
-        border-radius: 4px;
-        font-weight: 500;
-        transition: background-color 0.3s;
-        align-self: flex-start;
-    }
-    .research-card-link:hover .read-more-btn {
-        background-color: #2980b9;
-    }
-    .research-meta {
-        font-size: 0.9rem;
-        color: #7f8c8d;
-        margin-top: 15px;
-    }
-    /* Archive Grid */
-    .archive-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 20px;
-    }
-    .archive-item {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    .archive-item:hover {
-        background: #eaf2fb;
-        transform: translateY(-4px);
-    }
-    .archive-item h3 {
-        color: #2c3e50;
-        font-weight: 600;
-    }
-    .archive-item p {
-        color: #555;
+
+:root{
+    --primary:#2563eb;
+    --secondary:#1e40af;
+    --dark:#0f172a;
+    --text:#64748b;
+    --border:#e2e8f0;
+    --bg:#f8fafc;
+}
+
+body{
+    background:var(--bg);
+}
+
+/* ISSUE NAVIGATION */
+.issue-navigation{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.issue-btn{
+    text-decoration:none;
+    padding:12px 28px;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s ease;
+    border:1px solid #dbeafe;
+}
+
+.issue-btn.active{
+    background:var(--primary);
+    color:white;
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.issue-btn:not(.active){
+    background:white;
+    color:var(--primary);
+}
+
+.issue-btn:hover{
+    transform:translateY(-3px);
+    color:white;
+    background:var(--primary-dark);
+}
+
+/* Hero Section */
+
+.archive-hero{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    color:white;
+    padding:140px 0 80px;
+}
+
+.archive-hero h1{
+    font-size:3rem;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.archive-hero p{
+    max-width:750px;
+    margin:auto;
+    opacity:.9;
+}
+
+.archive-stats{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.stat-box{
+    background:rgba(255,255,255,.12);
+    padding:20px 40px;
+    border-radius:16px;
+    backdrop-filter:blur(10px);
+    text-align:center;
+}
+
+.stat-box h3{
+    margin:0;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.stat-box span{
+    font-size:.9rem;
+    opacity:.9;
+}
+
+/* Navigation */
+
+.year-navigation{
+    position:sticky;
+    top:90px;
+    z-index:100;
+    background:white;
+    padding:15px;
+    border-radius:16px;
+    margin-bottom:30px;
+    box-shadow:0 4px 20px rgba(0,0,0,.05);
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.year-navigation a{
+    text-decoration:none;
+    color:var(--primary);
+    background:#eff6ff;
+    padding:10px 18px;
+    border-radius:50px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.year-navigation a:hover{
+    background:var(--primary);
+    color:white;
+}
+
+/* Accordion */
+
+.archive-accordion{
+    margin-top:20px;
+}
+
+.archive-item{
+    border:none !important;
+    margin-bottom:20px;
+    border-radius:18px !important;
+    overflow:hidden;
+    box-shadow:0 6px 24px rgba(0,0,0,.05);
+}
+
+.archive-item .accordion-button{
+    padding:24px 30px;
+    background:white;
+    box-shadow:none !important;
+}
+
+.archive-item .accordion-button:not(.collapsed){
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    color:white;
+}
+
+.archive-item .accordion-button:not(.collapsed)::after{
+    filter:brightness(0) invert(1);
+}
+
+.year-title{
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+.year-subtitle{
+    font-size:.9rem;
+    opacity:.8;
+}
+
+.paper-count{
+    background:rgba(255,255,255,.15);
+    padding:8px 16px;
+    border-radius:50px;
+    font-size:.9rem;
+    font-weight:600;
+}
+
+.accordion-body{
+    background:#f8fafc;
+    padding:25px;
+}
+
+/* Paper Card */
+
+.paper-link{
+    text-decoration:none;
+}
+
+.paper-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    transition:.3s;
+    height:100%;
+}
+
+.paper-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--primary);
+    box-shadow:0 12px 25px rgba(37,99,235,.12);
+}
+
+.issue-badge{
+    display:inline-block;
+    background:#eff6ff;
+    color:var(--primary);
+    padding:6px 12px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.paper-title{
+    font-size:1.05rem;
+    color:var(--dark);
+    font-weight:700;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.paper-authors{
+    color:var(--text);
+    margin-bottom:10px;
+    font-size:.92rem;
+}
+
+.paper-meta{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    color:var(--text);
+    font-size:.88rem;
+}
+
+.paper-action{
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    color:white;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+/* Empty State */
+
+.empty-state{
+    text-align:center;
+    padding:80px 0;
+}
+
+.empty-state h3{
+    color:var(--text);
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .archive-hero{
+        padding:120px 0 60px;
     }
 
-    @media (max-width: 768px) {
-        .research-card {
-            padding: 20px;
-        }
-        .research-title {
-            font-size: 1.1rem;
-        }
+    .archive-hero h1{
+        font-size:2rem;
     }
+
+    .paper-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .paper-action{
+        width:100%;
+        text-align:center;
+    }
+
+    .year-title{
+        font-size:1.2rem;
+    }
+
+    .year-navigation{
+        top:70px;
+    }
+
+}
+
 </style>
 
-<!-- ===== Archive Grid (Visible on Page Load) ===== -->
-<div class="archive-grid" id="archiveGrid">
-    <div class="archive-item" id="viewArchiveBtn">
-        <h3>Archived Research</h3>
-        <p class="p-0 m-0">Volume -1, Issue -1, August -2025</p>
+<!-- Hero -->
+
+<section class="archive-hero">
+
+<div class="container text-center">
+
+    <h1 style="color: wheat;">Research Archive</h1>
+
+    <p>
+        Browse archived publications organized by publication year,
+        volume and issue.
+    </p>
+
+    <div class="archive-stats">
+
+        <div class="stat-box">
+            <h3 class="text-light">{{ total_papers }}</h3>
+            <span>Total Papers</span>
+        </div>
+
+        <div class="stat-box">
+            <h3 class="text-light">{{ grouped_papers|length }}</h3>
+            <span>Publication Years</span>
+        </div>
+
     </div>
+
+    <div class="issue-navigation">
+        <!-- Archive / Previous Issues -->
+        <a href="{{ url_for('crin_current_issue') }}"
+            class="issue-btn">
+            Current Issues
+        </a>
+    </div>
+
 </div>
 
-<!-- ===== Archive Research Container (Hidden initially) ===== -->
-<div class="research-container" id="archiveContent">
-    <div class="container section-title" data-aos="fade-up">
-        <h1 lass="fw-bold ">Archive Publication Issues</h1>
-    </div>
-    <div class="row">
-        {% if papers|length > 0 %}
-            {% for paper in papers %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <a href="{{ url_for('crin_paper_detail', paper_id=paper.id) }}" class="research-card-link">
-                    <div class="research-card">
-                        <h3 class="research-title">{{ paper.title }}</h3>
-                        <p class="research-description">
-                            {{ paper.abstract[:200] }}...
-                        </p>
-                        <button class="read-more-btn">Read More</button>
-                        <div class="research-meta">
-                            <span>Published: {{ paper.year or 'N/A' }}</span> | 
-                            <span>Category: {{ paper.journal.full_name or 'N/A' }}</span>
-                        </div>
+</section>
+
+<div class="container py-5">
+
+{% if grouped_papers %}
+
+<div class="accordion archive-accordion" id="archiveAccordion">
+
+    {% for year, papers in grouped_papers.items() %}
+
+    <div class="accordion-item archive-item" id="year{{ year }}">
+
+        <h2 class="accordion-header">
+
+            <button
+                class="accordion-button {% if not loop.first %}collapsed{% endif %}"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse{{ year }}"
+                aria-expanded="{% if loop.first %}true{% else %}false{% endif %}">
+
+                <div class="d-flex justify-content-between align-items-center w-100 me-3">
+
+                    <div class="year-title">
+                        {{ year }}
                     </div>
-                </a>
+
+                    <div class="paper-count">
+                        {{ papers|length }}
+                        Paper{{ 's' if papers|length > 1 else '' }}
+                    </div>
+
+                </div>
+
+            </button>
+
+        </h2>
+
+        <div
+            id="collapse{{ year }}"
+            class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+            data-bs-parent="#archiveAccordion">
+
+            <div class="accordion-body">
+
+                <div class="row">
+
+                    {% for paper in papers %}
+
+                    <div class="col-lg-6 mb-3">
+
+                        <a href="{{ url_for('crin_paper_detail', paper_id=paper.id) }}"
+                           class="paper-link">
+
+                            <div class="paper-card">
+
+                                <div>
+
+                                    <div class="issue-badge">
+                                        Volume {{ paper.volume or '-' }}
+                                        •
+                                        Issue {{ paper.issue or '-' }}
+                                    </div>
+
+                                    <div class="paper-title">
+                                        {{ paper.title }}
+                                    </div>
+
+                                    <div class="paper-authors">
+                                        {{ paper.authors }}
+                                    </div>
+
+                                    <div class="paper-meta">
+
+                                        <span>
+                                            📖 {{ paper.journal.full_name }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="paper-action">
+                                    View Paper →
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
             </div>
-            {% endfor %}
-        {% else %}
-            <div class="text-center fs-5 fw-bold my-3">
-                <p >No Archive Issues Available</p>
-            </div>
-        {% endif %}
+
+        </div>
+
     </div>
+
+    {% endfor %}
+
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const archiveGrid = document.getElementById('archiveGrid');
-        const archiveContent = document.getElementById('archiveContent');
-        const viewBtn = document.getElementById('viewArchiveBtn');
+{% else %}
 
-        viewBtn.addEventListener('click', function () {
-            archiveGrid.style.display = 'none';
-            archiveContent.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
-</script>
+<div class="empty-state">
 
-<br><br><br>
+    <h3>No Archived Publications Available</h3>
+
+    <p>
+        Archive records will appear here once publications are added.
+    </p>
+
+</div>
+
+{% endif %}
+
+</div>
 
 {% endblock %}

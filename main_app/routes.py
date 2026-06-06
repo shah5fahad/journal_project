@@ -6,6 +6,7 @@ from functools import wraps
 from main_app.models import EditorBoard, ContactDetail, ResearchPaper, User, JournalMaster, UserFeedback
 from main_app.extensions import db, mail, app
 from datetime import datetime, timedelta
+from collections import defaultdict
 
 
 # Automatically create tables and admin user
@@ -165,26 +166,44 @@ def cibdi_payment():
 
 @app.route("/cibdi/current_issue")
 def cibdi_current_issue():
-    papers = (
-        ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "001")
-        .order_by(ResearchPaper.id.desc())
-        .all()
-    )
+    current_year = datetime.now().year
     contact = (
         ContactDetail.query.join(JournalMaster)
         .filter(JournalMaster.journal_id == "001")
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("cibdi/Current_issue.html", papers=papers, contact=contact)
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(
+            JournalMaster.journal_id == "001",
+            ResearchPaper.year == current_year
+        )
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    return render_template(
+        "cibdi/Current_issue.html",
+        papers=papers,
+        contact=contact
+    )
+
 
 @app.route("/cibdi/archive")
 def cibdi_archive():
+    current_year = datetime.now().year
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "001", ResearchPaper.is_archive == True)
-        .order_by(ResearchPaper.id.desc())
+        .filter(
+            JournalMaster.journal_id == "001",
+            ResearchPaper.year != current_year
+        )
+        .order_by(
+            ResearchPaper.year.desc(),
+            ResearchPaper.volume.desc(),
+            ResearchPaper.issue.desc(),
+            ResearchPaper.id.desc()
+        )
         .all()
     )
     contact = (
@@ -193,7 +212,26 @@ def cibdi_archive():
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("cibdi/archive.html", papers=papers, contact=contact)
+    grouped_papers = defaultdict(list)
+
+    for paper in papers:
+        year = paper.year if paper.year else "Unknown"
+        grouped_papers[year].append(paper)
+
+    grouped_papers = dict(
+        sorted(
+            grouped_papers.items(),
+            key=lambda x: x[0] if isinstance(x[0], int) else 0,
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "cibdi/archive.html",
+        grouped_papers=grouped_papers,
+        total_papers=len(papers),
+        contact=contact
+    )
 
 
 @app.route("/cibdi/paper/<int:paper_id>")
@@ -284,6 +322,7 @@ def crin_payment():
 
 @app.route("/crin/current_issue")
 def crin_current_issue():
+    current_year = datetime.now().year
     contact = (
         ContactDetail.query.join(JournalMaster)
         .filter(JournalMaster.journal_id == "002")
@@ -292,18 +331,35 @@ def crin_current_issue():
     )
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "002")
+        .filter(
+            JournalMaster.journal_id == "002",
+            ResearchPaper.year == current_year
+        )
         .order_by(ResearchPaper.id.desc())
         .all()
     )
-    return render_template("crin/Current_issue.html", papers=papers, contact=contact)
+    return render_template(
+        "crin/Current_issue.html",
+        papers=papers,
+        contact=contact
+    )
+
 
 @app.route("/crin/archive")
 def crin_archive():
+    current_year = datetime.now().year
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "002", ResearchPaper.is_archive == True)
-        .order_by(ResearchPaper.id.desc())
+        .filter(
+            JournalMaster.journal_id == "002",
+            ResearchPaper.year != current_year
+        )
+        .order_by(
+            ResearchPaper.year.desc(),
+            ResearchPaper.volume.desc(),
+            ResearchPaper.issue.desc(),
+            ResearchPaper.id.desc()
+        )
         .all()
     )
     contact = (
@@ -312,7 +368,26 @@ def crin_archive():
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("crin/archive.html", papers=papers, contact=contact)
+    grouped_papers = defaultdict(list)
+
+    for paper in papers:
+        year = paper.year if paper.year else "Unknown"
+        grouped_papers[year].append(paper)
+
+    grouped_papers = dict(
+        sorted(
+            grouped_papers.items(),
+            key=lambda x: x[0] if isinstance(x[0], int) else 0,
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "crin/archive.html",
+        grouped_papers=grouped_papers,
+        total_papers=len(papers),
+        contact=contact
+    )
 
 
 @app.route("/crin/paper/<int:paper_id>")
@@ -406,6 +481,7 @@ def faai_Payment():
 
 @app.route("/faai/current_issue")
 def faai_current_issue():
+    current_year = datetime.now().year
     contact = (
         ContactDetail.query.join(JournalMaster)
         .filter(JournalMaster.journal_id == "003")
@@ -414,18 +490,35 @@ def faai_current_issue():
     )
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "003")
+        .filter(
+            JournalMaster.journal_id == "003",
+            ResearchPaper.year == current_year
+        )
         .order_by(ResearchPaper.id.desc())
         .all()
     )
-    return render_template("faai/Current_issue.html", papers=papers, contact=contact)
+    return render_template(
+        "faai/Current_issue.html",
+        papers=papers,
+        contact=contact
+    )
+
 
 @app.route("/faai/archive")
 def faai_archive():
+    current_year = datetime.now().year
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "003", ResearchPaper.is_archive == True)
-        .order_by(ResearchPaper.id.desc())
+        .filter(
+            JournalMaster.journal_id == "003",
+            ResearchPaper.year != current_year
+        )
+        .order_by(
+            ResearchPaper.year.desc(),
+            ResearchPaper.volume.desc(),
+            ResearchPaper.issue.desc(),
+            ResearchPaper.id.desc()
+        )
         .all()
     )
     contact = (
@@ -434,7 +527,26 @@ def faai_archive():
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("faai/archive.html", papers=papers, contact=contact)
+    grouped_papers = defaultdict(list)
+
+    for paper in papers:
+        year = paper.year if paper.year else "Unknown"
+        grouped_papers[year].append(paper)
+
+    grouped_papers = dict(
+        sorted(
+            grouped_papers.items(),
+            key=lambda x: x[0] if isinstance(x[0], int) else 0,
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "faai/archive.html",
+        grouped_papers=grouped_papers,
+        total_papers=len(papers),
+        contact=contact
+    )
 
 
 @app.route("/faai/paper/<int:paper_id>")
@@ -526,6 +638,7 @@ def feri_payment():
 
 @app.route("/feri/current_issue")
 def feri_current_issue():
+    current_year = datetime.now().year
     contact = (
         ContactDetail.query.join(JournalMaster)
         .filter(JournalMaster.journal_id == "004")
@@ -534,18 +647,35 @@ def feri_current_issue():
     )
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "004")
+        .filter(
+            JournalMaster.journal_id == "004",
+            ResearchPaper.year == current_year
+        )
         .order_by(ResearchPaper.id.desc())
         .all()
     )
-    return render_template("feri/Current_issue.html", papers=papers, contact=contact)
+    return render_template(
+        "feri/Current_issue.html",
+        papers=papers,
+        contact=contact
+    )
+
 
 @app.route("/feri/archive")
 def feri_archive():
+    current_year = datetime.now().year
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "004", ResearchPaper.is_archive == True)
-        .order_by(ResearchPaper.id.desc())
+        .filter(
+            JournalMaster.journal_id == "004",
+            ResearchPaper.year != current_year
+        )
+        .order_by(
+            ResearchPaper.year.desc(),
+            ResearchPaper.volume.desc(),
+            ResearchPaper.issue.desc(),
+            ResearchPaper.id.desc()
+        )
         .all()
     )
     contact = (
@@ -554,7 +684,26 @@ def feri_archive():
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("feri/archive.html", papers=papers, contact=contact)
+    grouped_papers = defaultdict(list)
+
+    for paper in papers:
+        year = paper.year if paper.year else "Unknown"
+        grouped_papers[year].append(paper)
+
+    grouped_papers = dict(
+        sorted(
+            grouped_papers.items(),
+            key=lambda x: x[0] if isinstance(x[0], int) else 0,
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "feri/archive.html",
+        grouped_papers=grouped_papers,
+        total_papers=len(papers),
+        contact=contact
+    )
 
 
 @app.route("/feri/paper/<int:paper_id>")
@@ -647,26 +796,44 @@ def fhim_payment():
 
 @app.route("/fhim/current_issue")
 def fhim_current_issue():
-    papers = (
-        ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "005")
-        .order_by(ResearchPaper.id.desc())
-        .all()
-    )
+    current_year = datetime.now().year
     contact = (
         ContactDetail.query.join(JournalMaster)
         .filter(JournalMaster.journal_id == "005")
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("fhim/Current_issue.html", papers=papers, contact=contact)
+    papers = (
+        ResearchPaper.query.join(JournalMaster)
+        .filter(
+            JournalMaster.journal_id == "005",
+            ResearchPaper.year == current_year
+        )
+        .order_by(ResearchPaper.id.desc())
+        .all()
+    )
+    return render_template(
+        "fhim/Current_issue.html",
+        papers=papers,
+        contact=contact
+    )
+
 
 @app.route("/fhim/archive")
 def fhim_archive():
+    current_year = datetime.now().year
     papers = (
         ResearchPaper.query.join(JournalMaster)
-        .filter(JournalMaster.journal_id == "005", ResearchPaper.is_archive == True)
-        .order_by(ResearchPaper.id.desc())
+        .filter(
+            JournalMaster.journal_id == "005",
+            ResearchPaper.year != current_year
+        )
+        .order_by(
+            ResearchPaper.year.desc(),
+            ResearchPaper.volume.desc(),
+            ResearchPaper.issue.desc(),
+            ResearchPaper.id.desc()
+        )
         .all()
     )
     contact = (
@@ -675,7 +842,26 @@ def fhim_archive():
         .order_by(ContactDetail.id.desc())
         .first()
     )
-    return render_template("fhim/archive.html", papers=papers, contact=contact)
+    grouped_papers = defaultdict(list)
+
+    for paper in papers:
+        year = paper.year if paper.year else "Unknown"
+        grouped_papers[year].append(paper)
+
+    grouped_papers = dict(
+        sorted(
+            grouped_papers.items(),
+            key=lambda x: x[0] if isinstance(x[0], int) else 0,
+            reverse=True
+        )
+    )
+
+    return render_template(
+        "fhim/archive.html",
+        grouped_papers=grouped_papers,
+        total_papers=len(papers),
+        contact=contact
+    )
 
 
 @app.route("/fhim/paper/<int:paper_id>")
