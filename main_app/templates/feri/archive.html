@@ -7,462 +7,289 @@ Archive Research Issues - Frontiers in Environmental Revolutionary Innovation
 {% block content %}
 
 <style>
+body { background: #fff; }
 
-:root{
-    --primary:#2563eb;
-    --secondary:#1e40af;
-    --dark:#0f172a;
-    --text:#64748b;
-    --border:#e2e8f0;
-    --bg:#f8fafc;
+.arch-wrap {
+    max-width: 860px;
+    margin: 75px auto;
+    padding: 48px 24px 80px;
 }
 
-body{
-    background:var(--bg);
+.arch-journal-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 8px;
 }
 
-/* ISSUE NAVIGATION */
-.issue-navigation{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin-top:30px;
-    flex-wrap:wrap;
+.arch-subtitle {
+    font-size: .95rem;
+    color: #555;
+    margin-bottom: 6px;
 }
 
-.issue-btn{
-    text-decoration:none;
-    padding:12px 28px;
-    border-radius:12px;
-    font-weight:600;
-    transition:.3s ease;
-    border:1px solid #dbeafe;
+.arch-toplink {
+    display: inline-block;
+    font-size: .9rem;
+    color: #2563eb;
+    text-decoration: none;
+    margin-bottom: 32px;
+}
+.arch-toplink:hover { text-decoration: underline; }
+
+/* Filters */
+.arch-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+.arch-filters label {
+    font-size: .85rem;
+    color: #555;
+    font-weight: 600;
+}
+.arch-filters select {
+    font-size: .88rem;
+    color: #111;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 6px 12px;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+}
+.arch-filters select:focus { border-color: #2563eb; }
+
+/* Year block */
+.year-block {
+    border-top: 1px solid #e5e7eb;
+    padding: 24px 0 8px;
 }
 
-.issue-btn.active{
-    background:var(--primary);
-    color:white;
-    box-shadow:0 8px 20px rgba(37,99,235,.25);
+.year-vol-heading {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 14px;
 }
 
-.issue-btn:not(.active){
-    background:white;
-    color:var(--primary);
+/* Issue links */
+.issue-link {
+    display: inline-block;
+    font-size: .95rem;
+    color: #2563eb;
+    text-decoration: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+}
+.issue-link:hover { text-decoration: underline; }
+
+/* Paper view */
+#paper-view { display: none; }
+
+.back-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid #e5e7eb;
+    padding: 20px 0 16px;
+    margin-bottom: 20px;
+}
+.back-btn {
+    font-size: .88rem;
+    color: #2563eb;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    text-decoration: none;
+}
+.back-btn:hover { text-decoration: underline; }
+
+.paper-view-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111;
+}
+.paper-view-heading small {
+    font-size: .85rem;
+    font-weight: 400;
+    color: #6b7280;
+    margin-left: 8px;
 }
 
-.issue-btn:hover{
-    transform:translateY(-3px);
-    color:white;
-    background:var(--primary-dark);
+/* Paper rows */
+.paper-row {
+    border-top: 1px solid #e5e7eb;
+    padding: 18px 0;
 }
+.paper-row:last-child { border-bottom: 1px solid #e5e7eb; }
 
-/* Hero Section */
-
-.archive-hero{
-    background:linear-gradient(135deg,#0f172a,#1e3a8a);
-    color:white;
-    padding:140px 0 80px;
+.paper-row-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 5px;
+    line-height: 1.5;
 }
-
-.archive-hero h1{
-    font-size:3rem;
-    font-weight:700;
-    margin-bottom:15px;
+.paper-row-authors {
+    font-size: .88rem;
+    color: #555;
+    margin-bottom: 6px;
 }
-
-.archive-hero p{
-    max-width:750px;
-    margin:auto;
-    opacity:.9;
+.paper-row-meta {
+    font-size: .82rem;
+    color: #9ca3af;
+    margin-bottom: 8px;
 }
-
-.archive-stats{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
-    margin-top:40px;
+.paper-row-link {
+    font-size: .88rem;
+    color: #2563eb;
+    text-decoration: none;
 }
+.paper-row-link:hover { text-decoration: underline; }
 
-.stat-box{
-    background:rgba(255,255,255,.12);
-    padding:20px 40px;
-    border-radius:16px;
-    backdrop-filter:blur(10px);
-    text-align:center;
-}
-
-.stat-box h3{
-    margin:0;
-    font-size:2rem;
-    font-weight:700;
-}
-
-.stat-box span{
-    font-size:.9rem;
-    opacity:.9;
-}
-
-/* Navigation */
-
-.year-navigation{
-    position:sticky;
-    top:90px;
-    z-index:100;
-    background:white;
-    padding:15px;
-    border-radius:16px;
-    margin-bottom:30px;
-    box-shadow:0 4px 20px rgba(0,0,0,.05);
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.year-navigation a{
-    text-decoration:none;
-    color:var(--primary);
-    background:#eff6ff;
-    padding:10px 18px;
-    border-radius:50px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.year-navigation a:hover{
-    background:var(--primary);
-    color:white;
-}
-
-/* Accordion */
-
-.archive-accordion{
-    margin-top:20px;
-}
-
-.archive-item{
-    border:none !important;
-    margin-bottom:20px;
-    border-radius:18px !important;
-    overflow:hidden;
-    box-shadow:0 6px 24px rgba(0,0,0,.05);
-}
-
-.archive-item .accordion-button{
-    padding:24px 30px;
-    background:white;
-    box-shadow:none !important;
-}
-
-.archive-item .accordion-button:not(.collapsed){
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
-    color:white;
-}
-
-.archive-item .accordion-button:not(.collapsed)::after{
-    filter:brightness(0) invert(1);
-}
-
-.year-title{
-    font-size:1.5rem;
-    font-weight:700;
-}
-
-.year-subtitle{
-    font-size:.9rem;
-    opacity:.8;
-}
-
-.paper-count{
-    background:rgba(255,255,255,.15);
-    padding:8px 16px;
-    border-radius:50px;
-    font-size:.9rem;
-    font-weight:600;
-}
-
-.accordion-body{
-    background:#f8fafc;
-    padding:25px;
-}
-
-/* Paper Card */
-
-.paper-link{
-    text-decoration:none;
-}
-
-.paper-card{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:22px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    transition:.3s;
-    height:100%;
-}
-
-.paper-card:hover{
-    transform:translateY(-4px);
-    border-color:var(--primary);
-    box-shadow:0 12px 25px rgba(37,99,235,.12);
-}
-
-.issue-badge{
-    display:inline-block;
-    background:#eff6ff;
-    color:var(--primary);
-    padding:6px 12px;
-    border-radius:50px;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:12px;
-}
-
-.paper-title{
-    font-size:1.05rem;
-    color:var(--dark);
-    font-weight:700;
-    line-height:1.5;
-    margin-bottom:12px;
-}
-
-.paper-authors{
-    color:var(--text);
-    margin-bottom:10px;
-    font-size:.92rem;
-}
-
-.paper-meta{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    color:var(--text);
-    font-size:.88rem;
-}
-
-.paper-action{
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
-    color:white;
-    padding:10px 18px;
-    border-radius:10px;
-    font-weight:600;
-    white-space:nowrap;
-}
-
-/* Empty State */
-
-.empty-state{
-    text-align:center;
-    padding:80px 0;
-}
-
-.empty-state h3{
-    color:var(--text);
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-    .archive-hero{
-        padding:120px 0 60px;
-    }
-
-    .archive-hero h1{
-        font-size:2rem;
-    }
-
-    .paper-card{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .paper-action{
-        width:100%;
-        text-align:center;
-    }
-
-    .year-title{
-        font-size:1.2rem;
-    }
-
-    .year-navigation{
-        top:70px;
-    }
-
-}
-
+.empty-msg { color: #9ca3af; font-size: .95rem; padding: 30px 0; }
 </style>
 
-<!-- Hero -->
+<div class="arch-wrap">
 
-<section class="archive-hero">
-
-<div class="container text-center">
-
-    <h1 style="color: wheat;">Research Archive</h1>
-
-    <p>
-        Browse archived publications organized by publication year,
-        volume and issue.
-    </p>
-
-    <div class="archive-stats">
-
-        <div class="stat-box">
-            <h3 class="text-light">{{ total_papers }}</h3>
-            <span>Total Papers</span>
-        </div>
-
-        <div class="stat-box">
-            <h3 class="text-light">{{ grouped_papers|length }}</h3>
-            <span>Publication Years</span>
-        </div>
-
-    </div>
-
-    <div class="issue-navigation">
-        <!-- Archive / Previous Issues -->
-        <a href="{{ url_for('feri_current_issue') }}"
-            class="issue-btn">
-            Current Issues
-        </a>
-    </div>
-
-</div>
-
-</section>
-
-<div class="container py-5">
+    <!-- Title -->
+    <div class="arch-journal-title">Archive</div>
+    <div class="arch-subtitle">Frontiers in Environmental Revolutionary Innovation</div>
+    <a href="{{ url_for('feri_current_issue') }}" class="arch-toplink">← Current Issues</a>
 
 {% if grouped_papers %}
 
-<div class="accordion archive-accordion" id="archiveAccordion">
+    <!-- Filters -->
+    <div class="arch-filters">
+        <label for="filter-year">Year:</label>
+        <select id="filter-year" onchange="applyFilters()">
+            <option value="">All Years</option>
+            {% set seen_years = [] %}
+            {% for (year, volume), papers in grouped_papers.items() %}
+                {% if year not in seen_years %}
+                    <option value="{{ year }}">{{ year }}</option>
+                    {% if seen_years.append(year) %}{% endif %}
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
 
-    {% for year, papers in grouped_papers.items() %}
+    <!-- Browse View -->
+    <div id="browse-view">
 
-    <div class="accordion-item archive-item" id="year{{ year }}">
+        {% set structure = {} %}
+        {% for (year, volume), papers in grouped_papers.items() %}
+            {% if year not in structure %}{% if structure.update({year: {}}) %}{% endif %}{% endif %}
+            {% if volume not in structure[year] %}{% if structure[year].update({volume: {}}) %}{% endif %}{% endif %}
+            {% for paper in papers %}
+                {% set issue = paper.issue | string if paper.issue else 'Unknown' %}
+                {% if issue not in structure[year][volume] %}{% if structure[year][volume].update({issue: []}) %}{% endif %}{% endif %}
+                {% if structure[year][volume][issue].append(paper) %}{% endif %}
+            {% endfor %}
+        {% endfor %}
 
-        <h2 class="accordion-header">
-
-            <button
-                class="accordion-button {% if not loop.first %}collapsed{% endif %}"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapse{{ year }}"
-                aria-expanded="{% if loop.first %}true{% else %}false{% endif %}">
-
-                <div class="d-flex justify-content-between align-items-center w-100 me-3">
-
-                    <div class="year-title">
-                        {{ year }}
-                    </div>
-
-                    <div class="paper-count">
-                        {{ papers|length }}
-                        Paper{{ 's' if papers|length > 1 else '' }}
-                    </div>
-
+        {% for year, volumes in structure.items() %}
+            {% for volume, issues in volumes.items() %}
+            <div class="year-block" data-year="{{ year }}" data-volume="{{ volume }}">
+                <div class="year-vol-heading">{{ year }} &ndash; Volume {{ volume }}</div>
+                {% for issue, plist in issues.items()|sort %}
+                <div>
+                    <button class="issue-link"
+                            onclick="showIssue('{{ year }}', '{{ volume }}', '{{ issue }}')">
+                        Issue {{ issue }}
+                    </button>
                 </div>
-
-            </button>
-
-        </h2>
-
-        <div
-            id="collapse{{ year }}"
-            class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
-            data-bs-parent="#archiveAccordion">
-
-            <div class="accordion-body">
-
-                <div class="row">
-
-                    {% for paper in papers %}
-
-                    <div class="col-lg-6 mb-3">
-
-                        <a href="{{ url_for('feri_paper_detail', paper_id=paper.id) }}"
-                           class="paper-link">
-
-                            <div class="paper-card">
-
-                                <div>
-
-                                    <div class="issue-badge">
-                                        Volume {{ paper.volume or '-' }}
-                                        •
-                                        Issue {{ paper.issue or '-' }}
-                                    </div>
-
-                                    <div class="paper-title">
-                                        {{ paper.title }}
-                                    </div>
-
-                                    <div class="paper-authors">
-                                        {{ paper.authors }}
-                                    </div>
-
-                                    <div class="paper-meta">
-
-                                        <span>
-                                            📖 {{ paper.journal.full_name }}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="paper-action">
-                                    View Paper →
-                                </div>
-
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-
+                {% endfor %}
             </div>
-
-        </div>
+            {% endfor %}
+        {% endfor %}
 
     </div>
 
-    {% endfor %}
-
-</div>
+    <!-- Paper View -->
+    <div id="paper-view">
+        <div class="back-row">
+            <button class="back-btn" onclick="showBrowse()">← Back to Archive</button>
+            <div class="paper-view-heading" id="paper-view-title"></div>
+        </div>
+        <div id="paper-list"></div>
+    </div>
 
 {% else %}
-
-<div class="empty-state">
-
-    <h3>No Archived Publications Available</h3>
-
-    <p>
-        Archive records will appear here once publications are added.
-    </p>
-
-</div>
-
+    <p class="empty-msg">No archived publications available yet.</p>
 {% endif %}
 
 </div>
+
+<script>
+const archiveData = {};
+
+{% if grouped_papers %}
+{% for (year, volume), papers in grouped_papers.items() %}
+    {% for paper in papers %}
+        {% set yr  = year | string %}
+        {% set vol = volume | string %}
+        {% set iss = paper.issue | string if paper.issue else 'Unknown' %}
+(function(){
+    if (!archiveData["{{ yr }}"]) archiveData["{{ yr }}"] = {};
+    if (!archiveData["{{ yr }}"]["{{ vol }}"]) archiveData["{{ yr }}"]["{{ vol }}"] = {};
+    if (!archiveData["{{ yr }}"]["{{ vol }}"]["{{ iss }}"]) archiveData["{{ yr }}"]["{{ vol }}"]["{{ iss }}"] = [];
+    archiveData["{{ yr }}"]["{{ vol }}"]["{{ iss }}"].push({
+        title:   {{ paper.title | tojson }},
+        authors: {{ paper.authors | tojson }},
+        volume:  {{ paper.volume | tojson if paper.volume else 'null' }},
+        issue:   {{ paper.issue  | tojson if paper.issue  else 'null' }},
+        journal: {{ paper.journal.full_name | tojson }},
+        url:     "{{ url_for('feri_paper_detail', paper_id=paper.id) }}"
+    });
+})();
+    {% endfor %}
+{% endfor %}
+{% endif %}
+
+function applyFilters() {
+    const selYear = document.getElementById('filter-year').value;
+    document.querySelectorAll('.year-block').forEach(b => {
+        const yearOk = !selYear || String(b.dataset.year) === String(selYear);
+        b.style.display = yearOk ? '' : 'none';
+    });
+}
+
+function showIssue(year, volume, issue) {
+    const papers = archiveData[year]?.[volume]?.[issue] || [];
+
+    document.getElementById('paper-view-title').innerHTML =
+        `${year} &ndash; Volume ${volume} &ndash; Issue ${issue}
+         <small>${papers.length} paper${papers.length !== 1 ? 's' : ''}</small>`;
+
+    document.getElementById('paper-list').innerHTML = papers.length === 0
+        ? '<p class="empty-msg">No papers found.</p>'
+        : papers.map(p => `
+            <div class="paper-row">
+                <div class="paper-row-title">${p.title}</div>
+                <div class="paper-row-authors">${p.authors}</div>
+                <div class="paper-row-meta">📖 ${p.journal} &nbsp;·&nbsp; Vol. ${p.volume || '–'}, Issue ${p.issue || '–'}</div>
+                <a href="${p.url}" class="paper-row-link">View Paper →</a>
+            </div>`).join('');
+
+    document.getElementById('browse-view').style.display = 'none';
+    document.getElementById('paper-view').style.display  = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showBrowse() {
+    document.getElementById('paper-view').style.display  = 'none';
+    document.getElementById('browse-view').style.display = 'block';
+}
+</script>
 
 {% endblock %}
