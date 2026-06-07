@@ -188,7 +188,7 @@ def cibdi_current_issue():
             ResearchPaper.volume.desc(),
             ResearchPaper.issue.desc()
         )
-        .limit(3)
+        .limit(1)
         .all()
     )
 
@@ -371,7 +371,7 @@ def crin_current_issue():
             ResearchPaper.volume.desc(),
             ResearchPaper.issue.desc()
         )
-        .limit(3)
+        .limit(1)
         .all()
     )
 
@@ -557,7 +557,7 @@ def faai_current_issue():
             ResearchPaper.volume.desc(),
             ResearchPaper.issue.desc()
         )
-        .limit(3)
+        .limit(1)
         .all()
     )
 
@@ -741,7 +741,7 @@ def feri_current_issue():
             ResearchPaper.volume.desc(),
             ResearchPaper.issue.desc()
         )
-        .limit(3)
+        .limit(1)
         .all()
     )
 
@@ -926,7 +926,7 @@ def fhim_current_issue():
             ResearchPaper.volume.desc(),
             ResearchPaper.issue.desc()
         )
-        .limit(3)
+        .limit(1)
         .all()
     )
 
