@@ -1,0 +1,1853 @@
+{% extends "basecode.html" %}
+{% block title %}Research Paper Submission{% endblock %}
+{% block content %}
+<style>
+/* =========================================================
+   RESEARCH DASHBOARD
+   ========================================================= */
+.research-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 0 40px;
+    color: #0f172a;
+}
+/* =========================================================
+   HERO
+   ========================================================= */
+.research-hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+    padding: 30px;
+    border-radius: 24px;
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(14, 165, 233, .25),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 15% 90%,
+            rgba(59, 130, 246, .20),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #172554
+        );
+    color: white;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, .15);
+}
+.research-hero::before {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    right: -80px;
+    top: -130px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+}
+.research-hero::after {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    right: 130px;
+    bottom: -120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.025);
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.hero-left {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+.hero-icon {
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+    box-shadow: 0 10px 25px rgba(37,99,235,.35);
+    font-size: 26px;
+}
+.hero-title {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 750;
+    letter-spacing: -.6px;
+}
+.hero-subtitle {
+    margin: 5px 0 0;
+    color: #cbd5e1;
+    font-size: 12px;
+}
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 16px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 11px;
+    background: rgba(255,255,255,.08);
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 650;
+    transition: .2s ease;
+}
+.hero-btn:hover {
+    background: rgba(255,255,255,.16);
+    color: white;
+    transform: translateY(-1px);
+}
+/* =========================================================
+   STATS
+   ========================================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 7px 25px rgba(15,23,42,.04);
+}
+.stat-icon {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 18px;
+}
+.stat-icon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+.stat-icon.green {
+    background: #f0fdf4;
+    color: #16a34a;
+}
+.stat-icon.orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+.stat-label {
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 600;
+}
+.stat-value {
+    margin-top: 2px;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 750;
+}
+/* =========================================================
+   MAIN CARDS
+   ========================================================= */
+.main-card {
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 8px 30px rgba(15,23,42,.05);
+}
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 19px 22px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.heading-icon {
+    width: 41px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #eff6ff;
+    color: #2563eb;
+}
+.card-heading h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 750;
+}
+.card-heading p {
+    margin: 3px 0 0;
+    color: #94a3b8;
+    font-size: 10px;
+}
+.form-body {
+    padding: 25px;
+}
+/* =========================================================
+   SECTION
+   ========================================================= */
+.form-section {
+    margin-bottom: 27px;
+}
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    color: #1e293b;
+    font-size: 13px;
+    font-weight: 750;
+}
+.section-title i {
+    color: #2563eb;
+}
+.section-number {
+    width: 23px;
+    height: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 10px;
+}
+/* =========================================================
+   FORM
+   ========================================================= */
+.field-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 11px;
+    font-weight: 700;
+}
+.field-label .required {
+    color: #dc2626;
+}
+.modern-input,
+.modern-select,
+.modern-textarea {
+    width: 100%;
+    border: 1px solid #dbe3ec;
+    border-radius: 11px;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 12px;
+    transition: .2s ease;
+}
+.modern-input,
+.modern-select {
+    height: 46px;
+    padding: 0 13px;
+}
+.modern-textarea {
+    padding: 12px 13px;
+    resize: vertical;
+    min-height: 125px;
+}
+.modern-input:focus,
+.modern-select:focus,
+.modern-textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: white;
+    box-shadow:
+        0 0 0 4px
+        rgba(37,99,235,.08);
+}
+.field-help {
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 9px;
+}
+/* =========================================================
+   AUTHORS
+   ========================================================= */
+.author-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+.author-description {
+    margin: -5px 0 15px;
+    color: #94a3b8;
+    font-size: 10px;
+}
+.add-author-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid #bfdbfe;
+    border-radius: 9px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 700;
+}
+.add-author-btn:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+.author-card {
+    position: relative;
+    padding: 17px;
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+    transition: .2s ease;
+}
+.author-card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 6px 20px rgba(37,99,235,.05);
+}
+.author-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 13px;
+}
+.author-number {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 750;
+}
+.author-number i {
+    color: #2563eb;
+}
+.corresponding-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #16a34a;
+    font-size: 10px;
+    font-weight: 700;
+}
+.remove-author-btn {
+    border: 0;
+    background: #fef2f2;
+    color: #dc2626;
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.remove-author-btn:hover {
+    background: #fee2e2;
+}
+/* =========================================================
+   FILE UPLOAD
+   ========================================================= */
+.upload-box {
+    position: relative;
+    padding: 24px;
+    border: 1.5px dashed #bfdbfe;
+    border-radius: 14px;
+    background: #f8fbff;
+    text-align: center;
+    transition: .2s ease;
+}
+.upload-box:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+.upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 21px;
+}
+.upload-title {
+    margin: 0;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 750;
+}
+.upload-help {
+    margin: 5px 0 15px;
+    color: #94a3b8;
+    font-size: 9px;
+}
+.file-input {
+    width: 100%;
+    font-size: 10px;
+}
+/* =========================================================
+   TEMPLATE BUTTON
+   ========================================================= */
+.template-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: white;
+    color: #475569;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 650;
+}
+.template-btn:hover {
+    background: #f8fafc;
+    color: #2563eb;
+}
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+.payment-card {
+    padding: 17px;
+    border: 1px solid #bae6fd;
+    border-radius: 14px;
+    background:
+        linear-gradient(
+            135deg,
+            #f0f9ff,
+            #f8fafc
+        );
+}
+.payment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+.payment-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 750;
+}
+.payment-title i {
+    color: #0284c7;
+}
+.payment-description {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 9px;
+}
+.form-switch .form-check-input {
+    width: 42px;
+    height: 21px;
+}
+.payment-upload {
+    margin-top: 17px;
+    padding-top: 17px;
+    border-top: 1px solid #bae6fd;
+}
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+.submit-btn {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    border-radius: 12px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+    color: white;
+    font-size: 12px;
+    font-weight: 750;
+    box-shadow:
+        0 9px 22px
+        rgba(37,99,235,.20);
+    transition: .2s ease;
+}
+.submit-btn:hover {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow:
+        0 13px 28px
+        rgba(37,99,235,.28);
+}
+/* =========================================================
+   SUBMISSIONS
+   ========================================================= */
+.submissions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+.submission-count {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 9px;
+    font-weight: 750;
+}
+.paper-list {
+    padding: 20px;
+}
+.paper-card {
+    margin-bottom: 14px;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    background: white;
+    transition: .2s ease;
+}
+.paper-card:last-child {
+    margin-bottom: 0;
+}
+.paper-card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 8px 25px rgba(15,23,42,.05);
+    transform: translateY(-1px);
+}
+.paper-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+.paper-id {
+    color: #2563eb;
+    font-size: 9px;
+    font-weight: 750;
+}
+.paper-title {
+    margin: 4px 0 7px;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+.paper-type {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 8px;
+    font-weight: 700;
+}
+.status-badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 750;
+}
+.status-approved {
+    background: #f0fdf4;
+    color: #15803d;
+}
+.status-rejected {
+    background: #fef2f2;
+    color: #dc2626;
+}
+.status-pending {
+    background: #fffbeb;
+    color: #a16207;
+}
+.paper-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+}
+.paper-info {
+    padding: 9px 10px;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.5;
+}
+.paper-info strong {
+    color: #334155;
+}
+.paper-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+}
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border: 1px solid #dbe3ec;
+    border-radius: 8px;
+    background: white;
+    color: #475569;
+    text-decoration: none;
+    font-size: 9px;
+    font-weight: 650;
+    transition: .2s ease;
+}
+.action-btn:hover {
+    border-color: #93c5fd;
+    color: #2563eb;
+    background: #f8fbff;
+}
+.action-danger {
+    border-color: #fecaca;
+    color: #dc2626;
+}
+.action-danger:hover {
+    border-color: #fca5a5;
+    color: #b91c1c;
+    background: #fef2f2;
+}
+.action-success {
+    border-color: #bbf7d0;
+    color: #15803d;
+}
+.action-success:hover {
+    border-color: #86efac;
+    color: #166534;
+    background: #f0fdf4;
+}
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.empty-state {
+    padding: 55px 20px;
+    text-align: center;
+}
+.empty-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-size: 27px;
+}
+.empty-state h3 {
+    margin: 0 0 5px;
+    color: #334155;
+    font-size: 14px;
+}
+.empty-state p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 10px;
+}
+/* =========================================================
+   MODALS
+   ========================================================= */
+.modern-modal {
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(15,23,42,.18);
+}
+.modal-header-modern {
+    padding: 18px 20px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+    color: white;
+}
+.modal-header-modern.danger {
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #b91c1c
+        );
+}
+.modal-header-modern .modal-title {
+    font-size: 14px;
+    font-weight: 750;
+}
+.review-comment {
+    padding: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+.review-comment:last-child {
+    margin-bottom: 0;
+}
+.review-author {
+    color: #2563eb;
+    font-size: 10px;
+    font-weight: 750;
+}
+.review-date {
+    color: #94a3b8;
+    font-size: 9px;
+}
+.review-text {
+    margin: 7px 0 0;
+    color: #334155;
+    font-size: 11px;
+    line-height: 1.6;
+}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .hero-actions {
+        width: 100%;
+    }
+    .hero-btn {
+        justify-content: center;
+        flex: 1;
+    }
+}
+@media (max-width: 767px) {
+    .research-page {
+        padding: 5px 0 25px;
+    }
+    .research-hero {
+        padding: 22px;
+        border-radius: 18px;
+    }
+    .hero-title {
+        font-size: 21px;
+    }
+    .hero-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+    }
+    .form-body {
+        padding: 18px;
+    }
+    .card-heading {
+        padding: 17px;
+    }
+    .author-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .add-author-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .paper-top {
+        flex-direction: column;
+    }
+    .status-badge {
+        align-self: flex-start;
+    }
+}
+@media (max-width: 520px) {
+    .hero-actions {
+        flex-direction: column;
+    }
+    .hero-btn {
+        width: 100%;
+    }
+    .paper-info-grid {
+        grid-template-columns: 1fr;
+    }
+    .paper-actions {
+        flex-direction: column;
+    }
+    .action-btn {
+        justify-content: center;
+        width: 100%;
+    }
+    .author-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+<div class="research-page">
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+<section class="research-hero">
+    <div class="hero-content">
+        <div class="hero-left">
+            <div class="hero-icon">
+                <i class="bi bi-journal-arrow-up"></i>
+            </div>
+            <div>
+                <h1 class="hero-title">
+                    Research Paper Submission
+                </h1>
+                <p class="hero-subtitle">
+                    Welcome back,
+                    <strong>{{ user.name or user.username }}</strong>
+                    · {{ user.email }}
+                </p>
+            </div>
+        </div>
+        <div class="hero-actions">
+            <a
+                href="#submitPapers"
+                class="hero-btn"
+            >
+                <i class="bi bi-journal-check"></i>
+                Submitted Papers
+            </a>
+        </div>
+    </div>
+</section>
+<!-- =====================================================
+     STATS
+     ===================================================== -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="bi bi-file-earmark-text"></i>
+        </div>
+        <div>
+            <div class="stat-label">
+                Total Submissions
+            </div>
+            <div class="stat-value">
+                {{ papers|length }}
+            </div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="bi bi-check-circle"></i>
+        </div>
+        <div>
+            <div class="stat-label">
+                Approved Papers
+            </div>
+            <div class="stat-value">
+                {{ papers|selectattr('status', 'equalto', 'approved')|list|length }}
+            </div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="bi bi-hourglass-split"></i>
+        </div>
+        <div>
+            <div class="stat-label">
+                Under Process
+            </div>
+            <div class="stat-value">
+                {{ papers|rejectattr('status', 'equalto', 'approved')|rejectattr('status', 'equalto', 'rejected')|list|length }}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- =====================================================
+     SUBMISSION FORM
+     ===================================================== -->
+<div class="main-card mb-4">
+    <div class="card-heading">
+        <div class="heading-icon">
+            <i class="bi bi-file-earmark-plus"></i>
+        </div>
+        <div>
+            <h2>
+                Submit New Research Paper
+            </h2>
+            <p>
+                Complete the details below to submit your paper for review.
+            </p>
+        </div>
+    </div>
+    <div class="form-body">
+        <form
+            action="{{ url_for('student_dashboard') }}"
+            method="POST"
+            enctype="multipart/form-data"
+            id="paperSubmissionForm"
+        >
+            <!-- =================================================
+                 SECTION 1
+                 ================================================= -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span class="section-number">
+                        01
+                    </span>
+                    <i class="bi bi-file-text"></i>
+                    Paper Information
+                </div>
+                <!-- TITLE -->
+                <div class="mb-3">
+                    <label
+                        for="title"
+                        class="field-label"
+                    >
+                        Paper Title
+                        <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        class="modern-input"
+                        required
+                        placeholder="Enter the complete title of your research paper"
+                    >
+                </div>
+                <div class="row g-3">
+                    <!-- PAPER TYPE -->
+                    <div class="col-md-6">
+                        <label
+                            for="paper_type"
+                            class="field-label"
+                        >
+                            Paper Type
+                            <span class="required">*</span>
+                        </label>
+                        <select
+                            name="paper_type"
+                            id="paper_type"
+                            class="modern-select"
+                            required
+                        >
+                            <option value="Original Research">
+                                Original Research
+                            </option>
+                            <option value="Review Paper">
+                                Review Paper
+                            </option>
+                            <option value="Short Communication">
+                                Short Communication
+                            </option>
+                        </select>
+                    </div>
+                    <!-- JOURNAL -->
+                    <div class="col-md-6">
+                        <label
+                            for="journal_id"
+                            class="field-label"
+                        >
+                            Target Journal
+                        </label>
+                        <select
+                            name="journal_id"
+                            id="journal_id"
+                            class="modern-select"
+                        >
+                            <option value="">
+                                -- Select Target Journal --
+                            </option>
+                            {% for journal in journals %}
+                                <option
+                                    value="{{ journal.id }}"
+                                    data-short-name="{{ journal.short_name|lower }}"
+                                >
+                                    {{ journal.full_name }}
+                                    ({{ journal.short_name }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <!-- ORCID -->
+                <div class="mt-3">
+                    <label
+                        for="orcid"
+                        class="field-label"
+                    >
+                        <i class="bi bi-person-badge me-1"></i>
+                        ORCID iD
+                    </label>
+                    <input
+                        type="text"
+                        name="orcid"
+                        id="orcid"
+                        class="modern-input"
+                        placeholder="e.g. 0000-0002-1825-0097"
+                    >
+                    <div class="field-help">
+                        Optional researcher identifier.
+                    </div>
+                </div>
+            </div>
+            <!-- =================================================
+                 AUTHORS
+                 ================================================= -->
+            <div class="form-section">
+                <div class="author-header">
+                    <div>
+                        <div class="section-title mb-0">
+                            <span class="section-number">
+                                02
+                            </span>
+                            <i class="bi bi-people-fill"></i>
+                            Author Details
+                        </div>
+                        <p class="author-description">
+                            Add between 1 and 10 authors and select one corresponding author.
+                        </p>
+                    </div>
+                    <button
+                        type="button"
+                        class="add-author-btn"
+                        id="addAuthorBtn"
+                        onclick="addAuthorField()"
+                    >
+                        <i class="bi bi-plus-circle"></i>
+                        Add Author
+                    </button>
+                </div>
+                <div id="authorsContainer">
+                    <!-- AUTHOR 1 -->
+                    <div
+                        class="author-card"
+                        id="authorCard_0"
+                    >
+                        <div class="author-top">
+                            <div class="author-number">
+                                <i class="bi bi-person-circle"></i>
+                                Author #1
+                            </div>
+                            <label class="corresponding-label">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="corresponding_author_index"
+                                    id="corr_0"
+                                    value="0"
+                                    checked
+                                >
+                                Corresponding Author
+                            </label>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input
+                                    type="text"
+                                    name="author_name[]"
+                                    class="modern-input"
+                                    placeholder="Full Name *"
+                                    required
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                    type="text"
+                                    name="author_designation[]"
+                                    class="modern-input"
+                                    placeholder="Designation (e.g. Scholar, Professor)"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                    type="text"
+                                    name="author_affiliation[]"
+                                    class="modern-input"
+                                    placeholder="Affiliation (College / University)"
+                                >
+                            </div>
+                            <div class="col-md-6">
+                                <input
+                                    type="email"
+                                    name="author_email[]"
+                                    class="modern-input"
+                                    placeholder="Email ID"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- =================================================
+                 ABSTRACT
+                 ================================================= -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span class="section-number">
+                        03
+                    </span>
+                    <i class="bi bi-card-text"></i>
+                    Research Abstract
+                </div>
+                <label
+                    for="abstract"
+                    class="field-label"
+                >
+                    Abstract
+                    <span class="required">*</span>
+                </label>
+                <textarea
+                    name="abstract"
+                    id="abstract"
+                    rows="5"
+                    class="modern-textarea"
+                    required
+                    placeholder="Summarize the core findings, methodology and scope of your research..."
+                ></textarea>
+            </div>
+            <!-- =================================================
+                 FILE
+                 ================================================= -->
+            <div class="form-section">
+                <div class="section-title">
+                    <span class="section-number">
+                        04
+                    </span>
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    Research Paper File
+                </div>
+                <div class="upload-box">
+                    <div class="upload-icon">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                    </div>
+                    <h3 class="upload-title">
+                        Upload your research paper
+                    </h3>
+                    <p class="upload-help">
+                        PDF format only · Maximum file size 5 MB
+                    </p>
+                    <input
+                        type="file"
+                        name="paper_file"
+                        id="paper_file"
+                        accept=".pdf"
+                        class="form-control file-input"
+                        required
+                    >
+                    <a
+                        href="{{ url_for('static', filename='assets/pdf/CRIN_Paper_template.docx') }}"
+                        class="template-btn"
+                        target="_blank"
+                        download
+                    >
+                        <i class="bi bi-download"></i>
+                        Download Paper Template
+                    </a>
+                </div>
+            </div>
+            <!-- =================================================
+                 PAYMENT
+                 ================================================= -->
+            <div class="form-section mb-0">
+                <div class="section-title">
+                    <span class="section-number">
+                        05
+                    </span>
+                    <i class="bi bi-credit-card"></i>
+                    Publication & Payment
+                </div>
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div>
+                            <div class="payment-title">
+                                <i class="bi bi-credit-card-2-front"></i>
+                                Paid Publication / Processing Fee
+                            </div>
+                            <p class="payment-description">
+                                Enable this option if this is a paid publication.
+                            </p>
+                        </div>
+                        <div class="form-check form-switch mb-0">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="is_paid"
+                                name="is_paid"
+                                onchange="togglePaymentUpload(this)"
+                            >
+                        </div>
+                    </div>
+                    <div
+                        id="payment_screenshot_block"
+                        class="payment-upload"
+                        style="display:none;"
+                    >
+                        <label
+                            for="payment_screenshot"
+                            class="field-label"
+                        >
+                            Payment Screenshot
+                            <span class="required">*</span>
+                        </label>
+                        <input
+                            type="file"
+                            name="payment_screenshot"
+                            id="payment_screenshot"
+                            accept="image/*,.pdf"
+                            class="modern-input"
+                        >
+                        <div class="field-help">
+                            JPG, PNG or PDF · Maximum 1 MB.
+                        </div>
+                        <a
+                            id="paymentDetailsLink"
+                            href="/crin/payment"
+                            target="_blank"
+                            class="template-btn"
+                        >
+                            <i class="bi bi-link-45deg"></i>
+                            Open Payment Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- =================================================
+                 SUBMIT
+                 ================================================= -->
+            <div class="mt-4">
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitPaperBtn"
+                >
+                    <i class="bi bi-cloud-upload"></i>
+                    Submit Paper for Review
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- =====================================================
+     SUBMITTED PAPERS
+     ===================================================== -->
+<div
+    class="main-card"
+    id="submitPapers"
+>
+    <div class="card-heading submissions-header">
+        <div class="d-flex align-items-center gap-12">
+            <div class="heading-icon">
+                <i class="bi bi-list-task"></i>
+            </div>
+            <div>
+                <h2>
+                    My Submitted Papers
+                </h2>
+                <p>
+                    Track your research submissions and review status.
+                </p>
+            </div>
+        </div>
+        <span class="submission-count">
+            {{ papers|length }} Submission{{ 's' if papers|length != 1 else '' }}
+        </span>
+    </div>
+    {% if papers %}
+        <div class="paper-list">
+            {% for paper in papers %}
+                {% set workflow_label =
+                    paper_status_labels.get(
+                        paper.workflow_status,
+                        paper.workflow_status|replace('_', ' ')|title
+                    )
+                %}
+                <div class="paper-card">
+                    <div class="paper-top">
+                        <div>
+                            <div class="paper-id">
+                                PAPER ID:
+                                {{ paper.paper_id or '-' }}
+                            </div>
+                            <h3 class="paper-title">
+                                {{ paper.title }}
+                            </h3>
+                            <span class="paper-type">
+                                {{ paper.paper_type or "Original Research" }}
+                            </span>
+                        </div>
+                        <div>
+                            {% if paper.status == 'approved' %}
+                                <span class="status-badge status-approved">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Approved
+                                </span>
+                            {% elif paper.status == 'rejected' %}
+                                <span class="status-badge status-rejected">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    Rejected
+                                </span>
+                            {% else %}
+                                <span class="status-badge status-pending">
+                                    <i class="bi bi-clock-history"></i>
+                                    {{ workflow_label }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="paper-info-grid">
+                        {% if paper.authors %}
+                            <div class="paper-info">
+                                <i class="bi bi-people me-1"></i>
+                                <strong>Authors:</strong>
+                                {{ paper.authors }}
+                            </div>
+                        {% endif %}
+                        {% if paper.corresponding_author %}
+                            <div class="paper-info">
+                                <i class="bi bi-star-fill text-success me-1"></i>
+                                <strong>Corresponding:</strong>
+                                {{ paper.corresponding_author }}
+                            </div>
+                        {% endif %}
+                        {% if paper.orcid %}
+                            <div class="paper-info">
+                                <i class="bi bi-person-badge me-1"></i>
+                                <strong>ORCID:</strong>
+                                {{ paper.orcid }}
+                            </div>
+                        {% endif %}
+                        {% if paper.is_paid %}
+                            <div class="paper-info">
+                                <i class="bi bi-credit-card text-info me-1"></i>
+                                <strong>Paid Submission</strong>
+                            </div>
+                        {% endif %}
+                        <div class="paper-info">
+                            <i class="bi bi-clock me-1"></i>
+                            <strong>Submitted:</strong>
+                            {{ paper.submitted_at.strftime('%Y-%m-%d %H:%M') }}
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        {% if paper.status == 'rejected' %}
+                            <button
+                                type="button"
+                                class="action-btn action-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#rejectionModal"
+                                data-rejection-message="{{ paper.rejection_reason or 'Paper does not meet requirements.' }}"
+                            >
+                                <i class="bi bi-chat-square-text"></i>
+                                Rejection Message
+                            </button>
+                            <a
+                                href="{{ url_for('edit_submitted_paper', paper_id=paper.id) }}"
+                                class="action-btn"
+                            >
+                                <i class="bi bi-pencil"></i>
+                                Edit & Resubmit
+                            </a>
+                        {% elif paper.status == 'approved' %}
+                            <a
+                                href="{{ url_for('static', filename='assets/pdf/' ~ paper.pdf_filename) }}"
+                                target="_blank"
+                                class="action-btn action-success"
+                                download
+                            >
+                                <i class="bi bi-file-earmark-pdf"></i>
+                                View PDF
+                            </a>
+                            <a
+                                href="{{ url_for(journals_map.get(paper.journal.journal_id)) }}"
+                                target="_blank"
+                                class="action-btn action-success"
+                            >
+                                <i class="bi bi-globe"></i>
+                                Listed on Portal
+                            </a>
+                        {% else %}
+                            <span class="action-btn">
+                                <i class="bi bi-hourglass-split"></i>
+                                Under Process
+                            </span>
+                        {% endif %}
+                        {% if paper.review_comments %}
+                            <button
+                                type="button"
+                                class="action-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#reviewHistoryModal{{ paper.id }}"
+                            >
+                                <i class="bi bi-chat-square-text"></i>
+                                Review History
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- REVIEW MODAL -->
+                {% if paper.review_comments %}
+                    <div
+                        class="modal fade"
+                        id="reviewHistoryModal{{ paper.id }}"
+                        tabindex="-1"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content modern-modal">
+                                <div class="modal-header modal-header-modern">
+                                    <h5 class="modal-title">
+                                        <i class="bi bi-chat-left-text me-2"></i>
+                                        Review Details -
+                                        {{ paper.paper_id or 'Paper' }}
+                                    </h5>
+                                    <button
+                                        type="button"
+                                        class="btn-close btn-close-white"
+                                        data-bs-dismiss="modal"
+                                    ></button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="mb-4">
+                                        <strong class="d-block text-dark mb-1">
+                                            {{ paper.title }}
+                                        </strong>
+                                        <span class="text-muted small">
+                                            Author:
+                                            {{ user.name or user.username }}
+                                            ({{ user.email }})
+                                        </span>
+                                    </div>
+                                    {% for comment in paper.review_comments|reverse %}
+                                        <div class="review-comment">
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="review-author">
+                                                    {{ comment.reviewer.name or comment.reviewer.username }}
+                                                </span>
+                                                <span class="review-date">
+                                                    {{ comment.created_at.strftime('%Y-%m-%d %H:%M') if comment.created_at else '-' }}
+                                                </span>
+                                            </div>
+                                            <p class="review-text">
+                                                {{ comment.comment }}
+                                            </p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="bi bi-inbox"></i>
+            </div>
+            <h3>
+                No Research Papers Yet
+            </h3>
+            <p>
+                Submit your first research paper using the form above.
+            </p>
+        </div>
+    {% endif %}
+</div>
+</div>
+<!-- =========================================================
+     REJECTION MODAL
+     ========================================================= -->
+<div
+    class="modal fade"
+    id="rejectionModal"
+    tabindex="-1"
+    aria-labelledby="rejectionModalLabel"
+    aria-hidden="true"
+>
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modern-modal">
+        <div class="modal-header modal-header-modern danger">
+            <h5
+                class="modal-title"
+                id="rejectionModalLabel"
+            >
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                Rejection Message
+            </h5>
+            <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div class="modal-body p-4">
+            <div class="alert alert-danger border-0 mb-0">
+                <i class="bi bi-info-circle me-2"></i>
+                <span id="rejectionMessageText">
+                    Paper does not meet requirements.
+                </span>
+            </div>
+        </div>
+        <div class="modal-footer border-0">
+            <button
+                type="button"
+                class="btn btn-secondary rounded-pill px-4"
+                data-bs-dismiss="modal"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+/* =========================================================
+   AUTHORS
+   ========================================================= */
+let authorCount = 1;
+const maxAuthors = 10;
+function addAuthorField() {
+    if (authorCount >= maxAuthors) {
+        alert(
+            "Maximum limit of 10 authors reached."
+        );
+        return;
+    }
+    const container =
+        document.getElementById(
+            "authorsContainer"
+        );
+    const index =
+        authorCount;
+    const card =
+        document.createElement("div");
+    card.className =
+        "author-card";
+    card.id =
+        `authorCard_${index}`;
+    card.innerHTML = `
+        <div class="author-top">
+            <div class="author-number">
+                <i class="bi bi-person-circle"></i>
+                Author #${index + 1}
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <label class="corresponding-label">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="corresponding_author_index"
+                        id="corr_${index}"
+                        value="${index}"
+                    >
+                    Corresponding Author
+                </label>
+                <button
+                    type="button"
+                    class="remove-author-btn"
+                    onclick="removeAuthorField(${index})"
+                    title="Remove author"
+                >
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <input
+                    type="text"
+                    name="author_name[]"
+                    class="modern-input"
+                    placeholder="Full Name *"
+                    required
+                >
+            </div>
+            <div class="col-md-6">
+                <input
+                    type="text"
+                    name="author_designation[]"
+                    class="modern-input"
+                    placeholder="Designation (e.g. Scholar, Professor)"
+                >
+            </div>
+            <div class="col-md-6">
+                <input
+                    type="text"
+                    name="author_affiliation[]"
+                    class="modern-input"
+                    placeholder="Affiliation (College / University)"
+                >
+            </div>
+            <div class="col-md-6">
+                <input
+                    type="email"
+                    name="author_email[]"
+                    class="modern-input"
+                    placeholder="Email ID"
+                >
+            </div>
+        </div>
+    `;
+    container.appendChild(card);
+    authorCount++;
+    updateAuthorButton();
+}
+function removeAuthorField(index) {
+    const card =
+        document.getElementById(
+            `authorCard_${index}`
+        );
+    if (card) {
+        card.remove();
+    }
+    updateAuthorButton();
+}
+function updateAuthorButton() {
+    const button =
+        document.getElementById(
+            "addAuthorBtn"
+        );
+    if (!button) return;
+    button.disabled =
+        authorCount >= maxAuthors;
+}
+/* =========================================================
+   PAYMENT
+   ========================================================= */
+function togglePaymentUpload(checkbox) {
+    const block =
+        document.getElementById(
+            "payment_screenshot_block"
+        );
+    const input =
+        document.getElementById(
+            "payment_screenshot"
+        );
+    if (!block || !input) return;
+    if (checkbox.checked) {
+        block.style.display =
+            "block";
+        input.required =
+            true;
+    } else {
+        block.style.display =
+            "none";
+        input.required =
+            false;
+        input.value =
+            "";
+    }
+}
+/* =========================================================
+   JOURNAL PAYMENT LINK
+   ========================================================= */
+const journalSelect =
+    document.getElementById(
+        "journal_id"
+    );
+const paymentDetailsLink =
+    document.getElementById(
+        "paymentDetailsLink"
+    );
+function updatePaymentLink() {
+    if (
+        !journalSelect ||
+        !paymentDetailsLink
+    ) {
+        return;
+    }
+    const selectedOption =
+        journalSelect.options[
+            journalSelect.selectedIndex
+        ];
+    const shortName =
+        selectedOption &&
+        selectedOption.dataset.shortName
+            ? selectedOption.dataset.shortName.trim()
+            : "crin";
+    paymentDetailsLink.href =
+        `/${shortName !== "fhima"
+            ? shortName
+            : "fhim"
+        }/payment`;
+}
+if (journalSelect) {
+    journalSelect.addEventListener(
+        "change",
+        updatePaymentLink
+    );
+    updatePaymentLink();
+}
+/* =========================================================
+   PAPER FILE VALIDATION
+   ========================================================= */
+const paperFile =
+    document.getElementById(
+        "paper_file"
+    );
+if (paperFile) {
+    paperFile.addEventListener(
+        "change",
+        function () {
+            const file =
+                this.files[0];
+            if (!file) return;
+            const maxSize =
+                5 * 1024 * 1024;
+            if (
+                file.type !==
+                    "application/pdf"
+            ) {
+                alert(
+                    "Please select a PDF file."
+                );
+                this.value = "";
+                return;
+            }
+            if (
+                file.size > maxSize
+            ) {
+                alert(
+                    "Paper file must not exceed 5 MB."
+                );
+                this.value = "";
+            }
+        }
+    );
+}
+/* =========================================================
+   PAYMENT FILE VALIDATION
+   ========================================================= */
+const paymentFile =
+    document.getElementById(
+        "payment_screenshot"
+    );
+if (paymentFile) {
+    paymentFile.addEventListener(
+        "change",
+        function () {
+            const file =
+                this.files[0];
+            if (!file) return;
+            const maxSize =
+                1 * 1024 * 1024;
+            if (
+                file.size > maxSize
+            ) {
+                alert(
+                    "Payment screenshot must not exceed 1 MB."
+                );
+                this.value = "";
+            }
+        }
+    );
+}
+/* =========================================================
+   SUBMISSION LOADING STATE
+   ========================================================= */
+const submissionForm =
+    document.getElementById(
+        "paperSubmissionForm"
+    );
+const submitButton =
+    document.getElementById(
+        "submitPaperBtn"
+    );
+if (
+    submissionForm &&
+    submitButton
+) {
+    submissionForm.addEventListener(
+        "submit",
+        function () {
+            submitButton.disabled =
+                true;
+            submitButton.innerHTML = `
+                <span
+                    class="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                ></span>
+                Submitting Paper...
+            `;
+        }
+    );
+}
+/* =========================================================
+   REJECTION MODAL
+   ========================================================= */
+const rejectionModal =
+    document.getElementById(
+        "rejectionModal"
+    );
+if (rejectionModal) {
+    rejectionModal.addEventListener(
+        "show.bs.modal",
+        function (event) {
+            const button =
+                event.relatedTarget;
+            const message =
+                button
+                    ? button.getAttribute(
+                        "data-rejection-message"
+                    )
+                    : "Paper does not meet requirements.";
+            const messageText =
+                document.getElementById(
+                    "rejectionMessageText"
+                );
+            if (messageText) {
+                messageText.textContent =
+                    message ||
+                    "Paper does not meet requirements.";
+            }
+        }
+    );
+}
+</script>
+{% endblock %}

@@ -1,35 +1,1071 @@
 {% extends "basecode.html" %}
 {% block title %}Edit User{% endblock %}
-
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit User: {{ user.username }}</h4>
+<style>
+/* =========================================================
+   EDIT USER PAGE
+   ========================================================= */
+.edit-user-page {
+    padding-bottom: 35px;
+}
+/* =========================================================
+   HEADER
+   ========================================================= */
+.edit-header {
+    position: relative;
+    padding: 28px 30px;
+    margin-bottom: 25px;
+    border-radius: 22px;
+    overflow: hidden;
+    color: #ffffff;
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(6, 182, 212, 0.28),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(59, 130, 246, 0.25),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #172554
+        );
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.15);
+}
+.edit-header::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    right: -60px;
+    top: -80px;
+}
+.edit-header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.edit-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.edit-icon {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+    box-shadow:
+        0 10px 25px rgba(37,99,235,0.3);
+    font-size: 24px;
+}
+.edit-title h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+}
+.edit-title p {
+    margin: 5px 0 0;
+    color: #cbd5e1;
+    font-size: 12px;
+}
+.back-dashboard {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    color: #e2e8f0;
+    text-decoration: none;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+.back-dashboard:hover {
+    color: #ffffff;
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-1px);
+}
+/* =========================================================
+   MAIN GRID
+   ========================================================= */
+.edit-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        290px;
+    gap: 22px;
+    align-items: start;
+}
+/* =========================================================
+   CARD
+   ========================================================= */
+.edit-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 8px 30px rgba(15,23,42,0.05);
+}
+.edit-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.header-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #eff6ff;
+    color: #2563eb;
+}
+.edit-card-header h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 16px;
+    font-weight: 700;
+}
+.edit-card-header p {
+    margin: 3px 0 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+/* =========================================================
+   FORM
+   ========================================================= */
+.edit-form-body {
+    padding: 25px;
+}
+.form-group-modern {
+    margin-bottom: 20px;
+}
+.form-label-modern {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+}
+.form-label-modern i {
+    color: #2563eb;
+    margin-right: 4px;
+}
+.form-control-modern,
+.form-select-modern {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #dbe3ec;
+    border-radius: 11px;
+    background: #f8fafc;
+    color: #0f172a;
+    padding: 0 14px;
+    font-size: 13px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+.form-control-modern:focus,
+.form-select-modern:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 4px
+        rgba(37,99,235,0.08);
+}
+/* =========================================================
+   USERNAME
+   ========================================================= */
+.username-display {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    border-radius: 11px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+}
+.username-display i {
+    color: #2563eb;
+}
+.readonly-badge {
+    margin-left: auto;
+    padding: 4px 7px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+/* =========================================================
+   EMAIL
+   ========================================================= */
+.email-helper {
+    margin-top: 6px;
+    color: #94a3b8;
+    font-size: 10px;
+}
+/* =========================================================
+   PASSWORD
+   ========================================================= */
+.password-wrapper {
+    position: relative;
+}
+.password-wrapper .form-control-modern {
+    padding-right: 48px;
+}
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+}
+.password-toggle:hover {
+    color: #2563eb;
+}
+.password-strength {
+    height: 4px;
+    margin-top: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+.password-strength-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: 5px;
+    transition:
+        width 0.25s ease;
+}
+.password-strength-text {
+    margin-top: 5px;
+    color: #94a3b8;
+    font-size: 10px;
+}
+.password-note {
+    margin-top: 7px;
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 10px;
+}
+/* =========================================================
+   ROLE
+   ========================================================= */
+.role-options {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 8px;
+}
+.role-option {
+    position: relative;
+}
+.role-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.role-option label {
+    min-height: 70px;
+    padding: 10px 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #64748b;
+    cursor: pointer;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+.role-option label i {
+    font-size: 17px;
+}
+.role-option input:checked + label {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #2563eb;
+    box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,0.07);
+}
+.role-option label:hover {
+    border-color: #93c5fd;
+}
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 8px;
+    margin-top: 25px;
+    border-top: 1px solid #e2e8f0;
+}
+.btn-cancel {
+    height: 44px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 10px;
+    border: 1px solid #dbe3ec;
+    background: #ffffff;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+.btn-cancel:hover {
+    background: #f8fafc;
+    color: #334155;
+}
+.btn-update {
+    height: 44px;
+    padding: 0 21px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: none;
+    border-radius: 10px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow:
+        0 8px 18px
+        rgba(37,99,235,0.2);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.btn-update:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow:
+        0 12px 24px
+        rgba(37,99,235,0.27);
+}
+/* =========================================================
+   ACCOUNT SIDEBAR
+   ========================================================= */
+.account-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow:
+        0 8px 30px rgba(15,23,42,0.05);
+}
+.account-avatar {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe,
+            #cffafe
+        );
+    color: #1d4ed8;
+    font-size: 22px;
+    font-weight: 800;
+}
+.account-name {
+    margin-bottom: 3px;
+    color: #0f172a;
+    font-size: 16px;
+    font-weight: 750;
+}
+.account-email {
+    color: #94a3b8;
+    font-size: 10px;
+    word-break: break-word;
+}
+.account-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 20px 0;
+}
+.account-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 0;
+    font-size: 11px;
+}
+.account-info-label {
+    color: #94a3b8;
+}
+.account-info-value {
+    color: #334155;
+    font-weight: 700;
+}
+/* Role badges */
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 7px;
+    font-size: 9px;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.role-admin {
+    background: #fef2f2;
+    color: #dc2626;
+}
+.role-approver {
+    background: #fffbeb;
+    color: #b45309;
+}
+.role-reviewer {
+    background: #f1f5f9;
+    color: #475569;
+}
+.role-user {
+    background: #ecfeff;
+    color: #0e7490;
+}
+/* Security notice */
+.security-note {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-size: 10px;
+    line-height: 1.5;
+}
+.security-note i {
+    margin-right: 4px;
+}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 991.98px) {
+    .edit-layout {
+        grid-template-columns: 1fr;
+    }
+    .account-card {
+        order: -1;
+    }
+    .account-card-inner {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .account-avatar {
+        margin: 0;
+    }
+    .account-divider,
+    .security-note {
+        display: none;
+    }
+    .account-details {
+        flex: 1;
+    }
+    .account-info {
+        margin-top: 5px;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+}
+@media (max-width: 767.98px) {
+    .edit-header {
+        padding: 22px;
+        border-radius: 18px;
+    }
+    .edit-header-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .back-dashboard {
+        width: 100%;
+        justify-content: center;
+    }
+    .edit-title h1 {
+        font-size: 21px;
+    }
+    .edit-title p {
+        font-size: 10px;
+    }
+    .edit-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 13px;
+    }
+    .edit-card {
+        border-radius: 17px;
+    }
+    .edit-card-header {
+        padding: 17px;
+    }
+    .edit-form-body {
+        padding: 18px;
+    }
+    .role-options {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+    .account-card {
+        padding: 17px;
+        border-radius: 17px;
+    }
+}
+@media (max-width: 480px) {
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+    .btn-cancel,
+    .btn-update {
+        width: 100%;
+        justify-content: center;
+    }
+    .account-info {
+        flex-wrap: wrap;
+    }
+}
+</style>
+<div class="edit-user-page">
+```
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+<div class="edit-header">
+    <div class="edit-header-content">
+        <div class="edit-title">
+            <div class="edit-icon">
+                <i class="bi bi-person-gear"></i>
             </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('edit_user', username=user.username) }}">
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Role</label>
-                        <select class="form-select" name="role">
-                            <option value="user" {% if user.role == 'user' %}selected{% endif %}>User</option>
-                            <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label>New Password (leave blank to keep current)</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
-                </form>
+            <div>
+                <h1>
+                    Edit User
+                </h1>
+                <p>
+                    Update account details, permissions and security.
+                </p>
             </div>
+        </div>
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="back-dashboard"
+        >
+            <i class="bi bi-arrow-left"></i>
+            Back to Dashboard
+        </a>
+    </div>
+</div>
+<!-- =====================================================
+     CONTENT
+     ===================================================== -->
+<div class="edit-layout">
+    <!-- =================================================
+         EDIT FORM
+         ================================================= -->
+    <div class="edit-card">
+        <div class="edit-card-header">
+            <div class="header-icon">
+                <i class="bi bi-pencil-square"></i>
+            </div>
+            <div>
+                <h2>
+                    Account Information
+                </h2>
+                <p>
+                    Modify the selected user's details
+                </p>
+            </div>
+        </div>
+        <div class="edit-form-body">
+            <form
+                method="POST"
+                action="{{ url_for('edit_user', username=user.username) }}"
+                id="editUserForm"
+            >
+                <!-- Username -->
+                <div class="form-group-modern">
+                    <label class="form-label-modern">
+                        <i class="bi bi-person"></i>
+                        Username
+                    </label>
+                    <div class="username-display">
+                        <i class="bi bi-at"></i>
+                        <span>
+                            {{ user.username }}
+                        </span>
+                        <span class="readonly-badge">
+                            Read only
+                        </span>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="form-group-modern">
+                    <label
+                        for="email"
+                        class="form-label-modern"
+                    >
+                        <i class="bi bi-envelope"></i>
+                        Email Address
+                    </label>
+                    <input
+                        type="email"
+                        class="form-control-modern"
+                        id="email"
+                        name="email"
+                        value="{{ user.email }}"
+                        required
+                        autocomplete="email"
+                    >
+                    <div class="email-helper">
+                        <i class="bi bi-info-circle"></i>
+                        This email address is associated with the user's account.
+                    </div>
+                </div>
+                <!-- Role -->
+                <div class="form-group-modern">
+                    <label class="form-label-modern">
+                        <i class="bi bi-person-badge"></i>
+                        Account Role
+                    </label>
+                    <div class="role-options">
+                        <!-- User -->
+                        <div class="role-option">
+                            <input
+                                type="radio"
+                                id="role_user"
+                                name="role"
+                                value="user"
+                                {% if user.role == 'user' %}
+                                    checked
+                                {% endif %}
+                            >
+                            <label for="role_user">
+                                <i class="bi bi-person"></i>
+                                User
+                            </label>
+                        </div>
+                        <!-- Approver -->
+                        <div class="role-option">
+                            <input
+                                type="radio"
+                                id="role_approver"
+                                name="role"
+                                value="approver"
+                                {% if user.role == 'approver' %}
+                                    checked
+                                {% endif %}
+                            >
+                            <label for="role_approver">
+                                <i class="bi bi-check-circle"></i>
+                                Approver
+                            </label>
+                        </div>
+                        <!-- Reviewer -->
+                        <div class="role-option">
+                            <input
+                                type="radio"
+                                id="role_reviewer"
+                                name="role"
+                                value="reviewer"
+                                {% if user.role == 'reviewer' %}
+                                    checked
+                                {% endif %}
+                            >
+                            <label for="role_reviewer">
+                                <i class="bi bi-eye"></i>
+                                Reviewer
+                            </label>
+                        </div>
+                        <!-- Admin -->
+                        <div class="role-option">
+                            <input
+                                type="radio"
+                                id="role_admin"
+                                name="role"
+                                value="admin"
+                                {% if user.role == 'admin' %}
+                                    checked
+                                {% endif %}
+                            >
+                            <label for="role_admin">
+                                <i class="bi bi-shield-lock"></i>
+                                Admin
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="form-group-modern">
+                    <label
+                        for="password"
+                        class="form-label-modern"
+                    >
+                        <i class="bi bi-lock"></i>
+                        New Password
+                    </label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            class="form-control-modern"
+                            id="password"
+                            name="password"
+                            placeholder="Leave blank to keep current password"
+                            autocomplete="new-password"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+                            <i
+                                class="bi bi-eye"
+                                id="toggleIcon"
+                            ></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div
+                            class="password-strength-bar"
+                            id="passwordStrengthBar"
+                        ></div>
+                    </div>
+                    <div
+                        class="password-strength-text"
+                        id="passwordStrengthText"
+                    >
+                        Leave blank to keep current password.
+                    </div>
+                    <div class="password-note">
+                        <i class="bi bi-shield-check"></i>
+                        Only enter a password if you want to change
+                        the user's existing password.
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="form-actions">
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="btn-cancel"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                        Cancel
+                    </a>
+                    <button
+                        type="submit"
+                        class="btn-update"
+                    >
+                        <i class="bi bi-check2-circle"></i>
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- =================================================
+         ACCOUNT SUMMARY
+         ================================================= -->
+    <div class="account-card">
+        <div class="account-card-inner">
+            <div class="account-avatar">
+                {{ user.username[0]|upper }}
+            </div>
+            <div class="account-details">
+                <div class="account-name">
+                    {{ user.username }}
+                </div>
+                <div class="account-email">
+                    {{ user.email }}
+                </div>
+                <div class="account-info">
+                    <span class="account-info-label">
+                        Current Role
+                    </span>
+                    {% if user.role == 'admin' %}
+                        <span class="role-badge role-admin">
+                            Admin
+                        </span>
+                    {% elif user.role == 'approver' %}
+                        <span class="role-badge role-approver">
+                            Approver
+                        </span>
+                    {% elif user.role == 'reviewer' %}
+                        <span class="role-badge role-reviewer">
+                            Reviewer
+                        </span>
+                    {% else %}
+                        <span class="role-badge role-user">
+                            User
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="account-divider"></div>
+        <div class="account-info">
+            <span class="account-info-label">
+                <i class="bi bi-person"></i>
+                Username
+            </span>
+            <span class="account-info-value">
+                {{ user.username }}
+            </span>
+        </div>
+        <div class="account-info">
+            <span class="account-info-label">
+                <i class="bi bi-envelope"></i>
+                Email
+            </span>
+            <span
+                class="account-info-value"
+                style="max-width: 160px; text-align:right; word-break:break-word;"
+            >
+                {{ user.email }}
+            </span>
+        </div>
+        <div class="security-note">
+            <i class="bi bi-shield-check"></i>
+            Account changes should only be made by authorized
+            administrators.
         </div>
     </div>
 </div>
+```
+</div>
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+<script>
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        /* =====================================================
+           EMAIL LOWERCASE
+           ===================================================== */
+        const emailInput =
+            document.getElementById("email");
+        if (emailInput) {
+            emailInput.addEventListener(
+                "input",
+                function () {
+                    this.value =
+                        this.value.toLowerCase();
+                }
+            );
+        }
+        /* =====================================================
+           PASSWORD SHOW / HIDE
+           ===================================================== */
+        const password =
+            document.getElementById("password");
+        const passwordToggle =
+            document.getElementById(
+                "passwordToggle"
+            );
+        const toggleIcon =
+            document.getElementById(
+                "toggleIcon"
+            );
+        if (
+            password &&
+            passwordToggle &&
+            toggleIcon
+        ) {
+            passwordToggle.addEventListener(
+                "click",
+                function () {
+                    if (
+                        password.type === "password"
+                    ) {
+                        password.type = "text";
+                        toggleIcon.classList.remove(
+                            "bi-eye"
+                        );
+                        toggleIcon.classList.add(
+                            "bi-eye-slash"
+                        );
+                        passwordToggle.setAttribute(
+                            "aria-label",
+                            "Hide password"
+                        );
+                    } else {
+                        password.type = "password";
+                        toggleIcon.classList.remove(
+                            "bi-eye-slash"
+                        );
+                        toggleIcon.classList.add(
+                            "bi-eye"
+                        );
+                        passwordToggle.setAttribute(
+                            "aria-label",
+                            "Show password"
+                        );
+                    }
+                }
+            );
+        }
+        /* =====================================================
+           PASSWORD STRENGTH
+           ===================================================== */
+        const strengthBar =
+            document.getElementById(
+                "passwordStrengthBar"
+            );
+        const strengthText =
+            document.getElementById(
+                "passwordStrengthText"
+            );
+        if (
+            password &&
+            strengthBar &&
+            strengthText
+        ) {
+            password.addEventListener(
+                "input",
+                function () {
+                    const value =
+                        this.value;
+                    if (!value.length) {
+                        strengthBar.style.width =
+                            "0%";
+                        strengthText.textContent =
+                            "Leave blank to keep current password.";
+                        return;
+                    }
+                    let score = 0;
+                    if (value.length >= 6) {
+                        score++;
+                    }
+                    if (value.length >= 10) {
+                        score++;
+                    }
+                    if (/[A-Z]/.test(value)) {
+                        score++;
+                    }
+                    if (/[0-9]/.test(value)) {
+                        score++;
+                    }
+                    if (/[^A-Za-z0-9]/.test(value)) {
+                        score++;
+                    }
+                    if (score <= 2) {
+                        strengthBar.style.width =
+                            "35%";
+                        strengthText.textContent =
+                            "Weak password";
+                    } else if (score <= 3) {
+                        strengthBar.style.width =
+                            "65%";
+                        strengthText.textContent =
+                            "Moderate password";
+                    } else {
+                        strengthBar.style.width =
+                            "100%";
+                        strengthText.textContent =
+                            "Strong password";
+                    }
+                }
+            );
+        }
+        /* =====================================================
+           FORM SUBMISSION FEEDBACK
+           ===================================================== */
+        const form =
+            document.getElementById(
+                "editUserForm"
+            );
+        if (form) {
+            form.addEventListener(
+                "submit",
+                function () {
+                    const submitButton =
+                        form.querySelector(
+                            ".btn-update"
+                        );
+                    if (submitButton) {
+                        submitButton.disabled =
+                            true;
+                        submitButton.innerHTML =
+                            `
+                            <span
+                                class="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                            ></span>
+                            Saving...
+                            `;
+                    }
+                }
+            );
+        }
+    }
+);
+</script>
 {% endblock %}

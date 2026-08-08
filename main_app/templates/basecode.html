@@ -1,156 +1,908 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Title -->
-    <title>Curevita Research - {% block title %}{% endblock %}</title>
-    
-    <!-- Bootstrap CSS -->
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    <title>
+        Curevita Research - {% block title %}{% endblock %}
+    </title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
-
-    <!-- Icons (Optional) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- =========================================================
+         BOOTSTRAP ICONS
+         ========================================================= -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+    <!-- =========================================================
+         CUSTOM CSS
+         ========================================================= -->
     <style>
+        :root {
+            --sidebar-width: 270px;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --sidebar-bg: #0f172a;
+            --sidebar-hover: #1e293b;
+            --sidebar-text: #cbd5e1;
+            --sidebar-muted: #64748b;
+            --page-bg: #f5f7fa;
+            --border-color: #e2e8f0;
+        }
+        /* =====================================================
+           GLOBAL
+           ===================================================== */
+        * {
+            box-sizing: border-box;
+        }
+        html,
         body {
-            background-color: #f5f7fa;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
         }
-        /* Navbar */
-        .navbar {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        body {
+            background-color: var(--page-bg);
+            font-family:
+                "Segoe UI",
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
         }
-        .navbar-brand {
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+        .app-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(37, 99, 235, 0.16),
+                    transparent 35%
+                ),
+                var(--sidebar-bg);
+            color: white;
+            z-index: 1050;
+            display: flex;
+            flex-direction: column;
+            border-right:
+                1px solid rgba(255, 255, 255, 0.06);
+            box-shadow:
+                8px 0 30px rgba(15, 23, 42, 0.08);
+            transition:
+                transform 0.3s ease;
+        }
+        /* =====================================================
+           BRAND
+           ===================================================== */
+        .sidebar-brand {
+            height: 78px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            color: white;
+            flex-shrink: 0;
+        }
+        .sidebar-brand:hover {
+            color: white;
+        }
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.30);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .brand-content {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .brand-title {
+            font-size: 17px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
         }
-        .nav-link {
+        .brand-subtitle {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 3px;
+        }
+        /* =====================================================
+           SIDEBAR MENU
+           ===================================================== */
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 14px;
+        }
+        .sidebar-section-title {
+            padding: 0 10px;
+            margin:
+                12px 0 8px;
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        /* =====================================================
+           SIDEBAR LINKS
+           ===================================================== */
+        .sidebar-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            min-height: 48px;
+            padding: 10px 13px;
+            margin-bottom: 5px;
+            border-radius: 12px;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
-            transition: all 0.2s ease-in-out;
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
         }
-        .nav-link:hover {
-            color: #0d6efd !important;
-            transform: translateY(-1px);
+        .sidebar-link i {
+            width: 22px;
+            min-width: 22px;
+            text-align: center;
+            font-size: 18px;
+            color: #94a3b8;
+            transition:
+                color 0.2s ease;
         }
-        /* Flash Messages */
+        .sidebar-link:hover {
+            color: white;
+            background:
+                var(--sidebar-hover);
+            transform:
+                translateX(3px);
+        }
+        .sidebar-link:hover i {
+            color: #60a5fa;
+        }
+        /* =====================================================
+           ACTIVE LINK
+           ===================================================== */
+        .sidebar-link.active {
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.95),
+                    rgba(29, 78, 216, 0.85)
+                );
+            box-shadow:
+                0 8px 20px
+                rgba(37, 99, 235, 0.20);
+        }
+        .sidebar-link.active i {
+            color: white;
+        }
+        /* =====================================================
+           APPROVED PAPERS
+           ===================================================== */
+        .sidebar-link.approved {
+            color: #67e8f9;
+        }
+        .sidebar-link.approved i {
+            color: #22d3ee;
+        }
+        .sidebar-link.approved:hover {
+            background:
+                rgba(6, 182, 212, 0.10);
+            color: #a5f3fc;
+        }
+        /* =====================================================
+           VERIFICATION
+           ===================================================== */
+        .sidebar-link.verification {
+            background:
+                rgba(245, 158, 11, 0.08);
+            color: #fbbf24;
+            border:
+                1px solid
+                rgba(245, 158, 11, 0.12);
+        }
+        .sidebar-link.verification i {
+            color: #f59e0b;
+        }
+        .sidebar-link.verification:hover {
+            background:
+                rgba(245, 158, 11, 0.15);
+            color: #fcd34d;
+        }
+        /* =====================================================
+           AUTHENTICATION LINKS
+           ===================================================== */
+        .sidebar-link.login-link {
+            background:
+                rgba(37, 99, 235, 0.12);
+            border:
+                1px solid
+                rgba(37, 99, 235, 0.18);
+            color: #93c5fd;
+        }
+        .sidebar-link.login-link i {
+            color: #60a5fa;
+        }
+        .sidebar-link.login-link:hover {
+            background:
+                rgba(37, 99, 235, 0.22);
+            color: white;
+        }
+        .sidebar-link.signup-link {
+            background:
+                rgba(16, 185, 129, 0.08);
+            border:
+                1px solid
+                rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+        }
+        .sidebar-link.signup-link i {
+            color: #34d399;
+        }
+        .sidebar-link.signup-link:hover {
+            background:
+                rgba(16, 185, 129, 0.18);
+            color: white;
+        }
+        /* =====================================================
+           USER SECTION
+           ===================================================== */
+        .sidebar-user {
+            padding: 14px;
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 11px;
+            border-radius: 13px;
+            background:
+                rgba(255, 255, 255, 0.04);
+            margin-bottom: 10px;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #334155,
+                    #475569
+                );
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .user-info {
+            overflow: hidden;
+        }
+        .user-name {
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .user-role {
+            color: #64748b;
+            font-size: 11px;
+            text-transform: capitalize;
+        }
+        /* =====================================================
+           LOGOUT
+           ===================================================== */
+        .logout-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            width: 100%;
+            padding: 10px 13px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fca5a5;
+            border:
+                1px solid
+                rgba(239, 68, 68, 0.20);
+            background:
+                rgba(239, 68, 68, 0.07);
+            font-size: 13px;
+            font-weight: 600;
+            transition:
+                all 0.2s ease;
+        }
+        .logout-link:hover {
+            background:
+                rgba(239, 68, 68, 0.15);
+            color: #fecaca;
+            border-color:
+                rgba(239, 68, 68, 0.35);
+        }
+        /* =====================================================
+           MAIN CONTENT
+           ===================================================== */
+        .app-main {
+            margin-left:
+                var(--sidebar-width);
+            min-height: 100vh;
+        }
+        /* =====================================================
+           MOBILE HEADER
+           ===================================================== */
+        .mobile-header {
+            display: none;
+            height: 64px;
+            background: white;
+            border-bottom:
+                1px solid var(--border-color);
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow:
+                0 2px 10px
+                rgba(15, 23, 42, 0.05);
+        }
+        .mobile-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .mobile-brand-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* =====================================================
+           MOBILE TOGGLE
+           ===================================================== */
+        .sidebar-toggle {
+            border: none;
+            background: #f1f5f9;
+            color: #334155;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            cursor: pointer;
+            transition:
+                all 0.2s ease;
+        }
+        .sidebar-toggle:hover {
+            background: #e2e8f0;
+            color: #2563eb;
+        }
+        /* =====================================================
+           MOBILE OVERLAY
+           ===================================================== */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background:
+                rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(2px);
+            z-index: 1040;
+        }
+        .sidebar-overlay.show {
+            display: block;
+        }
+        /* =====================================================
+           FLASH MESSAGES
+           ===================================================== */
         .alert {
             border-radius: 12px;
             font-size: 15px;
+            border: none;
         }
-        /* Page Content */
-        main {
+        /* =====================================================
+           PAGE CONTENT
+           ===================================================== */
+        .page-container {
+            padding: 28px;
             min-height: 70vh;
         }
-        /* Footer */
+        /* =====================================================
+           FOOTER
+           ===================================================== */
         footer {
-            background: linear-gradient(90deg, #212529, #343a40);
+            background:
+                linear-gradient(
+                    90deg,
+                    #212529,
+                    #343a40
+                );
         }
         footer p {
             margin: 0;
             font-size: 14px;
             letter-spacing: 0.5px;
         }
+        /* =====================================================
+           SIDEBAR SCROLLBAR
+           ===================================================== */
+        .sidebar-menu::-webkit-scrollbar {
+            width: 5px;
+        }
+        .sidebar-menu::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        /* =====================================================
+           TABLET + MOBILE
+           ===================================================== */
+        @media (max-width: 991.98px) {
+            .app-sidebar {
+                transform:
+                    translateX(-100%);
+                width:
+                    min(290px, 85vw);
+            }
+            .app-sidebar.show {
+                transform:
+                    translateX(0);
+            }
+            .app-main {
+                margin-left: 0;
+            }
+            .mobile-header {
+                display: flex;
+            }
+            .page-container {
+                padding:
+                    20px 16px;
+            }
+        }
+        /* =====================================================
+           SMALL MOBILE
+           ===================================================== */
+        @media (max-width: 575.98px) {
+            .mobile-header {
+                height: 60px;
+                padding:
+                    0 14px;
+            }
+            .mobile-brand {
+                font-size: 14px;
+            }
+            .page-container {
+                padding:
+                    16px 12px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">
-                <i class="bi bi-shield-lock-fill me-1"></i> Curevita Research
-            </a>
-            
-            <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    {% if current_user %}
-                        <!-- Dashboard -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard') }}">
-                                <i class="bi bi-speedometer2"></i> Dashboard
-                            </a>
-                        </li>
-
-                        <!-- Admin-only links -->
-                        {% if current_user.role == 'admin' %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('listedi') }}">
-                                    <i class="bi bi-people"></i> Editor
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('list_contacts') }}">
-                                    <i class="bi bi-person-lines-fill"></i> Journals
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('list_papers') }}">
-                                    <i class="bi bi-journal-text"></i> Research Papers
-                                </a>
-                            </li>
-                        {% endif %}
-
-                        <!-- Logout -->
-                        <li class="nav-item">
-                            <a class="btn btn-sm btn-outline-danger ms-lg-2" href="{{ url_for('logout') }}">
-                                <i class="bi bi-box-arrow-right"></i> Logout
-                            </a>
-                        </li>
-                    {% else %}
-                        <!-- Login -->
-                        <li class="nav-item">
-                            <a class="btn btn-sm btn-primary" href="{{ url_for('login') }}">
-                                <i class="bi bi-box-arrow-in-right"></i> Login
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
+<aside
+    class="app-sidebar"
+    id="appSidebar"
+>
+    <a
+        href="{% if current_user %}{{ url_for('student_dashboard') }}{% else %}{{ url_for('login') }}{% endif %}"
+        class="sidebar-brand"
+    >
+        <div class="brand-icon">
+            <i class="bi bi-journal-medical"></i>
+        </div>
+        <div class="brand-content">
+            <div class="brand-title">
+                Curevita Research
+            </div>
+            <div class="brand-subtitle">
+                Research Management
             </div>
         </div>
-    </nav>
-
-    <!-- Flash Messages -->
-    <div class="container mt-3">
+    </a>
+    <div class="sidebar-menu">
+        {% if current_user %}
+            <div class="sidebar-section-title">
+                Main
+            </div>
+            <a
+                href="{{ url_for('student_dashboard') }}"
+                class="sidebar-link
+                {% if request.endpoint == 'student_dashboard' %}
+                    active
+                {% endif %}"
+            >
+                <i class="bi bi-file-earmark-arrow-up"></i>
+                <span>
+                    Submit Paper
+                </span>
+            </a>
+            {% if current_user.role == 'admin' %}
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="sidebar-link
+                {% if request.endpoint == 'dashboard' %}
+                    active
+                {% endif %}"
+            >
+                <i class="bi bi-speedometer2"></i>
+                <span>
+                    Dashboard
+                </span>
+            </a>
+            {% endif %}
+            {% if current_user.role in ('admin', 'approver', 'reviewer') %}
+                <div class="sidebar-section-title">
+                    Review & Verification
+                </div>
+                <a
+                    href="{{ url_for('approved_papers') }}"
+                    class="sidebar-link approved
+                    {% if request.endpoint == 'approved_papers' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-journals"></i>
+                    <span>
+                        Approved Papers
+                    </span>
+                </a>
+                <a
+                    href="{{ url_for('admin_papers') }}"
+                    class="sidebar-link verification
+                    {% if request.endpoint == 'admin_papers' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-shield-check"></i>
+                    <span>
+                        Paper Verification
+                    </span>
+                </a>
+            {% endif %}
+            {% if current_user.role == 'admin' %}
+                <div class="sidebar-section-title">
+                    Administration
+                </div>
+                <a
+                    href="{{ url_for('listedi') }}"
+                    class="sidebar-link
+                    {% if request.endpoint == 'listedi' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-people"></i>
+                    <span>
+                        Editor
+                    </span>
+                </a>
+                <a
+                    href="{{ url_for('list_contacts') }}"
+                    class="sidebar-link
+                    {% if request.endpoint == 'list_contacts' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>
+                        Journals
+                    </span>
+                </a>
+                <a
+                    href="{{ url_for('list_papers') }}"
+                    class="sidebar-link
+                    {% if request.endpoint == 'list_papers' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-journal-text"></i>
+                    <span>
+                        Research Papers
+                    </span>
+                </a>
+            {% endif %}
+        {% else %}
+            <div class="sidebar-section-title">
+                Account
+            </div>
+            <a
+                href="{{ url_for('signup') }}"
+                class="sidebar-link signup-link
+                {% if request.endpoint == 'signup' %}
+                    active
+                {% endif %}"
+            >
+                <i class="bi bi-person-plus"></i>
+                <span>
+                    Student Signup
+                </span>
+            </a>
+            <a
+                href="{{ url_for('login') }}"
+                class="sidebar-link login-link
+                {% if request.endpoint == 'login' %}
+                    active
+                {% endif %}"
+            >
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>
+                    Login
+                </span>
+            </a>
+        {% endif %}
+    </div>
+    {% if current_user %}
+    <div class="sidebar-user">
+                {{ current_user.username[0] | upper }}
+            </div>
+            <div class="user-info">
+                <div class="user-name">
+                    {{ current_user.username }}
+                </div>
+                <div class="user-role">
+                    {{ current_user.role }}
+                </div>
+            </div>
+        </div>
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-link"
+        >
+            <i class="bi bi-box-arrow-right"></i>
+            <span>
+                Logout
+            </span>
+        </a>
+    </div>
+    {% endif %}
+</aside>
+<div class="mobile-header">
+    <div class="mobile-brand">
+        <div class="mobile-brand-icon">
+            <i class="bi bi-journal-medical"></i>
+        </div>
+        <span>
+            Curevita Research
+        </span>
+    </div>
+    <button
+        class="sidebar-toggle"
+        id="sidebarToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-controls="appSidebar"
+        aria-expanded="false"
+    >
+        <i class="bi bi-list"></i>
+    </button>
+</div>
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+<div class="app-main">
+    <div class="container-fluid px-4 pt-3">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
-                        <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <div
+                        class="alert alert-{{ category }}
+                               alert-dismissible
+                               fade show
+                               shadow-sm"
+                        role="alert"
+                    >
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        {{ message }}
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                        ></button>
                     </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
     </div>
-
-    <!-- Page Content -->
-    <main class="container py-4">
-        {% block content %}{% endblock %}
+    <main class="page-container">
+        {% block content %}
+        {% endblock %}
     </main>
-
-    <!-- Footer -->
-    <footer class="text-light text-center py-3">
-        <p>&copy; {{ current_year if current_year else "2025" }} Curevita Research</p>
+    <footer
+        class="text-light text-center py-3"
+    >
+        <p>
+            &copy;
+            {{ current_year if current_year else "2025" }}
+            Curevita Research
+        </p>
     </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    {% block scripts %}{% endblock %}
+</div>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+            const sidebar =
+                document.getElementById("appSidebar");
+            const toggle =
+                document.getElementById("sidebarToggle");
+            const overlay =
+                document.getElementById("sidebarOverlay");
+            function openSidebar() {
+                sidebar.classList.add("show");
+                overlay.classList.add("show");
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+                const icon =
+                    toggle.querySelector("i");
+                if (icon) {
+                    icon.classList.remove(
+                        "bi-list"
+                    );
+                    icon.classList.add(
+                        "bi-x-lg"
+                    );
+                }
+            }
+            function closeSidebar() {
+                sidebar.classList.remove("show");
+                overlay.classList.remove("show");
+                toggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+                const icon =
+                    toggle.querySelector("i");
+                if (icon) {
+                    icon.classList.remove(
+                        "bi-x-lg"
+                    );
+                    icon.classList.add(
+                        "bi-list"
+                    );
+                }
+            }
+            if (toggle) {
+                toggle.addEventListener(
+                    "click",
+                    function () {
+                        if (
+                            sidebar.classList.contains("show")
+                        ) {
+                            closeSidebar();
+                        } else {
+                            openSidebar();
+                        }
+                    }
+                );
+            }
+            if (overlay) {
+                overlay.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+            }
+            document
+                .querySelectorAll(".sidebar-link")
+                .forEach(
+                    function (link) {
+                        link.addEventListener(
+                            "click",
+                            function () {
+                                if (
+                                    window.innerWidth < 992
+                                ) {
+                                    closeSidebar();
+                                }
+                            }
+                        );
+                    }
+                );
+            document.addEventListener(
+                "keydown",
+                function (event) {
+                    if (
+                        event.key === "Escape" &&
+                        window.innerWidth < 992
+                    ) {
+                        closeSidebar();
+                    }
+                }
+            );
+            window.addEventListener(
+                "resize",
+                function () {
+                    if (
+                        window.innerWidth >= 992
+                    ) {
+                        sidebar.classList.remove(
+                            "show"
+                        );
+                        overlay.classList.remove(
+                            "show"
+                        );
+                        toggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+                        const icon =
+                            toggle.querySelector("i");
+                        if (icon) {
+                            icon.classList.remove(
+                                "bi-x-lg"
+                            );
+                            icon.classList.add(
+                                "bi-list"
+                            );
+                        }
+                    }
+                }
+            );
+        }
+    );
+</script>
+{% block scripts %}
+{% endblock %}
 </body>
 </html>

@@ -73,8 +73,8 @@
                             <i class="bi bi-cloud-upload"></i>
                         </div>
                         <h4 class="title">
-                            <a href="#" class="stretched-link"
-                                >Easy Online Submission</a
+                            <a href="{{ url_for('login') }}" class="stretched-link"
+                                >Submit Paper Online</a
                             >
                         </h4>
                     </div>
@@ -370,10 +370,9 @@
             >
                 <div class="col-xl-10">
                     <div class="text-center">
-                        <h4>
-                            Submit Research Work for Consideration of Publication
-                        </h4>
-                        <a class="cta-btn" href="/crin/current_issue">Submit Papers</a>
+                        <h2 class="cta-title">Submit Your Research Today</h2>
+                        <p class="mb-4">Join thousands of researchers publishing with Curevita Journals and make an impact.</p>
+                        <a href="{{ url_for('login') }}" class="cta-btn">Submit Your Papers <i class="fas fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>

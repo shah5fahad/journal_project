@@ -106,4 +106,30 @@
         </tbody>
     </table>
 </div>
+
+{% if pagination and pagination.pages > 1 %}
+<nav aria-label="Editor board pagination" class="mt-4 d-flex justify-content-center">
+    <ul class="pagination pagination-sm rounded-pill">
+        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('listedi', page=pagination.prev_num, journal_id=selected_journal, code=selected_category) if pagination.has_prev else '#' }}">Previous</a>
+        </li>
+
+        {% for page_num in pagination.iter_pages(left_edge=1, left_current=1, right_current=2, right_edge=1) %}
+            {% if page_num %}
+                <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('listedi', page=page_num, journal_id=selected_journal, code=selected_category) }}">{{ page_num }}</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">…</span></li>
+            {% endif %}
+        {% endfor %}
+
+        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('listedi', page=pagination.next_num, journal_id=selected_journal, code=selected_category) if pagination.has_next else '#' }}">Next</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+
+</div>
 {% endblock %}

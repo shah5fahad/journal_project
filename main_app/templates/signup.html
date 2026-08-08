@@ -1,35 +1,39 @@
 {% extends "basecode.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Student Signup{% endblock %}
 {% block content %}
 <style>
     /* =========================================================
-       LOGIN PAGE
+       SIGNUP PAGE
        ========================================================= */
-    .login-page {
-        min-height: calc(100vh - 56px);
+    .signup-page {
+        min-height:
+            calc(100vh - 56px);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 30px;
     }
-    .login-wrapper {
+    .signup-wrapper {
         width: 100%;
         max-width: 1050px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+            1fr 1fr;
         background: #ffffff;
         border-radius: 24px;
         overflow: hidden;
         box-shadow:
-            0 25px 70px rgba(15, 23, 42, 0.12);
-        border: 1px solid #e2e8f0;
+            0 25px 70px
+            rgba(15, 23, 42, 0.12);
+        border:
+            1px solid #e2e8f0;
     }
     /* =========================================================
        LEFT BRANDING PANEL
        ========================================================= */
-    .login-brand-panel {
+    .signup-brand-panel {
         position: relative;
-        padding: 55px 50px;
+        padding: 50px;
         color: white;
         background:
             radial-gradient(
@@ -52,29 +56,34 @@
         justify-content: center;
         overflow: hidden;
     }
-    .login-brand-panel::before {
+    .signup-brand-panel::before {
         content: "";
         position: absolute;
         width: 220px;
         height: 220px;
         border-radius: 50%;
         border:
-            1px solid rgba(255, 255, 255, 0.08);
+            1px solid
+            rgba(255, 255, 255, 0.08);
         top: -90px;
         right: -80px;
     }
-    .login-brand-panel::after {
+    .signup-brand-panel::after {
         content: "";
         position: absolute;
         width: 160px;
         height: 160px;
         border-radius: 50%;
         border:
-            1px solid rgba(255, 255, 255, 0.06);
+            1px solid
+            rgba(255, 255, 255, 0.06);
         bottom: -70px;
         left: -60px;
     }
-    .login-logo {
+    /* =========================================================
+       LOGO
+       ========================================================= */
+    .signup-logo {
         width: 58px;
         height: 58px;
         border-radius: 16px;
@@ -88,17 +97,18 @@
                 #06b6d4
             );
         box-shadow:
-            0 12px 30px rgba(37, 99, 235, 0.35);
+            0 12px 30px
+            rgba(37, 99, 235, 0.35);
         font-size: 28px;
         margin-bottom: 25px;
     }
-    .login-brand-panel h1 {
+    .signup-brand-panel h1 {
         font-size: 34px;
         font-weight: 750;
         letter-spacing: -0.8px;
         margin-bottom: 14px;
     }
-    .login-brand-panel .lead-text {
+    .signup-brand-panel .lead-text {
         color: #cbd5e1;
         font-size: 15px;
         line-height: 1.7;
@@ -106,21 +116,21 @@
         margin-bottom: 30px;
     }
     /* =========================================================
-       FEATURES
+       BENEFITS
        ========================================================= */
-    .login-features {
+    .signup-features {
         display: flex;
         flex-direction: column;
         gap: 15px;
     }
-    .login-feature {
+    .signup-feature {
         display: flex;
         align-items: center;
         gap: 12px;
         color: #e2e8f0;
         font-size: 13px;
     }
-    .login-feature-icon {
+    .signup-feature-icon {
         width: 34px;
         height: 34px;
         border-radius: 9px;
@@ -133,63 +143,67 @@
         flex-shrink: 0;
     }
     /* =========================================================
-       RIGHT LOGIN PANEL
+       FORM PANEL
        ========================================================= */
-    .login-form-panel {
-        padding: 50px;
+    .signup-form-panel {
+        padding: 45px 50px;
         background: #ffffff;
         display: flex;
         align-items: center;
     }
-    .login-form-container {
+    .signup-form-container {
         width: 100%;
         max-width: 430px;
         margin: auto;
     }
-    .login-heading {
-        margin-bottom: 30px;
+    /* =========================================================
+       HEADING
+       ========================================================= */
+    .signup-heading {
+        margin-bottom: 25px;
     }
-    .login-heading h2 {
+    .signup-heading h2 {
         color: #0f172a;
         font-size: 27px;
         font-weight: 700;
         margin-bottom: 7px;
     }
-    .login-heading p {
+    .signup-heading p {
         color: #64748b;
         font-size: 14px;
         margin: 0;
     }
     /* =========================================================
-       FORM
+       FORM GROUP
        ========================================================= */
-    .login-form-group {
-        margin-bottom: 20px;
+    .signup-form-group {
+        margin-bottom: 17px;
     }
-    .login-form-label {
+    .signup-form-label {
         display: flex;
         align-items: center;
         gap: 7px;
         color: #334155;
         font-size: 13px;
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 7px;
     }
-    .login-input-wrapper {
+    .signup-input-wrapper {
         position: relative;
     }
-    .login-input-icon {
+    .signup-input-icon {
         position: absolute;
         left: 15px;
         top: 50%;
-        transform: translateY(-50%);
+        transform:
+            translateY(-50%);
         color: #94a3b8;
         font-size: 17px;
         pointer-events: none;
     }
-    .login-input {
+    .signup-input {
         width: 100%;
-        height: 50px;
+        height: 48px;
         padding:
             10px 45px;
         border-radius: 12px;
@@ -204,21 +218,25 @@
             box-shadow 0.2s ease,
             background 0.2s ease;
     }
-    .login-input::placeholder {
+    .signup-input::placeholder {
         color: #94a3b8;
     }
-    .login-input:focus {
+    .signup-input:focus {
         background: #ffffff;
         border-color: #3b82f6;
         box-shadow:
             0 0 0 4px
             rgba(59, 130, 246, 0.10);
     }
-    .password-toggle {
+    /* =========================================================
+       PASSWORD TOGGLE
+       ========================================================= */
+    .signup-password-toggle {
         position: absolute;
         right: 14px;
         top: 50%;
-        transform: translateY(-50%);
+        transform:
+            translateY(-50%);
         border: none;
         background: transparent;
         color: #94a3b8;
@@ -226,44 +244,44 @@
         padding: 4px;
         font-size: 17px;
     }
-    .password-toggle:hover {
+    .signup-password-toggle:hover {
         color: #2563eb;
     }
     /* =========================================================
-       REMEMBER / FORGOT
+       EMAIL INFORMATION
        ========================================================= */
-    .login-options {
+    .otp-info {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 25px;
-        font-size: 13px;
-    }
-    .remember-wrapper {
-        display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 7px;
+        margin-top: 7px;
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+    .otp-info i {
+        color: #2563eb;
+        margin-top: 1px;
+        flex-shrink: 0;
+    }
+    /* =========================================================
+       PASSWORD REQUIREMENT
+       ========================================================= */
+    .password-hint {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #94a3b8;
+        font-size: 11px;
+        margin-top: 6px;
+    }
+    .password-hint i {
         color: #64748b;
     }
-    .remember-wrapper input {
-        width: 15px;
-        height: 15px;
-        accent-color: #2563eb;
-        cursor: pointer;
-    }
-    .forgot-link {
-        color: #2563eb;
-        text-decoration: none;
-        font-weight: 600;
-    }
-    .forgot-link:hover {
-        color: #1d4ed8;
-        text-decoration: underline;
-    }
     /* =========================================================
-       LOGIN BUTTON
+       REGISTER BUTTON
        ========================================================= */
-    .login-button {
+    .signup-button {
         width: 100%;
         height: 50px;
         border: none;
@@ -288,36 +306,36 @@
             transform 0.2s ease,
             box-shadow 0.2s ease;
     }
-    .login-button:hover {
+    .signup-button:hover {
         transform:
             translateY(-2px);
         box-shadow:
             0 14px 28px
             rgba(37, 99, 235, 0.30);
     }
-    .login-button:active {
+    .signup-button:active {
         transform:
             translateY(0);
     }
     /* =========================================================
-       SIGNUP
+       LOGIN LINK
        ========================================================= */
-    .signup-section {
-        margin-top: 25px;
-        padding-top: 22px;
+    .login-section {
+        margin-top: 22px;
+        padding-top: 20px;
         border-top:
             1px solid #e2e8f0;
         text-align: center;
         color: #64748b;
         font-size: 13px;
     }
-    .signup-link {
+    .login-link {
         color: #2563eb;
         font-weight: 700;
         text-decoration: none;
         margin-left: 4px;
     }
-    .signup-link:hover {
+    .login-link:hover {
         color: #1d4ed8;
         text-decoration: underline;
     }
@@ -331,7 +349,7 @@
         gap: 6px;
         color: #94a3b8;
         font-size: 11px;
-        margin-top: 20px;
+        margin-top: 18px;
     }
     .security-note i {
         color: #22c55e;
@@ -340,186 +358,255 @@
        RESPONSIVE
        ========================================================= */
     @media (max-width: 991.98px) {
-        .login-page {
+        .signup-page {
             padding: 25px;
             min-height:
                 calc(100vh - 60px);
         }
-        .login-wrapper {
+        .signup-wrapper {
             max-width: 600px;
             grid-template-columns: 1fr;
         }
-        .login-brand-panel {
+        .signup-brand-panel {
             padding: 35px;
             text-align: center;
             align-items: center;
         }
-        .login-brand-panel h1 {
+        .signup-brand-panel h1 {
             font-size: 28px;
         }
-        .login-brand-panel .lead-text {
+        .signup-brand-panel .lead-text {
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 20px;
         }
-        .login-features {
+        .signup-features {
             display: none;
         }
-        .login-form-panel {
+        .signup-form-panel {
             padding: 40px 35px;
         }
     }
     @media (max-width: 575.98px) {
-        .login-page {
+        .signup-page {
             padding: 15px 10px;
             align-items: flex-start;
         }
-        .login-wrapper {
+        .signup-wrapper {
             border-radius: 18px;
             margin-top: 10px;
         }
-        .login-brand-panel {
+        .signup-brand-panel {
             padding: 30px 22px;
         }
-        .login-logo {
+        .signup-logo {
             width: 50px;
             height: 50px;
             border-radius: 14px;
             font-size: 23px;
             margin-bottom: 18px;
         }
-        .login-brand-panel h1 {
+        .signup-brand-panel h1 {
             font-size: 24px;
         }
-        .login-brand-panel .lead-text {
+        .signup-brand-panel .lead-text {
             font-size: 13px;
             line-height: 1.6;
         }
-        .login-form-panel {
+        .signup-form-panel {
             padding: 30px 20px;
         }
-        .login-heading h2 {
+        .signup-heading h2 {
             font-size: 23px;
-        }
-        .login-options {
-            font-size: 12px;
         }
     }
 </style>
-<div class="login-page">
-<div class="login-wrapper">
+<div class="signup-page">
+```
+<div class="signup-wrapper">
     <!-- =====================================================
-         LEFT BRANDING
+         LEFT BRANDING PANEL
          ===================================================== -->
-    <div class="login-brand-panel">
-        <div class="login-logo">
+    <div class="signup-brand-panel">
+        <div class="signup-logo">
             <i class="bi bi-journal-medical"></i>
         </div>
         <h1>
-            Curevita Research
+            Join Curevita Research
         </h1>
         <p class="lead-text">
-            A centralized platform for managing,
-            submitting, reviewing, and publishing
-            research papers efficiently.
+            Create your student account and get access
+            to a streamlined platform for submitting and
+            managing your research papers.
         </p>
-        <div class="login-features">
-            <div class="login-feature">
-                <div class="login-feature-icon">
-                    <i class="bi bi-file-earmark-text"></i>
+        <div class="signup-features">
+            <div class="signup-feature">
+                <div class="signup-feature-icon">
+                    <i class="bi bi-person-check"></i>
                 </div>
                 <span>
-                    Submit and manage research papers
+                    Create your personal research profile
                 </span>
             </div>
-            <div class="login-feature">
-                <div class="login-feature-icon">
-                    <i class="bi bi-shield-check"></i>
+            <div class="signup-feature">
+                <div class="signup-feature-icon">
+                    <i class="bi bi-file-earmark-arrow-up"></i>
                 </div>
                 <span>
-                    Secure paper verification workflow
+                    Submit research papers online
                 </span>
             </div>
-            <div class="login-feature">
-                <div class="login-feature-icon">
-                    <i class="bi bi-people"></i>
+            <div class="signup-feature">
+                <div class="signup-feature-icon">
+                    <i class="bi bi-envelope-check"></i>
                 </div>
                 <span>
-                    Collaborative research management
+                    Verify your account securely using OTP
+                </span>
+            </div>
+            <div class="signup-feature">
+                <div class="signup-feature-icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                <span>
+                    Track your research submission journey
                 </span>
             </div>
         </div>
     </div>
     <!-- =====================================================
-         LOGIN FORM
+         SIGNUP FORM PANEL
          ===================================================== -->
-    <div class="login-form-panel">
-        <div class="login-form-container">
+    <div class="signup-form-panel">
+        <div class="signup-form-container">
             <!-- Heading -->
-            <div class="login-heading">
+            <div class="signup-heading">
                 <h2>
-                    Welcome back
+                    Create your account
                 </h2>
                 <p>
-                    Sign in to continue to your research dashboard.
+                    Register as a student to start submitting your research.
                 </p>
             </div>
             <!-- =================================================
-                 FORM
+                 SIGNUP FORM
                  ================================================= -->
             <form
                 method="POST"
-                action="{{ url_for('login') }}"
+                action="{{ url_for('signup') }}"
             >
-                <!-- Username / Email -->
-                <div class="login-form-group">
+                <!-- =================================================
+                     FULL NAME
+                     ================================================= -->
+                <div class="signup-form-group">
                     <label
-                        for="username"
-                        class="login-form-label"
+                        for="name"
+                        class="signup-form-label"
                     >
                         <i class="bi bi-person"></i>
-                        Username or Email
+                        Full Name
                     </label>
-                    <div class="login-input-wrapper">
+                    <div class="signup-input-wrapper">
                         <i
-                            class="bi bi-person login-input-icon">
+                            class="bi bi-person signup-input-icon">
                         </i>
                         <input
                             type="text"
-                            class="login-input"
+                            class="signup-input"
+                            id="name"
+                            name="name"
+                            required
+                            autocomplete="name"
+                            placeholder="e.g. John Doe"
+                        >
+                    </div>
+                </div>
+                <!-- =================================================
+                     USERNAME
+                     ================================================= -->
+                <div class="signup-form-group">
+                    <label
+                        for="username"
+                        class="signup-form-label"
+                    >
+                        <i class="bi bi-at"></i>
+                        Username
+                    </label>
+                    <div class="signup-input-wrapper">
+                        <i
+                            class="bi bi-at signup-input-icon">
+                        </i>
+                        <input
+                            type="text"
+                            class="signup-input"
                             id="username"
                             name="username"
                             required
                             autocomplete="username"
-                            placeholder="Enter username or email"
+                            placeholder="Choose a unique username"
                         >
                     </div>
                 </div>
-                <!-- Password -->
-                <div class="login-form-group">
+                <!-- =================================================
+                     EMAIL
+                     ================================================= -->
+                <div class="signup-form-group">
+                    <label
+                        for="email"
+                        class="signup-form-label"
+                    >
+                        <i class="bi bi-envelope"></i>
+                        Email Address
+                    </label>
+                    <div class="signup-input-wrapper">
+                        <i
+                            class="bi bi-envelope signup-input-icon">
+                        </i>
+                        <input
+                            type="email"
+                            class="signup-input"
+                            id="email"
+                            name="email"
+                            required
+                            autocomplete="email"
+                            placeholder="name@example.com"
+                        >
+                    </div>
+                    <div class="otp-info">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span>
+                            A 6-digit OTP will be sent to this email
+                            address for account verification.
+                        </span>
+                    </div>
+                </div>
+                <!-- =================================================
+                     PASSWORD
+                     ================================================= -->
+                <div class="signup-form-group">
                     <label
                         for="password"
-                        class="login-form-label"
+                        class="signup-form-label"
                     >
                         <i class="bi bi-lock"></i>
                         Password
                     </label>
-                    <div class="login-input-wrapper">
+                    <div class="signup-input-wrapper">
                         <i
-                            class="bi bi-lock login-input-icon">
+                            class="bi bi-lock signup-input-icon">
                         </i>
                         <input
                             type="password"
-                            class="login-input"
+                            class="signup-input"
                             id="password"
                             name="password"
                             required
-                            autocomplete="current-password"
-                            placeholder="Enter your password"
+                            autocomplete="new-password"
+                            placeholder="Create a secure password"
                         >
                         <button
                             type="button"
-                            class="password-toggle"
+                            class="signup-password-toggle"
                             id="passwordToggle"
                             aria-label="Show password"
                         >
@@ -529,56 +616,38 @@
                             </i>
                         </button>
                     </div>
-                </div>
-                <!-- =================================================
-                     REMEMBER / FORGOT
-                     ================================================= -->
-                <div class="login-options">
-                    <label
-                        class="remember-wrapper"
-                        for="remember"
-                    >
-                        <input
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                        >
+                    <div class="password-hint">
+                        <i class="bi bi-shield-lock"></i>
                         <span>
-                            Remember me
+                            Use a strong password to protect your account.
                         </span>
-                    </label>
-                    <a
-                        href="{{ url_for('forgot_password') }}"
-                        class="forgot-link"
-                    >
-                        Forgot Password?
-                    </a>
+                    </div>
                 </div>
                 <!-- =================================================
-                     LOGIN BUTTON
+                     REGISTER BUTTON
                      ================================================= -->
                 <button
                     type="submit"
-                    class="login-button"
+                    class="signup-button"
                 >
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="bi bi-send-check"></i>
                     <span>
-                        Sign In
+                        Register & Send OTP
                     </span>
                 </button>
             </form>
             <!-- =================================================
-                 SIGNUP
+                 LOGIN
                  ================================================= -->
-            <div class="signup-section">
+            <div class="login-section">
                 <span>
-                    Don't have an account?
+                    Already have an account?
                 </span>
                 <a
-                    href="{{ url_for('signup') }}"
-                    class="signup-link"
+                    href="{{ url_for('login') }}"
+                    class="login-link"
                 >
-                    Create Student Account
+                    Login here
                 </a>
             </div>
             <!-- =================================================
@@ -593,6 +662,7 @@
         </div>
     </div>
 </div>
+```
 </div>
 <!-- =========================================================
      PASSWORD VISIBILITY

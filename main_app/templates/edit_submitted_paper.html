@@ -1,0 +1,138 @@
+{% extends "basecode.html" %}
+{% block title %}Edit Submitted Paper{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h3 class="mb-3">Edit & Resubmit Paper</h3>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label">Title <span class="text-danger">*</span></label>
+            <input class="form-control" name="title" value="{{ paper.title }}" required>
+        </div>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Type of Paper</label>
+                <select name="paper_type" class="form-select">
+                    <option value="Original Research" {% if paper.paper_type == 'Original Research' %}selected{% endif %}>Original Research</option>
+                    <option value="Review Paper" {% if paper.paper_type == 'Review Paper' %}selected{% endif %}>Review Paper</option>
+                    <option value="Short Communication" {% if paper.paper_type == 'Short Communication' %}selected{% endif %}>Short Communication</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Target Journal</label>
+                <select name="journal_id" class="form-select">
+                    <option value="">-- Select Target Journal --</option>
+                    {% for journal in journals %}
+                        <option value="{{ journal.id }}" {% if paper.journal_id == journal.id %}selected{% endif %}>{{ journal.full_name }} ({{ journal.short_name }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <hr class="my-3">
+
+        <h6 class="fw-bold">Author Details</h6>
+        <div id="authorsContainer">
+            {% if authors_details %}
+                {% for a in authors_details %}
+                <div class="card p-3 mb-3 author-card" id="authorCard_{{ loop.index0 }}">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <input type="text"
+                                name="author_name[]"
+                                class="form-control form-control-sm"
+                                placeholder="Full Name *"
+                                value="{{ a.name }}"
+                                required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text"
+                                name="author_designation[]"
+                                class="form-control form-control-sm"
+                                placeholder="Designation"
+                                value="{{ a.designation }}">
+                        </div>
+
+                        <div class="col-md-6 mt-2">
+                            <input type="text"
+                                name="author_affiliation[]"
+                                class="form-control form-control-sm"
+                                placeholder="Affiliation"
+                                value="{{ a.affiliation }}">
+                        </div>
+
+                        <div class="col-md-6 mt-2">
+                            <input type="email"
+                                name="author_email[]"
+                                class="form-control form-control-sm"
+                                placeholder="Email"
+                                value="{{ a.email }}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- fallback: single author prefilled from comma list -->
+                <div class="card p-3 mb-3 author-card" id="authorCard_0">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <input type="text" name="author_name[]" class="form-control form-control-sm" placeholder="Full Name *" value="{{ paper.authors }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="author_designation[]" class="form-control form-control-sm" placeholder="Designation">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <input type="text" name="author_affiliation[]" class="form-control form-control-sm" placeholder="Affiliation">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <input type="email" name="author_email[]" class="form-control form-control-sm" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Abstract</label>
+            <textarea class="form-control" name="abstract" rows="4">{{ paper.abstract }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Citation</label>
+            <input class="form-control" name="citation" value="{{ paper.citation }}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Replace Paper File (PDF)</label>
+            <input type="file" class="form-control" name="paper_file" accept=".pdf">
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="is_paid" name="is_paid" {% if paper.is_paid %}checked{% endif %}>
+            <label class="form-check-label" for="is_paid">Paid Publication / Processing Fee</label>
+        </div>
+
+        <div class="mb-3" id="payment_block" style="display: {% if paper.is_paid %}block{% else %}none{% endif %};">
+            <label class="form-label">Upload Payment Screenshot</label>
+            <input type="file" class="form-control" name="payment_screenshot" accept="image/*,.pdf">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save Changes & Resubmit</button>
+        <a class="btn btn-secondary" href="{{ url_for('student_dashboard') }}">Cancel</a>
+    </form>
+</div>
+
+<script>
+// simple toggle for payment block
+const isPaidCheckbox = document.getElementById('is_paid');
+if (isPaidCheckbox) {
+    isPaidCheckbox.addEventListener('change', function(){
+        const block = document.getElementById('payment_block');
+        if (this.checked) block.style.display='block'; else block.style.display='none';
+    });
+}
+</script>
+
+{% endblock %}

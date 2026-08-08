@@ -11,11 +11,11 @@ db = SQLAlchemy()
 mail = Mail()
 
 
-# flask --app run.py db init
-# flask --app run.py db migrate -m "Message"
-# flask --app run.py db upgrade
+# flask --app app.py db init
+# flask --app app.py db migrate -m "Message"
+# flask --app app.py db upgrade
 # rever migrations
-# flask --app run.py db downgrade
+# flask --app app.py db downgrade
 
 def init_config():
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -31,6 +31,7 @@ def init_config():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 
     db.init_app(app)
+    mail.init_app(app)
 
 # Init database
 init_config()

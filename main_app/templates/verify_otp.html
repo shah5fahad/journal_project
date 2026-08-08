@@ -1,0 +1,739 @@
+{% extends "basecode.html" %}
+{% block title %}Verify Email{% endblock %}
+{% block content %}
+<style>
+/* =========================================================
+   OTP VERIFICATION PAGE
+   ========================================================= */
+.otp-page {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+.otp-wrapper {
+    width: 100%;
+    max-width: 1050px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, 0.12);
+}
+/* =========================================================
+   LEFT BRANDING
+   ========================================================= */
+.otp-brand {
+    position: relative;
+    padding: 55px 50px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(59, 130, 246, 0.35),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(6, 182, 212, 0.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #172554
+        );
+}
+.otp-brand::before {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+    top: -100px;
+    right: -80px;
+}
+.otp-brand::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+    bottom: -80px;
+    left: -60px;
+}
+/* Logo */
+.otp-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #06b6d4
+        );
+    box-shadow:
+        0 12px 30px rgba(37,99,235,0.35);
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+.otp-brand h1 {
+    font-size: 34px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+}
+.otp-brand-description {
+    max-width: 410px;
+    color: #cbd5e1;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+/* =========================================================
+   BRAND FEATURES
+   ========================================================= */
+.otp-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.otp-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+.otp-feature-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    color: #60a5fa;
+}
+/* =========================================================
+   RIGHT PANEL
+   ========================================================= */
+.otp-form-panel {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+}
+.otp-form-container {
+    width: 100%;
+    max-width: 430px;
+    margin: auto;
+    text-align: center;
+}
+/* =========================================================
+   VERIFICATION ICON
+   ========================================================= */
+.otp-main-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 22px;
+    border-radius: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #ecfeff
+        );
+    box-shadow:
+        0 10px 30px rgba(37,99,235,0.10);
+    font-size: 32px;
+}
+/* =========================================================
+   HEADING
+   ========================================================= */
+.otp-heading h2 {
+    margin-bottom: 8px;
+    color: #0f172a;
+    font-size: 28px;
+    font-weight: 700;
+}
+.otp-heading p {
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+/* Email badge */
+.email-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 100%;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 600;
+    word-break: break-all;
+}
+/* =========================================================
+   OTP INPUT
+   ========================================================= */
+.otp-input-container {
+    margin: 30px auto 22px;
+    max-width: 320px;
+    position: relative;
+}
+.otp-input {
+    width: 100%;
+    height: 72px;
+    border-radius: 16px;
+    border: 2px solid #dbe3ec;
+    background: #f8fafc;
+    color: #0f172a;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: 12px;
+    padding-left: 12px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+.otp-input::placeholder {
+    color: #cbd5e1;
+    letter-spacing: 12px;
+}
+.otp-input:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 5px
+        rgba(37,99,235,0.10);
+}
+/* =========================================================
+   VERIFY BUTTON
+   ========================================================= */
+.verify-btn {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #ffffff;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow:
+        0 10px 22px
+        rgba(37,99,235,0.22);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.verify-btn:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 28px
+        rgba(37,99,235,0.30);
+}
+.verify-btn:active {
+    transform: translateY(0);
+}
+/* =========================================================
+   RESEND
+   ========================================================= */
+.resend-container {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    text-align: left;
+}
+.resend-message {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.resend-message strong {
+    display: block;
+    color: #334155;
+    margin-bottom: 2px;
+}
+.resend-btn {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #bfdbfe;
+    background: #eff6ff;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+.resend-btn:hover {
+    background: #dbeafe;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+}
+/* =========================================================
+   SECURITY
+   ========================================================= */
+.security-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+.security-note i {
+    color: #22c55e;
+}
+/* =========================================================
+   RESPONSIVE TABLET
+   ========================================================= */
+@media (max-width: 991.98px) {
+    .otp-page {
+        padding: 25px;
+    }
+    .otp-wrapper {
+        max-width: 600px;
+        grid-template-columns: 1fr;
+    }
+    .otp-brand {
+        padding: 35px;
+        text-align: center;
+        align-items: center;
+    }
+    .otp-brand h1 {
+        font-size: 28px;
+    }
+    .otp-brand-description {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .otp-features {
+        display: none;
+    }
+    .otp-form-panel {
+        padding: 40px 35px;
+    }
+}
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
+@media (max-width: 575.98px) {
+    .otp-page {
+        padding: 15px 10px;
+        align-items: flex-start;
+    }
+    .otp-wrapper {
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+    .otp-brand {
+        padding: 30px 22px;
+    }
+    .otp-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        font-size: 23px;
+        margin-bottom: 18px;
+    }
+    .otp-brand h1 {
+        font-size: 24px;
+    }
+    .otp-brand-description {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+    .otp-form-panel {
+        padding: 30px 20px;
+    }
+    .otp-main-icon {
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        font-size: 27px;
+    }
+    .otp-heading h2 {
+        font-size: 23px;
+    }
+    .otp-input {
+        height: 64px;
+        font-size: 26px;
+        letter-spacing: 9px;
+        padding-left: 9px;
+    }
+    .otp-input::placeholder {
+        letter-spacing: 9px;
+    }
+    .resend-container {
+        align-items: center;
+    }
+}
+</style>
+<div class="otp-page">
+```
+<div class="otp-wrapper">
+    <!-- =====================================================
+         BRANDING PANEL
+         ===================================================== -->
+    <div class="otp-brand">
+        <div class="otp-logo">
+            <i class="bi bi-shield-check"></i>
+        </div>
+        <h1>
+            Curevita Research
+        </h1>
+        <p class="otp-brand-description">
+            Secure your research account by verifying
+            your email address. This quick verification
+            step helps keep the research platform safe.
+        </p>
+        <div class="otp-features">
+            <div class="otp-feature">
+                <div class="otp-feature-icon">
+                    <i class="bi bi-envelope-check"></i>
+                </div>
+                <span>
+                    Verify your registered email
+                </span>
+            </div>
+            <div class="otp-feature">
+                <div class="otp-feature-icon">
+                    <i class="bi bi-shield-lock"></i>
+                </div>
+                <span>
+                    Protect your account securely
+                </span>
+            </div>
+            <div class="otp-feature">
+                <div class="otp-feature-icon">
+                    <i class="bi bi-check2-circle"></i>
+                </div>
+                <span>
+                    Complete your student registration
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- =====================================================
+         OTP FORM
+         ===================================================== -->
+    <div class="otp-form-panel">
+        <div class="otp-form-container">
+            <!-- Icon -->
+            <div class="otp-main-icon">
+                <i class="bi bi-envelope-check"></i>
+            </div>
+            <!-- Heading -->
+            <div class="otp-heading">
+                <h2>
+                    Verify your email
+                </h2>
+                <p>
+                    We sent a 6-digit verification code to
+                </p>
+                <div class="email-badge">
+                    <i class="bi bi-envelope"></i>
+                    <span>
+                        {{ user.email }}
+                    </span>
+                </div>
+            </div>
+            <!-- =================================================
+                 OTP FORM
+                 ================================================= -->
+            <form
+                method="POST"
+                action="{{ url_for('verify_otp') }}"
+            >
+                <div class="otp-input-container">
+                    <input
+                        type="text"
+                        name="otp"
+                        id="otp"
+                        class="otp-input"
+                        maxlength="6"
+                        minlength="6"
+                        pattern="[0-9]{6}"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        placeholder="000000"
+                        required
+                        autofocus
+                    >
+                </div>
+                <button
+                    type="submit"
+                    class="verify-btn"
+                >
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>
+                        Verify OTP & Proceed
+                    </span>
+                </button>
+            </form>
+            <!-- =================================================
+                 RESEND OTP
+                 ================================================= -->
+            <div class="resend-container">
+                <div class="resend-message">
+                    <strong>
+                        Didn't receive the code?
+                    </strong>
+                    Check your spam or junk folder.
+                </div>
+                <a
+                    href="{{ url_for('resend_otp') }}"
+                    class="resend-btn"
+                    id="resendOtpBtn"
+                >
+                    <i class="bi bi-arrow-clockwise me-1"></i>
+                    <span id="resendOtpText">Resend OTP</span>
+                </a>
+            </div>
+            <!-- =================================================
+                 SECURITY
+                 ================================================= -->
+            <div class="security-note">
+                <i class="bi bi-shield-lock-fill"></i>
+                <span>
+                    Secure email verification
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+```
+</div>
+<script>
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        /* =====================================================
+           OTP INPUT
+           ===================================================== */
+        const otp =
+            document.getElementById("otp");
+        if (otp) {
+            /*
+             * Allow numbers only.
+             */
+            otp.addEventListener(
+                "input",
+                function () {
+                    this.value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .slice(0, 6);
+                }
+            );
+            /*
+             * Automatically submit after
+             * entering all 6 digits.
+             */
+            otp.addEventListener(
+                "input",
+                function () {
+                    if (this.value.length === 6) {
+                        setTimeout(
+                            function () {
+                                const form =
+                                    otp.closest("form");
+                                if (form) {
+                                    form.submit();
+                                }
+                            },
+                            250
+                        );
+                    }
+                }
+            );
+        }
+        /* =====================================================
+           RESEND OTP
+           ===================================================== */
+        const resendBtn =
+            document.getElementById("resendOtpBtn");
+        const resendText =
+            document.getElementById("resendOtpText");
+        if (!resendBtn || !resendText) {
+            return;
+        }
+        const COOLDOWN_SECONDS = 30;
+        /*
+         * Check if a cooldown already exists.
+         *
+         * This also works after page refresh.
+         */
+        const savedCooldown =
+            localStorage.getItem(
+                "otp_resend_cooldown"
+            );
+        if (savedCooldown) {
+            const remaining =
+                Math.ceil(
+                    (
+                        parseInt(savedCooldown) -
+                        Date.now()
+                    ) / 1000
+                );
+            if (remaining > 0) {
+                startCountdown(remaining);
+            } else {
+                localStorage.removeItem(
+                    "otp_resend_cooldown"
+                );
+            }
+        }
+        /*
+         * Resend OTP click.
+         */
+        resendBtn.addEventListener(
+            "click",
+            function (event) {
+                /*
+                 * Prevent multiple clicks.
+                 */
+                if (
+                    resendBtn.classList.contains(
+                        "disabled"
+                    )
+                ) {
+                    event.preventDefault();
+                    return;
+                }
+                /*
+                 * Calculate cooldown end time.
+                 */
+                const cooldownEndTime =
+                    Date.now() +
+                    (COOLDOWN_SECONDS * 1000);
+                /*
+                 * Save cooldown.
+                 */
+                localStorage.setItem(
+                    "otp_resend_cooldown",
+                    cooldownEndTime
+                );
+                /*
+                 * Start countdown.
+                 */
+                startCountdown(
+                    COOLDOWN_SECONDS
+                );
+            }
+        );
+        /* =====================================================
+           COUNTDOWN FUNCTION
+           ===================================================== */
+        function startCountdown(seconds) {
+            /*
+             * Disable button.
+             */
+            resendBtn.classList.add(
+                "disabled"
+            );
+            resendBtn.style.pointerEvents =
+                "none";
+            resendBtn.style.opacity =
+                "0.6";
+            let remaining = seconds;
+            /*
+             * Initial text.
+             */
+            resendText.textContent =
+                `Resend in ${remaining}s`;
+            /*
+             * Countdown timer.
+             */
+            const timer =
+                setInterval(
+                    function () {
+                        remaining--;
+                        /*
+                         * Countdown completed.
+                         */
+                        if (remaining <= 0) {
+                            clearInterval(timer);
+                            /*
+                             * Enable button.
+                             */
+                            resendBtn.classList.remove(
+                                "disabled"
+                            );
+                            resendBtn.style.pointerEvents =
+                                "auto";
+                            resendBtn.style.opacity =
+                                "1";
+                            /*
+                             * Restore button text.
+                             */
+                            resendText.textContent =
+                                "Resend OTP";
+                            /*
+                             * Remove saved cooldown.
+                             */
+                            localStorage.removeItem(
+                                "otp_resend_cooldown"
+                            );
+                            return;
+                        }
+                        /*
+                         * Update countdown text.
+                         */
+                        resendText.textContent =
+                            `Resend in ${remaining}s`;
+                    },
+                    1000
+                );
+        }
+    }
+);
+</script>
+{% endblock %}

@@ -31,9 +31,11 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
+    name = db.Column(db.String(150), nullable=True)
     email = db.Column(db.String(200), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
     role = db.Column(db.String(50), default="user")  # 'admin' ya 'user'
+    is_verified = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now(), onupdate=datetime.now())
 
@@ -45,6 +47,74 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+
+class OTPVerification(db.Model):
+    __tablename__ = 'otp_verifications'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    otp_code = db.Column(db.String(6), nullable=False)
+    expires_at = db.Column(db.DateTime, nullable=False)
+    is_used = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user = db.relationship('User', backref=db.backref('otps', lazy=True, cascade="all, delete-orphan"))
+
+    def is_valid(self):
+        return not self.is_used and datetime.now() <= self.expires_at
+
+
+class SubmittedPaper(db.Model):
+    __tablename__ = 'submitted_papers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    paper_id = db.Column(db.String(50), unique=True, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    journal_id = db.Column(db.Integer, db.ForeignKey('journal_master.id'), nullable=True)
+    title = db.Column(db.String(300), nullable=False)
+    abstract = db.Column(db.Text, nullable=False)
+    pdf_filename = db.Column(db.String(250), nullable=False)
+    
+    # Author & Paper Meta Fields
+    authors = db.Column(db.Text, nullable=True)  # Comma-separated names of all authors
+    authors_details_json = db.Column(db.Text, nullable=True)  # JSON representation of authors
+    corresponding_author = db.Column(db.String(250), nullable=True)
+    orcid = db.Column(db.String(100), nullable=True)
+    paper_type = db.Column(db.String(100), nullable=True)  # 'Original Research', 'Review Paper', 'Short Communication'
+    is_paid = db.Column(db.Boolean, default=False)
+    payment_screenshot = db.Column(db.String(250), nullable=True)
+    citation = db.Column(db.Text, nullable=True)
+
+    status = db.Column(db.String(20), default='pending', nullable=False)  # 'pending', 'approved', 'rejected'
+    workflow_status = db.Column(db.String(80), default='under_review', nullable=False)
+    reviewer_comment = db.Column(db.Text, nullable=True)
+    rejection_reason = db.Column(db.Text, nullable=True)
+    submitted_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    user = db.relationship('User', backref=db.backref('submitted_papers', lazy=True, cascade="all, delete-orphan"))
+    journal = db.relationship('JournalMaster', backref=db.backref('submitted_papers', lazy=True))
+    review_comments = db.relationship('PaperReviewComment', backref='paper', lazy=True, cascade='all, delete-orphan')
+
+    def __repr__(self):
+        return f"<SubmittedPaper {self.id} - {self.title} ({self.status})>"
+
+
+class PaperReviewComment(db.Model):
+    __tablename__ = 'paper_review_comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    paper_id = db.Column(db.Integer, db.ForeignKey('submitted_papers.id'), nullable=False)
+    reviewer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+    reviewer = db.relationship('User', backref=db.backref('review_comments', lazy=True, cascade='all, delete-orphan'))
+
+    def __repr__(self):
+        return f"<PaperReviewComment {self.id} - paper {self.paper_id}>"
 
 
 class EditorBoard(db.Model):
@@ -94,8 +164,6 @@ class ResearchPaper(db.Model):
     __tablename__ = "research_paper"
 
     id = db.Column(db.Integer, primary_key=True)
-    main_heading = db.Column(db.String(300), nullable=False)
-    sub_heading = db.Column(db.String(500), nullable=False)
     title = db.Column(db.String(300), nullable=False)
     authors = db.Column(db.String(300), nullable=False)
     volume = db.Column(db.String(50), nullable=True)

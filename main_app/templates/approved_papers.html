@@ -1,0 +1,655 @@
+{% extends "basecode.html" %}
+{% block title %}Published Approved Research Papers{% endblock %}
+{% block content %}
+<style>
+    /* ================================
+       Approved Papers Page
+    ================================= */
+    .approved-page {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+    .page-hero {
+        position: relative;
+        overflow: hidden;
+        border: 0;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #0d6efd 0%, #4f46e5 55%, #6f42c1 100%);
+        color: #fff;
+        box-shadow: 0 12px 35px rgba(13, 110, 253, 0.18);
+    }
+    .page-hero::before {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        right: -70px;
+        top: -90px;
+    }
+    .page-hero::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        right: 100px;
+        bottom: -90px;
+    }
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    .hero-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(10px);
+        font-size: 26px;
+    }
+    .hero-title {
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        font-weight: 750;
+        margin-bottom: 5px;
+    }
+    .hero-subtitle {
+        color: rgba(255, 255, 255, 0.82);
+        margin-bottom: 0;
+    }
+    .hero-count {
+        min-width: 105px;
+        padding: 14px 18px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(10px);
+        text-align: center;
+    }
+    .hero-count-number {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 750;
+    }
+    .hero-count-label {
+        display: block;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.75);
+    }
+    /* Filter */
+    .filter-card {
+        border: 0;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 8px 28px rgba(15, 23, 42, 0.07);
+    }
+    .filter-title {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+    .filter-input,
+    .filter-select {
+        min-height: 46px;
+        border-radius: 13px !important;
+        border: 1px solid #e2e8f0;
+        box-shadow: none !important;
+    }
+    .filter-input:focus,
+    .filter-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.08) !important;
+    }
+    .search-group {
+        position: relative;
+    }
+    .search-group .search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        z-index: 3;
+    }
+    .search-group input {
+        padding-left: 43px;
+    }
+    .search-btn {
+        min-height: 46px;
+        border-radius: 13px;
+        font-weight: 650;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+    /* Paper cards */
+    .paper-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #edf0f5;
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: 0 7px 24px rgba(15, 23, 42, 0.055);
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+                    border-color 0.25s ease;
+    }
+    .paper-card:hover {
+        transform: translateY(-5px);
+        border-color: #dbe5f5;
+        box-shadow: 0 16px 38px rgba(15, 23, 42, 0.11);
+    }
+    .paper-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #198754, #20c997);
+    }
+    .paper-card-body {
+        padding: 24px;
+    }
+    .verified-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: #e9f8f0;
+        color: #198754;
+        font-size: 0.74rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .journal-badge {
+        max-width: 48%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 0.72rem;
+        font-weight: 650;
+    }
+    .paper-id {
+        color: #0d6efd;
+        font-size: 0.75rem;
+        font-weight: 750;
+        letter-spacing: 0.3px;
+    }
+    .paper-title {
+        font-size: 1.08rem;
+        line-height: 1.45;
+        font-weight: 750;
+        color: #1e293b;
+        margin-top: 7px;
+        margin-bottom: 13px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .author-box {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 11px 12px;
+        border-radius: 13px;
+        background: #f8fafc;
+        margin-bottom: 15px;
+    }
+    .author-avatar {
+        flex: 0 0 34px;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: #e0ecff;
+        color: #0d6efd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .author-name {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #334155;
+    }
+    .author-email {
+        font-size: 0.72rem;
+        color: #64748b;
+        word-break: break-word;
+    }
+    .abstract-text {
+        color: #64748b;
+        font-size: 0.82rem;
+        line-height: 1.65;
+        min-height: 82px;
+        margin-bottom: 18px;
+    }
+    .paper-footer {
+        border-top: 1px solid #edf0f5;
+        padding-top: 15px;
+    }
+    .date-text {
+        color: #94a3b8;
+        font-size: 0.72rem;
+        white-space: nowrap;
+    }
+    .pdf-btn {
+        border-radius: 11px;
+        font-size: 0.76rem;
+        font-weight: 650;
+        padding: 8px 13px;
+        white-space: nowrap;
+    }
+    /* Empty state */
+    .empty-state {
+        background: #fff;
+        border-radius: 22px;
+        border: 1px dashed #dbe2ea;
+        padding: 65px 25px;
+    }
+    .empty-icon {
+        width: 75px;
+        height: 75px;
+        border-radius: 22px;
+        background: #f1f5f9;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        font-size: 32px;
+    }
+    /* Pagination */
+    .pagination .page-link {
+        border: 0;
+        margin: 0 3px;
+        min-width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 11px !important;
+        color: #475569;
+        font-size: 0.82rem;
+        font-weight: 600;
+    }
+    .pagination .page-item.active .page-link {
+        background: #0d6efd;
+        color: #fff;
+        box-shadow: 0 5px 14px rgba(13, 110, 253, 0.2);
+    }
+    .pagination .page-link:hover {
+        background: #eef4ff;
+        color: #0d6efd;
+    }
+    /* Responsive */
+    @media (max-width: 767.98px) {
+        .page-hero {
+            border-radius: 18px;
+        }
+        .hero-count {
+            min-width: 85px;
+        }
+        .hero-count-number {
+            font-size: 1.25rem;
+        }
+        .filter-card {
+            border-radius: 17px;
+        }
+        .paper-card {
+            border-radius: 18px;
+        }
+        .paper-card-body {
+            padding: 20px;
+        }
+        .paper-footer {
+            gap: 12px;
+            flex-direction: column;
+            align-items: stretch !important;
+        }
+        .pdf-btn {
+            width: 100%;
+        }
+        .date-text {
+            text-align: center;
+        }
+    }
+</style>
+<div class="approved-page">
+<!-- =========================
+     Page Header
+========================== -->
+<div class="page-hero mb-4">
+    <div class="hero-content p-4 p-md-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4">
+            <div class="d-flex align-items-center gap-3">
+                <div class="hero-icon">
+                    <i class="bi bi-journal-check"></i>
+                </div>
+                <div>
+                    <h1 class="hero-title">
+                        Published Research Papers
+                    </h1>
+                    <p class="hero-subtitle">
+                        Explore verified and approved research publications.
+                    </p>
+                </div>
+            </div>
+            <div class="hero-count">
+                <span class="hero-count-number">
+                    {{ pagination.total if pagination else papers|length }}
+                </span>
+                <span class="hero-count-label">
+                    Published Papers
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- =========================
+     Search & Filters
+========================== -->
+<div class="filter-card mb-4">
+    <div class="card-body p-3 p-md-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-sliders text-primary"></i>
+            <span class="filter-title">
+                Search & Filter Publications
+            </span>
+        </div>
+        <form method="GET" action="{{ url_for('approved_papers') }}">
+            <div class="row g-3 align-items-end">
+                <!-- Search -->
+                <div class="col-12 col-lg-5">
+                    <label class="form-label small fw-semibold text-secondary">
+                        Search Publication
+                    </label>
+                    <div class="search-group">
+                        <i class="bi bi-search search-icon"></i>
+                        <input
+                            type="text"
+                            name="q"
+                            class="form-control filter-input"
+                            placeholder="Search by paper ID or title..."
+                            value="{{ search_query }}"
+                        >
+                    </div>
+                </div>
+                <!-- Author -->
+                <div class="col-12 col-lg-5">
+                    <label class="form-label small fw-semibold text-secondary">
+                        Filter by Author
+                    </label>
+                    <select
+                        name="user_id"
+                        class="form-select filter-select"
+                    >
+                        <option value="">
+                            All Approved Student Authors
+                        </option>
+                        {% for author in approved_authors %}
+                            <option
+                                value="{{ author.id }}"
+                                {% if selected_user_id == author.id %}selected{% endif %}
+                            >
+                                {{ author.name or author.username }}
+                                ({{ author.email }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Actions -->
+                <div class="col-12 col-lg-2 d-flex gap-2">
+                    <button
+                        type="submit"
+                        class="btn btn-primary search-btn flex-grow-1"
+                    >
+                        <i class="bi bi-search me-1"></i>
+                        Search
+                    </button>
+                    {% if search_query or selected_user_id %}
+                        <a
+                            href="{{ url_for('approved_papers') }}"
+                            class="btn btn-light border search-btn"
+                            title="Reset Filters"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- =========================
+     Papers
+========================== -->
+{% if papers %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5 class="fw-bold mb-1 text-dark">
+                Approved Publications
+            </h5>
+            <small class="text-muted">
+                Showing verified research papers
+            </small>
+        </div>
+        <span class="badge rounded-pill bg-light text-success border px-3 py-2">
+            <i class="bi bi-patch-check-fill me-1"></i>
+            Verified
+        </span>
+    </div>
+    <div class="row g-4 mb-4">
+        {% for paper in papers %}
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="paper-card h-100">
+                    <div class="paper-card-body d-flex flex-column h-100">
+                        <!-- Top badges -->
+                        <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                            <span class="verified-badge">
+                                <i class="bi bi-patch-check-fill"></i>
+                                Verified
+                            </span>
+                            {% if paper.journal %}
+                                <span
+                                    class="journal-badge"
+                                    title="{{ paper.journal.full_name }}"
+                                >
+                                    <i class="bi bi-journal-text me-1"></i>
+                                    {{ paper.journal.short_name or paper.journal.full_name }}
+                                </span>
+                            {% endif %}
+                        </div>
+                        <!-- Paper ID -->
+                        <div class="paper-id">
+                            PAPER ID:
+                            {{ paper.paper_id or '-' }}
+                        </div>
+                        <!-- Title -->
+                        <h5
+                            class="paper-title"
+                            title="{{ paper.title }}"
+                        >
+                            {{ paper.title }}
+                        </h5>
+                        <!-- Author -->
+                        <div class="author-box">
+                            <div class="author-avatar">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="author-name">
+                                    {{ paper.user.name or paper.user.username }}
+                                </div>
+                                <div class="author-email">
+                                    {{ paper.user.email }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Abstract -->
+                        <div class="abstract-text flex-grow-1">
+                            {% if paper.abstract %}
+                                {{ paper.abstract[:200] }}
+                                {% if paper.abstract|length > 200 %}
+                                    ...
+                                {% endif %}
+                            {% else %}
+                                <span class="fst-italic">
+                                    No abstract available.
+                                </span>
+                            {% endif %}
+                        </div>
+                        <!-- Footer -->
+                        <div class="paper-footer d-flex justify-content-between align-items-center">
+                            <div class="date-text">
+                                <i class="bi bi-calendar3 me-1"></i>
+                                {% if paper.updated_at %}
+                                    {{ paper.updated_at.strftime('%b %d, %Y') }}
+                                {% else %}
+                                    Date unavailable
+                                {% endif %}
+                            </div>
+                            <a
+                                href="{{ url_for('static', filename='assets/pdf/' ~ paper.pdf_filename) }}"
+                                target="_blank"
+                                class="btn btn-primary pdf-btn"
+                                download
+                            >
+                                <i class="bi bi-file-earmark-pdf me-1"></i>
+                                Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- =========================
+         Pagination
+    ========================== -->
+    {% if pagination and pagination.pages > 1 %}
+        <div class="d-flex justify-content-center mt-4 mb-4">
+            <nav aria-label="Approved Papers Pagination">
+                <ul class="pagination mb-0">
+                    <!-- Previous -->
+                    <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                        {% if pagination.has_prev %}
+                            <a
+                                class="page-link"
+                                href="{{ url_for(
+                                    'approved_papers',
+                                    page=pagination.prev_num,
+                                    q=search_query,
+                                    user_id=selected_user_id
+                                ) }}"
+                            >
+                                <i class="bi bi-chevron-left me-1"></i>
+                                Previous
+                            </a>
+                        {% else %}
+                            <span class="page-link">
+                                <i class="bi bi-chevron-left"></i>
+                            </span>
+                        {% endif %}
+                    </li>
+                    <!-- Pages -->
+                    {% for page_num in pagination.iter_pages(
+                        left_edge=1,
+                        right_edge=1,
+                        left_current=2,
+                        right_current=2
+                    ) %}
+                        {% if page_num %}
+                            <li
+                                class="page-item
+                                {% if page_num == pagination.page %}active{% endif %}"
+                            >
+                                <a
+                                    class="page-link"
+                                    href="{{ url_for(
+                                        'approved_papers',
+                                        page=page_num,
+                                        q=search_query,
+                                        user_id=selected_user_id
+                                    ) }}"
+                                >
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">
+                                    ...
+                                </span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- Next -->
+                    <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                        {% if pagination.has_next %}
+                            <a
+                                class="page-link"
+                                href="{{ url_for(
+                                    'approved_papers',
+                                    page=pagination.next_num,
+                                    q=search_query,
+                                    user_id=selected_user_id
+                                ) }}"
+                            >
+                                Next
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        {% else %}
+                            <span class="page-link">
+                                <i class="bi bi-chevron-right"></i>
+                            </span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+{% else %}
+    <!-- =========================
+         Empty State
+    ========================== -->
+    <div class="empty-state text-center">
+        <div class="empty-icon">
+            <i class="bi bi-journal-x"></i>
+        </div>
+        <h4 class="fw-bold text-dark mb-2">
+            No Approved Papers Found
+        </h4>
+        <p class="text-muted mb-4">
+            We couldn't find any published papers matching your
+            current search or author filter.
+        </p>
+        {% if search_query or selected_user_id %}
+            <a
+                href="{{ url_for('approved_papers') }}"
+                class="btn btn-primary rounded-pill px-4"
+            >
+                <i class="bi bi-arrow-counterclockwise me-1"></i>
+                Reset Filters
+            </a>
+        {% else %}
+            <div class="text-muted small">
+                <i class="bi bi-info-circle me-1"></i>
+                Published papers will appear here once they are approved.
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+</div>
+{% endblock %}

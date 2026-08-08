@@ -7,8 +7,6 @@ from main_app.models import JournalMaster, ResearchPaper
 with app.app_context():
     research_papers_data = [
         {
-            "main_heading": "Water Quality Research",
-            "sub_heading": "Assessment of Narmada River during COVID-19 Lockdown",
             "title": "Assessment of Water Quality of Narmada River in COVID-19 Pandemic",
             "authors": "Manohar Pawar, Kaleem Shah, and Seema Dhurvey",
             "volume": "1",
@@ -22,8 +20,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Entomological Research",
-            "sub_heading": "First Record of Leaf Beetle Platypria erinaceus from Rajasthan, India",
             "title": "Leaf Beetle Platypria erinaceus (Fabricius, 1801) First Record from Rajasthan, India",
             "authors": "Anil Sarsavan, Manohar Pawar, Satish Kumar Sharma",
             "volume": "1",
@@ -37,8 +33,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Biotechnology Research",
-            "sub_heading": "Genetic Fidelity Assessment of Micropropagated Glycyrrhiza glabra L. using RAPD Markers",
             "title": "Assessment of Genetic Fidelity of In vitro Micropropagated Plants of Glycyrrhiza glabra L. using Random Amplified Polymorphic DNA Technique (RAPD)",
             "authors": "Yogesh Badkhane, Sourav Datta, A.S. Yadav, Souvika Bakshi",
             "volume": "1",
@@ -52,8 +46,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Environmental Research",
-            "sub_heading": "Impacts of Mining Activities on Groundwater in Tiroid Region, Balaghat District",
             "title": "Impacts of Mining Activities on the Physicochemical Properties of Groundwater in Tiroid Region Balaghat District: A Comprehensive Review",
             "authors": "Kuldeep Lakhera",
             "volume": "1",
@@ -67,8 +59,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Hydrological Research",
-            "sub_heading": "Spatiotemporal Analysis of Groundwater Levels in Ujjain City (2022–2025)",
             "title": "Spatiotemporal Analysis of Groundwater Levels in Ujjain City: 2022 to 2025",
             "authors": "Ishwar Sharma, Harish Vyas, D.M. Kumawat",
             "volume": "1",
@@ -82,8 +72,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "AI and Deep Learning Research",
-            "sub_heading": "AI and Deep Learning for Anemia Prediction",
             "title": "A Comprehensive Review on Using Artificial Intelligence and Deep Learning to Predict Anemia in Humans",
             "authors": "Shreya Sharma",
             "volume": "1",
@@ -97,8 +85,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Data Science",
-            "sub_heading": "Data Science integrates statistics, computing, and domain expertise to derive insights from data.",
             "title": "Data Science: An Emerging Interdisciplinary Field",
             "authors": "Nitin Kumar Dhimole",
             "volume": "1",
@@ -112,8 +98,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Machine Learning",
-            "sub_heading": "Machine Learning enables systems to learn from data without explicit programming",
             "title": "A Comprehensive Study on Machine Learning: Concepts, Applications, Challenges, and Future Directions",
             "authors": "Vinod Kumar Sharma",
             "volume": "1",
@@ -127,8 +111,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Internet of Things",
-            "sub_heading": "IoT connects physical devices for seamless communication",
             "title": "The Internet of Things (IoT): Opportunities, Challenges, and Future Scope",
             "authors": "Priyadarshini Bharthare",
             "volume": "1",
@@ -142,8 +124,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Big Data",
-            "sub_heading": "Big Data is transforming industries and society",
             "title": "Big Data: Challenges, Technologies, and Future Directions in Transforming Business Intelligence and Decision Making",
             "authors": "Sitesh Kumar Sinha",
             "volume": "1",
@@ -157,8 +137,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Biodegradation Research",
-            "sub_heading": "Enhancing Biodegradation of Methyl-Parathion by Aspergilli sp.",
             "title": "Enhancing Biodegradation of Methyl-Parathion By Aspergilli Sp. from Indian Agricultural Soil",
             "authors": "Akanksha Khare, Ashutosh Gupta, Naveen Kango, Kailash Prasad Jaiswal",
             "volume": "1",
@@ -172,8 +150,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Animal Nutrition Research",
-            "sub_heading": "Effect of Strategic Nutrient Supplementation on Growth Performance of Murrah Buffalo Calves",
             "title": "To evaluate the effect of strategic nutrient supplementation on the growth performance of Murrah buffalo calves",
             "authors": "Neeha Meena, Sandeep Nanavati, Mohabbat Singh Jamra, Ashok Kumar Patil, Nawal Singh Rawat, Danveer Singh Yadav",
             "volume": "1",
@@ -187,8 +163,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Environmental Biotechnology",
-            "sub_heading": "Bioremediation Potential of Hydrocarbon-Degrading Fungi from Select Soil Niches of India",
             "title": "Bioremediation Potential of Hydrocarbon-Degrading Fungi from Select Soil Niches of India",
             "authors": "Ashutosh Gupta, Akanksha Khare, Naveen Kango, Kailash Prasad Jaiswal",
             "volume": "1",
@@ -202,8 +176,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Poultry Genetics Research",
-            "sub_heading": "Study of Polymorphism at MHC B-Lβ (Class II) Family Alleles Using PCR-SSP in Naked Neck Chickens",
             "title": "Study of Polymorphism at MHC B-Lβ (Class II) Family Alleles Using PCR-SSP in Naked Neck Chickens",
             "authors": "Amit Kumar Jha, M. S. Thakur, S.S. Tomar, R. K. Vandre",
             "volume": "1",
@@ -217,8 +189,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Biogas Research",
-            "sub_heading": "Influence of different cultural parameters in biogas production using university food waste",
             "title": "Influence of different cultural parameters in the production of biogas using university food waste in Telangana State of India",
             "authors": "Punam Sharnagat, KP Jaiswal",
             "volume": "1",
@@ -232,8 +202,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Environmental Research",
-            "sub_heading": "Global Trade, Climate Change, and the Spread of Invasive Alien Species",
             "title": "Global Trade, Climate Change, and the Spread of Invasive Alien Species: Impacts on Ecosystem Services",
             "authors": "Babaharinand Saket, Anand Chaurasia",
             "volume": "1",
@@ -247,8 +215,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Environmental Research",
-            "sub_heading": "Biodiversity Conservation and Phytodiversity Assessment in the Catchment Area of Runjh Dam, Panna (M.P.)",
             "title": "Biodiversity Conservation and Phytodiversity Assessment in the Catchment Area of Runjh Dam, Panna (M.P.)",
             "authors": "Pratima Dahayat, Anand Chaurasia",
             "volume": "1",
@@ -262,8 +228,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Aquatic Biodiversity Research",
-            "sub_heading": "Macroinvertebrates as Indicators of Trophic Status & Water Quality of Kaliasote Dam",
             "title": "Macroinvertebrates as a Tool to Assess the Trophic Status and Water Quality of Kaliasote Dam",
             "authors": "Nisar Ahmad Ganie, Zahoor Ahmad Malik",
             "volume": "1",
@@ -277,8 +241,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Nutrition & Sustainability Research",
-            "sub_heading": "Phytochemical and Nutritional Insights into Edible Bamboo Shoots: Bioactives, Processing, and Sustainability",
             "title": "Phytochemical and Nutritional Insights into Edible Bamboo Shoots: Bioactives, Processing, and Sustainability",
             "authors": "Sunita Tiwari, Priyanka Tiwari",
             "volume": "1",
@@ -292,8 +254,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Ornithological Research",
-            "sub_heading": "First Record of a Leucistic Indian Pied Starling (Gracupica contra) from Keonjhar, Odisha, India",
             "title": "First Record of a Leucistic Indian Pied Starling (Gracupica contra) from Keonjhar, Odisha, India",
             "authors": "Anil Sarsavan, Satish Kumar Sharam, Manohar Pawar",
             "volume": "1",
@@ -307,8 +267,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Urban Research",
-            "sub_heading": "Geo-Spatial Insights into Urban Sprawl and Land Use Transformation: A GIS-Based Case Study of Narsinghgarh, Madhya Pradesh",
             "title": "Geo-Spatial Insights into Urban Sprawl and Land Use Transformation: A GIS-Based Case Study of Narsinghgarh, Madhya Pradesh",
             "authors": "Nitesh Bhargava, Kamal Kushwaha, Manohar Pawar",
             "volume": "1",
@@ -322,8 +280,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Healthcare Research",
-            "sub_heading": "Effectiveness of Structured Teaching on Catheter-Associated Urinary Tract Infection (CAUTI) Prevention among Nurses at NMCH",
             "title": "Effectiveness of Structured Teaching on Catheter-Associated Urinary Tract Infection (CAUTI) Prevention among Nurses at NMCH",
             "authors": "Krishna Kant, Raju Kumar, Vivek Tiwari, Rajlaxmi Kumari, Shivanand Gupta, Sajjan Patel, K. Latha",
             "volume": "1",
@@ -337,8 +293,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Maternal Health Research",
-            "sub_heading": "A Study to Assess the Knowledge Regarding Respectful Maternity Care Among The Midwives at NMCH, Jamuhar",
             "title": "A Study to Assess the Knowledge Regarding Respectful Maternity Care Among The Midwives at NMCH, Jamuhar",
             "authors": "Aditya Kumar, Abhishek Kumar Satyam, Kritika Singh, Khushboo Kumari, Vivek Raj, Ruchi Tripathi, K. Latha",
             "volume": "1",
@@ -352,8 +306,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Medical Data Science Research",
-            "sub_heading": "Data Intelligence Tools in Diabetes Mellitus: Applications, Methods, and Future Directions",
             "title": "Data Intelligence Tools in Diabetes Mellitus: Applications, Methods, and Future Directions",
             "authors": "Kailash Prasad Jaiswal",
             "volume": "1",
@@ -367,8 +319,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Pharmaceutical AI Research",
-            "sub_heading": "Comprehensive Review on the Role of Artificial Intelligence (AI) in Drug Discovery and Drug Development",
             "title": "Comprehensive Review on the Role of Artificial Intelligence (AI) in Drug Discovery and Drug Development",
             "authors": "Zahoor Ahmad Malik, Jitendra Bajaj, Neha Shukla",
             "volume": "1",
@@ -382,8 +332,6 @@ with app.app_context():
             "is_archive": True
         },
         {
-            "main_heading": "Healthcare Management Research",
-            "sub_heading": "The Role of Data Science in Hospital Management",
             "title": "The Role of Data Science in Hospital Management",
             "authors": "Sajjan Singh Patel, Ruchi Tripathi",
             "volume": "1",
@@ -425,8 +373,9 @@ with app.app_context():
                 # Assign journal object/reference if needed
                 paper_data["journal"] = journal
 
-                # Create new ResearchPaper entry
-                new_paper = ResearchPaper(**paper_data)
+                # Create new ResearchPaper entry (filter out removed fields)
+                safe_data = {k: v for k, v in paper_data.items()}
+                new_paper = ResearchPaper(**safe_data)
                 db.session.add(new_paper)
                 db.session.commit()
                 total_inserted += 1
