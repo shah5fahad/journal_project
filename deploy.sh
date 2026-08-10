@@ -74,7 +74,18 @@ fi
 if ! marker_done "app_dir"; then
     log "Creating app directory..."
     sudo mkdir -p "$APP_DIR"
+
+    log "Setting ownership of $APP_DIR to $APP_USER..."
     sudo chown -R "$APP_USER:$APP_USER" "$APP_DIR"
+
+    # Verify ownership actually took effect before moving on
+    OWNER_CHECK=$(stat -c '%U:%G' "$APP_DIR")
+    if [ "$OWNER_CHECK" != "$APP_USER:$APP_USER" ]; then
+        echo "ERROR: Failed to set ownership on $APP_DIR (got: $OWNER_CHECK, expected: $APP_USER:$APP_USER)" >&2
+        exit 1
+    fi
+
+    log "Ownership confirmed: $APP_DIR is owned by $APP_USER:$APP_USER"
     mark "app_dir"
 else
     log "App directory already exists — skipping."
@@ -104,6 +115,7 @@ else
     # Move repo contents into APP_DIR, preserving the marker directory
     shopt -s dotglob
     mv "$TMPDIR_CLONE"/* "$APP_DIR"/
+    sudo chown -R "$APP_USER:$APP_USER" "$APP_DIR"
     shopt -u dotglob
     rm -rf "$TMPDIR_CLONE"
 fi

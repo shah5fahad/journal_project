@@ -1463,12 +1463,12 @@ def student_dashboard():
 
         file = request.files.get("paper_file")
         if not title or not abstract or not file:
-            flash("Please fill in all required fields and select a PDF file.", "danger")
+            flash("Please fill in all required fields and select a DOCX file.", "danger")
             return redirect(url_for("student_dashboard"))
 
         paper_file_size = get_uploaded_file_size(file)
         if paper_file_size > MAX_PAPER_FILE_SIZE_BYTES:
-            flash("Paper PDF file must be 5 MB or smaller. Please compress the file and try again.", "danger")
+            flash("Paper DOCX file must be 5 MB or smaller. Please compress the file and try again.", "danger")
             return redirect(url_for("student_dashboard"))
 
         # Payment screenshot file handling if paid toggle is on
@@ -1492,7 +1492,7 @@ def student_dashboard():
                 flash("Please upload the payment screenshot as the 'Paid' toggle is turned ON.", "danger")
                 return redirect(url_for("student_dashboard"))
 
-        if file and file.filename.lower().endswith(".pdf"):
+        if file and file.filename.lower().endswith((".docx", ".doc")):
             filename = secure_filename(file.filename)
             unique_filename = f"{current_user.id}_{int(datetime.now().timestamp())}_{filename}"
             upload_dir = os.path.join(app.root_path, "static", "assets", "pdf", "submissions")
@@ -1527,7 +1527,7 @@ def student_dashboard():
             flash("Paper submitted successfully with author details! It is now pending review.", "success")
             return redirect(url_for("student_dashboard"))
         else:
-            flash("Only PDF files are allowed for paper upload.", "danger")
+            flash("Only DOCX files are allowed for paper upload.", "danger")
             return redirect(url_for("student_dashboard"))
 
     user_papers = SubmittedPaper.query.filter_by(user_id=current_user.id).order_by(SubmittedPaper.submitted_at.desc()).all()
@@ -1631,33 +1631,36 @@ def edit_submitted_paper(paper_id):
                     app.logger.exception('Could not remove old payment screenshot')
             payment_filename = None
 
-        # PDF replacement handling
+        # DOCX replacement handling
         file = request.files.get('paper_file')
         if file and file.filename:
             file_size = get_uploaded_file_size(file)
             if file_size > MAX_PAPER_FILE_SIZE_BYTES:
-                flash("Paper PDF file must be 5 MB or smaller. Please compress the file and try again.", 'danger')
+                flash("Paper DOCX file must be 5 MB or smaller. Please compress the file and try again.", 'danger')
                 return redirect(request.url)
 
-        if file and file.filename.lower().endswith('.pdf'):
-            filename = secure_filename(file.filename)
-            unique_filename = f"{current_user.id}_{int(datetime.now().timestamp())}_{filename}"
-            upload_dir = os.path.join(app.root_path, 'static', 'assets', 'pdf', 'submissions')
-            os.makedirs(upload_dir, exist_ok=True)
-            saved_path = os.path.join(upload_dir, unique_filename)
-            file.save(saved_path)
-            rel_pdf_filename = f"submissions/{unique_filename}"
+            if file.filename.lower().endswith(('.docx', '.doc')):
+                filename = secure_filename(file.filename)
+                unique_filename = f"{current_user.id}_{int(datetime.now().timestamp())}_{filename}"
+                upload_dir = os.path.join(app.root_path, 'static', 'assets', 'pdf', 'submissions')
+                os.makedirs(upload_dir, exist_ok=True)
+                saved_path = os.path.join(upload_dir, unique_filename)
+                file.save(saved_path)
+                rel_pdf_filename = f"submissions/{unique_filename}"
 
-            # remove old file if exists
-            if paper.pdf_filename:
-                try:
-                    old_path = os.path.join(app.root_path, 'static', 'assets', 'pdf', paper.pdf_filename)
-                    if os.path.exists(old_path):
-                        os.remove(old_path)
-                except Exception:
-                    app.logger.exception('Could not remove old submitted PDF')
+                # remove old file if exists
+                if paper.pdf_filename:
+                    try:
+                        old_path = os.path.join(app.root_path, 'static', 'assets', 'pdf', paper.pdf_filename)
+                        if os.path.exists(old_path):
+                            os.remove(old_path)
+                    except Exception:
+                        app.logger.exception('Could not remove old submitted paper')
 
-            paper.pdf_filename = rel_pdf_filename
+                paper.pdf_filename = rel_pdf_filename
+            else:
+                flash("Only DOCX files are allowed for paper upload.", 'danger')
+                return redirect(request.url)
 
         # Update DB fields
         paper.title = title or paper.title

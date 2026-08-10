@@ -1162,19 +1162,19 @@
                 </div>
                 <div class="upload-box">
                     <div class="upload-icon">
-                        <i class="bi bi-file-earmark-pdf"></i>
+                        <i class="bi bi-file-earmark-word"></i>
                     </div>
                     <h3 class="upload-title">
                         Upload your research paper
                     </h3>
                     <p class="upload-help">
-                        PDF format only · Maximum file size 5 MB
+                        DOCX format only · Maximum file size 5 MB
                     </p>
                     <input
                         type="file"
                         name="paper_file"
                         id="paper_file"
-                        accept=".pdf"
+                        accept=".docx,.doc"
                         class="form-control file-input"
                         required
                     >
@@ -1399,8 +1399,8 @@
                                 class="action-btn action-success"
                                 download
                             >
-                                <i class="bi bi-file-earmark-pdf"></i>
-                                View PDF
+                                <i class="bi bi-file-earmark-word"></i>
+                                Download Paper
                             </a>
                             <a
                                 href="{{ url_for(journals_map.get(paper.journal.journal_id)) }}"
@@ -1740,12 +1740,10 @@ if (paperFile) {
             if (!file) return;
             const maxSize =
                 5 * 1024 * 1024;
-            if (
-                file.type !==
-                    "application/pdf"
-            ) {
+            const ext = file.name.split(".").pop().toLowerCase();
+            if (ext !== "docx" && ext !== "doc") {
                 alert(
-                    "Please select a PDF file."
+                    "Please select a DOCX file."
                 );
                 this.value = "";
                 return;
