@@ -1,0 +1,326 @@
+{% extends "basecode.html" %}
+{% block title %}User Feedback Management{% endblock %}
+
+{% block content %}
+<style>
+.feedback-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.stat-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid #e9ecef;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.stat-icon.primary { background: #e7f1ff; color: #0d6efd; }
+.stat-icon.warning { background: #fff3cd; color: #ffc107; }
+.stat-icon.success { background: #d1e7dd; color: #198754; }
+
+.stat-info h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.stat-info p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.feedback-table th {
+    background: #283846;
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    font-size: 0.9rem;
+    padding: 12px 16px;
+}
+
+.feedback-table td {
+    vertical-align: middle;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+}
+
+.badge-unread {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-read {
+    background-color: #198754;
+    color: #ffffff;
+}
+
+.msg-preview {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+<div class="container-fluid py-3">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">
+                <i class="bi bi-chat-left-text-fill text-primary me-2"></i>User Feedback
+            </h2>
+            <p class="text-muted mb-0">View and manage contact messages and user feedback submissions.</p>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="stat-box">
+                <div class="stat-icon primary">
+                    <i class="bi bi-chat-dots-fill"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>{{ total_count }}</h4>
+                    <p>Total Feedback Messages</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-box">
+                <div class="stat-icon warning">
+                    <i class="bi bi-envelope-exclamation-fill"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>{{ unread_count }}</h4>
+                    <p>Unread / Pending</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-box">
+                <div class="stat-icon success">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <div class="stat-info">
+                    <h4>{{ read_count }}</h4>
+                    <p>Read / Processed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter & Search Card -->
+    <div class="feedback-card">
+        <form method="GET" action="{{ url_for('admin_user_feedback') }}" class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label fw-bold text-muted small">Search</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
+                    <input type="text" name="q" class="form-control" placeholder="Search by name, email, subject, message..." value="{{ search_query }}">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold text-muted small">Status Filter</label>
+                <select name="status" class="form-select">
+                    <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All Statuses</option>
+                    <option value="unread" {% if status_filter == 'unread' %}selected{% endif %}>Unread / Pending</option>
+                    <option value="read" {% if status_filter == 'read' %}selected{% endif %}>Read / Processed</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-grow-1">
+                    <i class="bi bi-filter me-1"></i> Filter
+                </button>
+                <a href="{{ url_for('admin_user_feedback') }}" class="btn btn-outline-secondary">
+                    Reset
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Feedback Table Card -->
+    <div class="feedback-card p-0 overflow-hidden">
+        <div class="table-responsive">
+            {% if feedbacks %}
+            <table class="table feedback-table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">#</th>
+                        <th style="width: 140px;">Date & Time</th>
+                        <th>User Name & Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th style="width: 110px;">Status</th>
+                        <th style="width: 160px;" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fb in feedbacks %}
+                    <tr>
+                        <td class="fw-bold text-secondary">{{ fb.id }}</td>
+                        <td>
+                            <small class="d-block text-dark fw-bold">{{ fb.created_at.strftime('%Y-%m-%d') if fb.created_at else '-' }}</small>
+                            <small class="text-muted">{{ fb.created_at.strftime('%H:%M') if fb.created_at else '' }}</small>
+                        </td>
+                        <td>
+                            <div class="fw-bold text-dark">{{ fb.name }}</div>
+                            <div class="small text-muted"><i class="bi bi-envelope me-1"></i>{{ fb.email }}</div>
+                        </td>
+                        <td class="fw-semibold text-primary">{{ fb.subject or '-' }}</td>
+                        <td>
+                            <div class="msg-preview text-secondary" title="{{ fb.message }}">
+                                {{ fb.message }}
+                            </div>
+                            <button type="button" class="btn btn-link btn-sm p-0 mt-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#viewModal{{ fb.id }}">
+                                Read Full <i class="bi bi-arrow-right-short"></i>
+                            </button>
+                        </td>
+                        <td>
+                            {% if fb.status %}
+                                <span class="badge badge-read px-2 py-1"><i class="bi bi-check2-circle me-1"></i>Read</span>
+                            {% else %}
+                                <span class="badge badge-unread px-2 py-1"><i class="bi bi-clock-history me-1"></i>Unread</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-1">
+                                <form method="POST" action="{{ url_for('toggle_user_feedback_status', id=fb.id) }}" style="display: inline;">
+                                    {% if fb.status %}
+                                        <button type="submit" class="btn btn-sm btn-outline-warning" title="Mark as Unread">
+                                            <i class="bi bi-arrow-counterclockwise"></i>
+                                        </button>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-sm btn-outline-success" title="Mark as Read">
+                                            <i class="bi bi-check-lg"></i>
+                                        </button>
+                                    {% endif %}
+                                </form>
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ fb.id }}" title="Delete Feedback">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- View Message Modal -->
+                    <div class="modal fade" id="viewModal{{ fb.id }}" tabindex="-1" aria-labelledby="viewModalLabel{{ fb.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-dark text-white">
+                                    <h5 class="modal-title" id="viewModalLabel{{ fb.id }}">
+                                        <i class="bi bi-chat-left-text me-2"></i>Feedback #{{ fb.id }} - {{ fb.subject }}
+                                    </h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <strong>From:</strong> {{ fb.name }} ({{ fb.email }})
+                                        </div>
+                                        <div class="col-md-6 text-md-end">
+                                            <strong>Date:</strong> {{ fb.created_at.strftime('%Y-%m-%d %H:%M:%S') if fb.created_at else '-' }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="mb-3">
+                                        <h6 class="fw-bold text-muted">Subject:</h6>
+                                        <p class="fs-6 fw-semibold text-dark">{{ fb.subject }}</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold text-muted">Message:</h6>
+                                        <div class="p-3 bg-light rounded border text-dark" style="white-space: pre-wrap; word-break: break-word;">{{ fb.message }}</div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="POST" action="{{ url_for('toggle_user_feedback_status', id=fb.id) }}">
+                                        {% if fb.status %}
+                                            <button type="submit" class="btn btn-warning"><i class="bi bi-arrow-counterclockwise me-1"></i>Mark Unread</button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i>Mark Read</button>
+                                        {% endif %}
+                                    </form>
+                                    <a href="mailto:{{ fb.email }}?subject=Re: {{ fb.subject }}" class="btn btn-primary">
+                                        <i class="bi bi-reply-fill me-1"></i> Reply via Email
+                                    </a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="deleteModal{{ fb.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ fb.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ fb.id }}"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Delete</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete feedback <strong>#{{ fb.id }}</strong> from <strong>{{ fb.name }}</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="POST" action="{{ url_for('delete_user_feedback', id=fb.id) }}">
+                                        <button type="submit" class="btn btn-danger">Delete Feedback</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="p-5 text-center text-muted">
+                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                <h5>No user feedback found</h5>
+                <p class="small mb-0">No feedback entries match your search and filter criteria.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Feedback pagination" class="mt-4 d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('admin_user_feedback', page=pagination.prev_num, q=search_query, status=status_filter) }}">Previous</a>
+            </li>
+            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                {% if page_num %}
+                    <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('admin_user_feedback', page=page_num, q=search_query, status=status_filter) }}">{{ page_num }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+            {% endfor %}
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('admin_user_feedback', page=pagination.next_num, q=search_query, status=status_filter) }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1035,7 +1035,7 @@
                     <textarea id="feedback_user_message" class="form-control" rows="5" placeholder="Your Message"></textarea>
                   </div>
                   <div class="col-12">
-                    <button type="submit" class="btn btn-warning w-100 py-3">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                    <a href="{{ url_for('user_feedback_page') }}" class="btn btn-warning w-100 py-3">Share Feedback<i class="fas fa-paper-plane ms-2"></i></a>
                   </div>
                 </div>
               </form>
@@ -1174,30 +1174,6 @@
     }, { threshold: 0.5 });
     
     observer.observe(document.querySelector('.stats-container'));
-  </script>
-  <script>
-    document.querySelector(".contact-form form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const name = document.querySelector('.contact-form #feedback_user_name').value.trim();
-      const email = document.querySelector('.contact-form #feedback_user_email').value.trim();
-      const subject = document.querySelector('.contact-form #feedback_user_subject').value.trim();
-      const message = document.querySelector('.contact-form #feedback_user_message').value.trim();
-
-      const response = await fetch("/api/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message }),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        alert(result.success);
-        document.querySelector("form").reset();
-      } else {
-        alert(result.error || "Something went wrong!");
-      }
-    });
   </script>
 </body>
 </html>

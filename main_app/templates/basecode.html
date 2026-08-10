@@ -577,6 +577,20 @@
                     Submit Paper
                 </span>
             </a>
+            {% if current_user.role == 'user' %}
+            <a
+                href="{{ url_for('user_feedback_page') }}"
+                class="sidebar-link
+                {% if request.endpoint == 'user_feedback_page' %}
+                    active
+                {% endif %}"
+            >
+                <i class="bi bi-chat-left-heart"></i>
+                <span>
+                    Share Feedback
+                </span>
+            </a>
+            {% endif %}
             {% if current_user.role == 'admin' %}
             <a
                 href="{{ url_for('dashboard') }}"
@@ -658,6 +672,18 @@
                     <i class="bi bi-journal-text"></i>
                     <span>
                         Research Papers
+                    </span>
+                </a>
+                <a
+                    href="{{ url_for('admin_user_feedback') }}"
+                    class="sidebar-link
+                    {% if request.endpoint == 'admin_user_feedback' %}
+                        active
+                    {% endif %}"
+                >
+                    <i class="bi bi-chat-left-text"></i>
+                    <span>
+                        User Feedback
                     </span>
                 </a>
             {% endif %}

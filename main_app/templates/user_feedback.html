@@ -1,0 +1,387 @@
+html
+{% extends "basecode.html" %}
+{% block title %}Share Portal Feedback{% endblock %}
+{% block content %}
+<style>
+    .feedback-container {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    .feedback-card {
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        padding: 30px;
+        margin-bottom: 24px;
+    }
+    .feedback-header-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+    }
+    .cooldown-card {
+        background: #fff8e6;
+        border: 1px solid #ffeeba;
+        border-radius: 14px;
+        padding: 28px;
+        margin-bottom: 24px;
+    }
+    .cooldown-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 12px;
+        background: #ffc107;
+        color: #212529;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+    }
+    .recent-item {
+        border-left: 4px solid #0d6efd;
+        background: #f8f9fa;
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+    }
+    .recent-item.read {
+        border-left-color: #198754;
+    }
+    .account-field {
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        color: #495057;
+    }
+    .feedback-alert {
+        margin-bottom: 24px;
+    }
+    @media (max-width: 576px) {
+        .feedback-card {
+            padding: 20px;
+        }
+        .feedback-header-icon {
+            width: 46px;
+            height: 46px;
+            font-size: 1.3rem;
+        }
+        .feedback-header h2 {
+            font-size: 1.5rem;
+        }
+        .feedback-submit-row {
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 15px;
+        }
+        .feedback-submit-row button {
+            width: 100%;
+        }
+    }
+</style>
+<div class="container py-3 feedback-container">
+    <!-- =====================================================
+         PAGE HEADER
+         ====================================================== -->
+    <div class="d-flex align-items-center gap-3 mb-4 feedback-header">
+        <div class="feedback-header-icon">
+            <i class="bi bi-chat-left-heart"></i>
+        </div>
+        <div>
+            <h2 class="fw-bold mb-1">
+                Share Portal Feedback
+            </h2>
+            <p class="text-muted mb-0">
+                Help us improve your experience. You can share
+                your concerns or feedback once every 24 hours.
+            </p>
+        </div>
+    </div>
+    <!-- =====================================================
+         FLASH MESSAGES
+         ====================================================== -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="feedback-alert">
+                {% for category, message in messages %}
+                    <div
+                        class="alert alert-{{ category }} alert-dismissible fade show"
+                        role="alert"
+                    >
+                        {% if category == "success" %}
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                        {% elif category == "warning" %}
+                            <i class="bi bi-clock-history me-2"></i>
+                        {% elif category == "danger" %}
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        {% else %}
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                        {% endif %}
+                        {{ message }}
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <!-- =====================================================
+         FEEDBACK SUBMISSION
+         ====================================================== -->
+    {% if can_submit %}
+        <div class="feedback-card">
+            <h4 class="fw-bold mb-3">
+                <i class="bi bi-pencil-square text-primary me-2"></i>
+                Submit Your Concern or Feedback
+            </h4>
+            <p class="text-secondary small mb-4">
+                Please describe your experience, concerns, or
+                suggestions clearly. Our administration team
+                reviews every submission.
+            </p>
+            <form
+                method="POST"
+                action="{{ url_for('add_feedback') }}"
+                id="userFeedbackForm"
+            >
+                <!-- Account Information -->
+                <div class="row g-3 mb-3">
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            Your Name
+                        </label>
+                        <div class="form-control bg-light account-field">
+                            {{ user.name or user.username }}
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-lock-fill me-1"></i>
+                            Account information
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            Your Email
+                        </label>
+                        <div class="form-control bg-light account-field">
+                            {{ user.email }}
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-lock-fill me-1"></i>
+                            Account information
+                        </div>
+                    </div>
+                </div>
+                <!-- =================================================
+                     SUBJECT
+                     ================================================== -->
+                <div class="mb-3">
+                    <label
+                        for="fb_subject"
+                        class="form-label fw-semibold"
+                    >
+                        Category / Subject
+                        <span class="text-danger">*</span>
+                    </label>
+                    <select
+                        name="subject"
+                        id="fb_subject"
+                        class="form-select"
+                        required
+                    >
+                        <option value="" disabled selected>
+                            -- Select Feedback Category --
+                        </option>
+                        <option value="General Portal Experience">
+                            General Portal Experience
+                        </option>
+                        <option value="Paper Submission Issue / Concern">
+                            Paper Submission Issue / Concern
+                        </option>
+                        <option value="Account & Profile Setting">
+                            Account &amp; Profile Setting
+                        </option>
+                        <option value="Technical Bug / Performance Error">
+                            Technical Bug / Performance Error
+                        </option>
+                        <option value="Other Suggestion or Concern">
+                            Other Suggestion or Concern
+                        </option>
+                    </select>
+                </div>
+                <!-- =================================================
+                     MESSAGE
+                     ================================================== -->
+                <div class="mb-4">
+                    <label
+                        for="fb_message"
+                        class="form-label fw-semibold"
+                    >
+                        Detailed Message / Concern
+                        <span class="text-danger">*</span>
+                    </label>
+                    <textarea
+                        name="message"
+                        id="fb_message"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Write your detailed feedback or concern here..."
+                        minlength="15"
+                        maxlength="1500"
+                        required
+                    ></textarea>
+                    <div class="form-text text-muted">
+                        Minimum 15 characters, maximum 1500 characters.
+                    </div>
+                </div>
+                <!-- =================================================
+                     SUBMIT BUTTON
+                     ================================================== -->
+                <div
+                    class="d-flex align-items-center justify-content-between feedback-submit-row"
+                >
+                    <div class="text-muted small">
+                        <i class="bi bi-clock me-1"></i>
+                        Note: Submissions are allowed once per 24 hours.
+                    </div>
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn btn-primary px-4 py-2 fw-bold"
+                    >
+                        <i class="bi bi-send-fill me-2"></i>
+                        Submit Feedback
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <!-- =====================================================
+             24-HOUR COOLDOWN CARD
+             ====================================================== -->
+        <div class="cooldown-card">
+            <div class="d-flex align-items-start gap-3">
+                <div class="cooldown-icon flex-shrink-0">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <div>
+                    <h4 class="fw-bold text-dark mb-2">
+                        24-Hour Feedback Limit Active
+                    </h4>
+                    <p class="text-secondary mb-3">
+                        Thank you! You have already submitted
+                        feedback in the last 24 hours. To ensure
+                        all submissions receive attention, users
+                        can share feedback once every 24 hours.
+                    </p>
+                    <!-- Remaining Time -->
+                    <div
+                        class="d-inline-flex align-items-center bg-white px-3 py-2 rounded border shadow-sm"
+                    >
+                        <i
+                            class="bi bi-hourglass-split text-warning me-2 fs-5"
+                        ></i>
+                        <div>
+                            <span class="small text-muted d-block">
+                                Next submission available in:
+                            </span>
+                            <strong class="text-dark fs-6">
+                                {{ cooldown_hours }} hour(s)
+                                and
+                                {{ cooldown_minutes }} minute(s)
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- =================================================
+                 LAST FEEDBACK
+                 ================================================== -->
+            {% if last_feedback %}
+                <hr class="my-4">
+                <div>
+                    <h6 class="fw-bold text-muted mb-2">
+                        Your Last Submitted Feedback:
+                    </h6>
+                    <div class="bg-white p-3 rounded border">
+                        <div
+                            class="d-flex justify-content-between align-items-center mb-1"
+                        >
+                            <span class="fw-bold text-primary">
+                                {{ last_feedback.subject }}
+                            </span>
+                            <span class="badge bg-secondary">
+                                {{ last_feedback.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </span>
+                        </div>
+                        <p class="mb-0 text-dark small">
+                            {{ last_feedback.message }}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    <!-- =====================================================
+         FEEDBACK HISTORY
+         ====================================================== -->
+    {% if user_recent_feedbacks %}
+        <div class="feedback-card">
+            <h5 class="fw-bold mb-3">
+                <i class="bi bi-journal-check me-2 text-primary"></i>
+                Your Feedback History
+            </h5>
+            <div class="recent-list">
+                {% for fb in user_recent_feedbacks %}
+                    <div
+                        class="recent-item {% if fb.status %}read{% endif %}"
+                    >
+                        <!-- Feedback Header -->
+                        <div
+                            class="d-flex justify-content-between align-items-center mb-1"
+                        >
+                            <strong class="text-dark">
+                                {{ fb.subject }}
+                            </strong>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="small text-muted">
+                                    {{ fb.created_at.strftime('%b %d, %Y %H:%M') if fb.created_at else '' }}
+                                </span>
+                                {% if fb.status %}
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        Reviewed
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="bi bi-clock me-1"></i>
+                                        Under Review
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Feedback Message -->
+                        <p
+                            class="mb-0 text-secondary small"
+                            style="white-space: pre-wrap;"
+                        >
+                            {{ fb.message }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -2485,63 +2485,181 @@ def delete_paper(id):
     return redirect(url_for("list_papers"))
 
 
+@app.route("/user/feedback", methods=["GET"])
+@login_required
+def user_feedback_page():
+    current_user = User.query.filter_by(username=session["username"]).first()
+    if delete_session_if_user_not_exists(current_user):
+        return redirect(url_for("login"))
+
+    # Check 24-hour rate limit for current user
+    twenty_four_hours_ago = datetime.now() - timedelta(minutes=1)
+    last_feedback = UserFeedback.query.filter(
+        UserFeedback.email == current_user.email,
+        UserFeedback.created_at >= twenty_four_hours_ago
+    ).order_by(UserFeedback.created_at.desc()).first()
+
+    can_submit = last_feedback is None
+    cooldown_hours = 0
+    cooldown_minutes = 0
+    if last_feedback and last_feedback.created_at:
+        time_diff = (last_feedback.created_at + timedelta(hours=24)) - datetime.now()
+        seconds_remaining = int(time_diff.total_seconds())
+        if seconds_remaining > 0:
+            cooldown_hours = seconds_remaining // 3600
+            cooldown_minutes = (seconds_remaining % 3600) // 60
+
+    user_recent_feedbacks = UserFeedback.query.filter_by(email=current_user.email).order_by(UserFeedback.created_at.desc()).limit(5).all()
+    return render_template(
+        "user_feedback.html",
+        user=current_user,
+        can_submit=can_submit,
+        last_feedback=last_feedback,
+        cooldown_hours=cooldown_hours,
+        cooldown_minutes=cooldown_minutes,
+        user_recent_feedbacks=user_recent_feedbacks
+    )
+
+
 @app.route("/api/feedback", methods=["POST"])
+@login_required
 def add_feedback():
-    data = request.get_json()
+    current_user = User.query.filter_by(username=session["username"]).first()
+    if delete_session_if_user_not_exists(current_user):
+        return redirect(url_for("login"))
 
-    name = data.get("name")
-    email = data.get("email")
-    subject = data.get("subject", "")
-    message = data.get("message", "")
+    subject = (request.form.get("subject") or "").strip()
+    message = (request.form.get("message") or "").strip()
 
-    if not name.strip() or not email.strip() or not message.strip():
-        return jsonify({"error": "All required fields must be filled."}), 400
+    if not message:
+        flash("Feedback message is required.", "danger")
+        return redirect(url_for("user_feedback_page"))
 
-    # Check if user has sent feedback in the last 1 hour
-    one_hour_ago = datetime.now() - timedelta(hours=1)
+    if len(message) < 15:
+        flash("Feedback message must contain at least 15 characters.", "danger")
+        return redirect(url_for("user_feedback_page"))
+
+    if len(message) > 1500:
+        flash("Feedback message cannot exceed 1500 characters.", "danger")
+        return redirect(url_for("user_feedback_page"))
+
+    twenty_four_hours_ago = datetime.now() - timedelta(hours=24)
     recent_feedback = UserFeedback.query.filter(
-        UserFeedback.email == email,
-        UserFeedback.created_at >= one_hour_ago
+        UserFeedback.email == current_user.email,
+        UserFeedback.created_at >= twenty_four_hours_ago
     ).first()
 
     if recent_feedback:
-        return jsonify({"error": "You can only send feedback once in a hour."}), 429
+        error_message = (
+            "You can only share feedback once every 24 hours. "
+            "Please try again later."
+        )
 
-    # Save feedback in database
+        flash(error_message, "warning")
+        return redirect(url_for("user_feedback_page"))
+
     new_feedback = UserFeedback(
-        name=name,
-        email=email,
-        subject=subject,
+        name=current_user.name,
+        email=current_user.email,
+        subject=subject or "Portal Feedback",
         message=message
     )
     db.session.add(new_feedback)
     db.session.commit()
 
-    # Send confirmation mail
+    # Send confirmation email
     try:
         msg = Message(
-            subject="Your Contact Request Has Been Received",
+            subject="Your Feedback Has Been Received",
             sender="no-reply@yourdomain.com",
-            recipients=[email],
+            recipients=[current_user.email],
         )
-        msg.body = f"""
-            Dear {name},
+        msg.body = f"""Dear {current_user.name},
 
-            Thank you for reaching out to us!
+Thank you for reaching out to us!
 
-            We have successfully received your query:
-            "{message}"
+We have successfully received your feedback/query:
 
-            Our support team will review it and get back to you shortly.
+"{message}"
 
-            Best regards,
-            Support Team
-            Curevita Journals
-        """
+Our support team will review it and get back to you.
+
+Best regards,
+Support Team
+Curevita Journals
+"""
         mail.send(msg)
         new_feedback.status = True
         db.session.commit()
     except Exception as e:
         print("Mail sending failed:", e)
 
-    return jsonify({"success": "Query received successfully."}), 201
+    flash("Feedback submitted successfully.", "success")
+    return redirect(url_for("user_feedback_page"))
+
+
+@app.route("/admin/user-feedback", methods=["GET"])
+@admin_required
+def admin_user_feedback():
+    current_user = User.query.filter_by(username=session["username"]).first()
+    if delete_session_if_user_not_exists(current_user):
+        return redirect(url_for("login"))
+    page = request.args.get("page", 1, type=int)
+    search_query = (request.args.get("q") or "").strip()
+    status_filter = (request.args.get("status") or "all").strip().lower()
+
+    query = UserFeedback.query
+
+    if status_filter == "read":
+        query = query.filter_by(status=True)
+    elif status_filter == "unread":
+        query = query.filter_by(status=False)
+
+    if search_query:
+        search_pattern = f"%{search_query}%"
+        query = query.filter(
+            (UserFeedback.name.ilike(search_pattern)) |
+            (UserFeedback.email.ilike(search_pattern)) |
+            (UserFeedback.subject.ilike(search_pattern)) |
+            (UserFeedback.message.ilike(search_pattern))
+        )
+
+    pagination = query.order_by(UserFeedback.created_at.desc()).paginate(page=page, per_page=15, error_out=False)
+    feedbacks = pagination.items
+
+    total_count = UserFeedback.query.count()
+    unread_count = UserFeedback.query.filter_by(status=False).count()
+    read_count = UserFeedback.query.filter_by(status=True).count()
+
+    return render_template(
+        "admin_user_feedback.html",
+        feedbacks=feedbacks,
+        pagination=pagination,
+        search_query=search_query,
+        status_filter=status_filter,
+        total_count=total_count,
+        unread_count=unread_count,
+        read_count=read_count,
+        current_user=current_user
+    )
+
+
+@app.route("/admin/user-feedback/<int:id>/toggle-status", methods=["POST"])
+@admin_required
+def toggle_user_feedback_status(id):
+    fb = UserFeedback.query.get_or_404(id)
+    fb.status = not fb.status
+    db.session.commit()
+    status_label = "Read" if fb.status else "Unread"
+    flash(f"Feedback #{fb.id} marked as {status_label}.", "success")
+    return redirect(url_for("admin_user_feedback"))
+
+
+@app.route("/admin/user-feedback/<int:id>/delete", methods=["POST"])
+@admin_required
+def delete_user_feedback(id):
+    fb = UserFeedback.query.get_or_404(id)
+    db.session.delete(fb)
+    db.session.commit()
+    flash(f"Feedback #{id} deleted successfully.", "success")
+    return redirect(url_for("admin_user_feedback"))
