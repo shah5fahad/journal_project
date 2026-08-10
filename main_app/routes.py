@@ -31,6 +31,108 @@ PAPER_STATUS_LABELS = {
 }
 
 
+def send_paper_approval_email(paper, research_paper=None, volume=None, issue=None):
+    try:
+        recipients = []
+        if paper.user and paper.user.email:
+            recipients.append(paper.user.email)
+
+        if paper.authors_details_json:
+            try:
+                authors_data = json.loads(paper.authors_details_json)
+                for a in authors_data:
+                    email = (a.get("email") or "").strip()
+                    if email and email not in recipients:
+                        recipients.append(email)
+            except Exception:
+                pass
+
+        if not recipients:
+            print("No recipient email addresses found for paper publication notification.")
+            return False
+
+        author_name = paper.user.name or paper.user.username if paper.user else "Author"
+        journal_name = paper.journal.full_name if paper.journal else "Curevita Journals"
+
+        # Direct paper file link
+        paper_file_url = url_for("static", filename="assets/pdf/" + paper.pdf_filename, _external=True)
+
+        # Direct paper detail page URL if available
+        paper_page_url = None
+        if paper.journal and paper.journal.short_name and research_paper:
+            endpoint = f"{paper.journal.short_name.lower()}_paper_detail"
+            try:
+                paper_page_url = url_for(endpoint, paper_id=research_paper.id, _external=True)
+            except Exception:
+                paper_page_url = url_for("student_dashboard", _external=True)
+        else:
+            paper_page_url = url_for("student_dashboard", _external=True)
+
+        vol_issue_str = f"Volume {volume}, Issue {issue}" if (volume and issue) else ""
+
+        msg = Message(
+            subject=f"Paper Publication Confirmation: {paper.title}",
+            recipients=recipients
+        )
+
+        msg.body = f"""Dear {author_name},
+
+        Congratulations! We are pleased to inform you that your research paper has been officially approved and published.
+
+        Paper Details:
+        - Title: {paper.title}
+        - Submission ID: {paper.paper_id or paper.id}
+        - Journal: {journal_name}
+        {f"- Publication: {vol_issue_str}" if vol_issue_str else ""}
+        - Authors: {paper.authors or author_name}
+
+        Direct Link to Open Paper File:
+        {paper_file_url}
+
+        Direct Link to Paper Detail Page:
+        {paper_page_url}
+
+        Thank you for contributing your research work to {journal_name}.
+
+        Best regards,
+        Editorial Team
+        {journal_name}"""
+
+        vol_issue_item = f"<li><strong>Publication:</strong> {vol_issue_str}</li>" if vol_issue_str else ""
+        msg.html = f"""
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;">
+            <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">Paper Publication Confirmation</h2>
+            <p>Dear <strong>{author_name}</strong>,</p>
+            <p>Congratulations! We are pleased to inform you that your research paper has been officially approved and published.</p>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; margin: 20px 0; border-left: 4px solid #28a745;">
+                <h3 style="margin-top: 0; color: #28a745;">Paper Details:</h3>
+                <ul style="list-style-type: none; padding-left: 0; line-height: 1.8;">
+                    <li><strong>Title:</strong> {paper.title}</li>
+                    <li><strong>Submission ID:</strong> {paper.paper_id or paper.id}</li>
+                    <li><strong>Journal:</strong> {journal_name}</li>
+                    {vol_issue_item}
+                    <li><strong>Authors:</strong> {paper.authors or author_name}</li>
+                </ul>
+            </div>
+
+            <div style="margin: 25px 0; text-align: center;">
+                <a href="{paper_page_url}" style="background-color: #198754; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;" target="_blank">View Paper Details</a>
+            </div>
+
+            <p style="color: #6c757d; font-size: 0.9em;">Thank you for contributing your research work to {journal_name}.</p>
+            <hr style="border: 0; border-top: 1px solid #e0e0e0; margin-top: 30px;">
+            <p style="color: #888888; font-size: 0.8em; text-align: center;">This is an automated notification from {journal_name}.</p>
+        </div>
+        """
+
+        mail.send(msg)
+        return True
+    except Exception as e:
+        print(f"Error sending paper approval email: {e}")
+        return False
+
+
 def get_uploaded_file_size(upload_file):
     if not upload_file or not upload_file.filename:
         return 0
@@ -1761,6 +1863,7 @@ def approve_submitted_paper(paper_id):
 
     volume = request.form.get("volume", type=int)
     issue = request.form.get("issue", type=int)
+    research_paper = None
 
     if workflow_status == "paper_published":
         if not volume or not issue:
@@ -1789,6 +1892,9 @@ def approve_submitted_paper(paper_id):
                     is_current=True,
                 )
                 db.session.add(research_paper)
+            else:
+                flash("A research paper with the same title, volume, and issue already exists. Please check before publishing.", "warning")
+                return redirect(url_for("admin_papers"))
 
         paper.status = "approved"
         paper.workflow_status = "paper_published"
@@ -1807,7 +1913,11 @@ def approve_submitted_paper(paper_id):
     if workflow_status == "rejected":
         flash(f"Paper '{paper.title}' has been REJECTED. It cannot be approved in the future.", "warning")
     elif workflow_status == "paper_published":
-        flash(f"Paper '{paper.title}' has been published successfully.", "success")
+        email_sent = send_paper_approval_email(paper, research_paper=research_paper, volume=volume, issue=issue)
+        if email_sent:
+            flash(f"Paper '{paper.title}' has been published successfully and a confirmation email was sent to the author.", "success")
+        else:
+            flash(f"Paper '{paper.title}' has been published successfully.", "success")
     else:
         flash("Paper workflow status updated successfully.", "success")
     return redirect(url_for("admin_papers"))
