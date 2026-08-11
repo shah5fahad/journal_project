@@ -116,7 +116,7 @@
 
         <div class="mb-3" id="payment_block" style="display: {% if paper.is_paid %}block{% else %}none{% endif %};">
             <label class="form-label">Upload Payment Screenshot</label>
-            <input type="file" class="form-control" name="payment_screenshot" accept="image/*,.pdf">
+            <input type="file" class="form-control" name="payment_screenshot" id="payment_screenshot" accept="image/*,.pdf">
         </div>
 
         <button class="btn btn-primary" type="submit">Save Changes & Resubmit</button>
@@ -130,7 +130,9 @@ const isPaidCheckbox = document.getElementById('is_paid');
 if (isPaidCheckbox) {
     isPaidCheckbox.addEventListener('change', function(){
         const block = document.getElementById('payment_block');
+        const input = document.getElementById("payment_screenshot");
         if (this.checked) block.style.display='block'; else block.style.display='none';
+        if (this.checked) input.required = true; else input.required = false;
     });
 }
 

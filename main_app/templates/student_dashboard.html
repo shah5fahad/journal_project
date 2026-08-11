@@ -1394,12 +1394,12 @@
                             </a>
                         {% elif paper.status == 'approved' %}
                             <a
-                                href="{{ url_for('static', filename='assets/pdf/' ~ paper.pdf_filename) }}"
+                                href="{{ url_for('static', filename='assets/pdf/' ~ paper.final_pdf_filename) }}"
                                 target="_blank"
                                 class="action-btn action-success"
                                 download
                             >
-                                <i class="bi bi-file-earmark-word"></i>
+                                <i class="bi bi-file-earmark-pdf"></i>
                                 Download Paper
                             </a>
                             <a
@@ -1410,6 +1410,23 @@
                                 <i class="bi bi-globe"></i>
                                 Listed on Portal
                             </a>
+                        {% elif paper.workflow_status == 'final_approval' %}
+                            {% if paper.author_approval_state == 'approved' %}
+                                <span class="action-btn">
+                                    <i class="bi bi-hourglass-split"></i>
+                                    Waiting for Publish
+                                </span>
+                            {% elif paper.final_pdf_filename %}
+                                <button
+                                    type="button"
+                                    class="action-btn action-success"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#finalApprovalModal{{ paper.id }}"
+                                >
+                                    <i class="bi bi-check2-circle"></i>
+                                    Final Approval
+                                </button>
+                            {% endif %}
                         {% else %}
                             <span class="action-btn">
                                 <i class="bi bi-hourglass-split"></i>
@@ -1482,6 +1499,54 @@
                         </div>
                     </div>
                 {% endif %}
+                {% if paper.workflow_status == 'final_approval' %}
+                    <div class="modal fade" id="finalApprovalModal{{ paper.id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content modern-modal">
+                                <form action="{{ url_for('submit_final_approval_decision', paper_id=paper.id) }}" method="POST">
+                                    <div class="modal-header modal-header-modern">
+                                        <h5 class="modal-title">
+                                            <i class="bi bi-shield-check me-2"></i>
+                                            Author Final Approval
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body p-4">
+                                        <div class="mb-3">
+                                            <h5>Final approval</h5><hr>
+                                        </div>
+                                        <div class="mb-3">
+                                            <a
+                                                href="{{ url_for('static', filename='assets/pdf/' ~ paper.final_pdf_filename) }}"
+                                                target="_blank"
+                                                class="action-btn action-success"
+                                                download
+                                            >
+                                                <i class="bi bi-file-earmark-pdf"></i>
+                                                Review Final Paper PDF
+                                            </a>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-check form-switch ps-0 d-flex justify-content-between">
+                                                <label class="form-check-label" for="final_toggle_{{ paper.id }}">Approve final paper</label>
+                                                <input class="form-check-input" type="checkbox" id="final_toggle_{{ paper.id }}" name="final_toggle" value="approved" onchange="toggleFinalApprovalComment(this, '{{ paper.id }}')" checked>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3" id="final_comment_block_{{ paper.id }}" style="display:none;">
+                                            <label for="author_comment_{{ paper.id }}" class="field-label">Comment <span class="required">*</span></label>
+                                            <textarea name="author_comment" id="author_comment_{{ paper.id }}" rows="4" class="form-control" placeholder="Add comment or resubmission note"></textarea>
+                                        </div>
+                                        <input type="hidden" name="final_decision" id="final_decision_{{ paper.id }}" value="approved">
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary rounded-pill px-4">Submit Decision</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     {% else %}
@@ -1547,6 +1612,23 @@
 </div>
 </div>
 <script>
+function toggleFinalApprovalComment(checkbox, paperId) {
+   const decisionField = document.getElementById('final_decision_' + paperId);
+   const commentBlock = document.getElementById('final_comment_block_' + paperId);
+   const commentText = document.getElementById('author_comment_' + paperId);
+   if (!decisionField || !commentBlock || !commentText) return;
+
+   if (checkbox.checked) {
+       decisionField.value = 'approved';
+       commentBlock.style.display = 'none';
+       commentText.required = false;
+       commentText.value = '';
+   } else {
+       decisionField.value = 'comment';
+       commentBlock.style.display = 'block';
+       commentText.required = true;
+   }
+}
 /* =========================================================
    AUTHORS
    ========================================================= */

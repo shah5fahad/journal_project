@@ -19,6 +19,7 @@ PAPER_STATUS_OPTIONS = [
     "revised",
     "rejected",
     "payment_completed_paper_accepted",
+    "final_approval",
     "paper_published",
 ]
 
@@ -27,6 +28,7 @@ PAPER_STATUS_LABELS = {
     "revised": "Revised",
     "rejected": "Rejected",
     "payment_completed_paper_accepted": "Payment completed & paper accepted",
+    "final_approval": "Final Approval",
     "paper_published": "Paper Published",
 }
 
@@ -160,6 +162,16 @@ def _ensure_missing_columns():
         db.session.execute(text("ALTER TABLE research_paper DROP COLUMN main_heading"))
     if "sub_heading" in columns:
         db.session.execute(text("ALTER TABLE research_paper DROP COLUMN sub_heading"))
+
+    submitted_columns = [column_info["name"] for column_info in inspector.get_columns("submitted_papers")]
+    if "final_pdf_filename" not in submitted_columns:
+        db.session.execute(text("ALTER TABLE submitted_papers ADD COLUMN final_pdf_filename VARCHAR(250)"))
+    if "final_approval_requested" not in submitted_columns:
+        db.session.execute(text("ALTER TABLE submitted_papers ADD COLUMN final_approval_requested BOOLEAN DEFAULT FALSE"))
+    if "author_approval_state" not in submitted_columns:
+        db.session.execute(text("ALTER TABLE submitted_papers ADD COLUMN author_approval_state VARCHAR(20) DEFAULT 'pending'"))
+    if "author_approval_comment" not in submitted_columns:
+        db.session.execute(text("ALTER TABLE submitted_papers ADD COLUMN author_approval_comment TEXT"))
 
     db.session.commit()
 
@@ -1653,9 +1665,9 @@ def edit_submitted_paper(paper_id):
         flash('You are not authorized to edit this submission.', 'danger')
         return redirect(url_for('student_dashboard'))
 
-    # Only allow editing when rejected
-    if paper.status != 'rejected':
-        flash('Only rejected papers can be edited and resubmitted.', 'warning')
+    # Only allow editing when rejected or sent back with an author comment
+    if paper.status != 'rejected' and paper.workflow_status != 'revised':
+        flash('Only rejected or author-commented papers can be edited and resubmitted.', 'warning')
         return redirect(url_for('student_dashboard'))
 
     if request.method == 'POST':
@@ -1796,6 +1808,117 @@ def edit_submitted_paper(paper_id):
     return render_template('edit_submitted_paper.html', paper=paper, journals=journals, authors_details=authors_details)
 
 
+@app.route('/student/paper/<int:paper_id>/final-approval-request', methods=['POST'])
+@approver_or_admin_required
+def request_final_approval(paper_id):
+    current_user = User.query.filter_by(username=session['username']).first()
+    if delete_session_if_user_not_exists(current_user):
+        return redirect(url_for('login'))
+
+    paper = SubmittedPaper.query.get_or_404(paper_id)    
+    final_file = request.files.get('final_pdf_file')
+    old_final_pdf_filename = paper.final_pdf_filename if paper.final_pdf_filename else None
+    new_final_pdf_filename = None
+
+    if final_file and final_file.filename:
+        if not final_file.filename.lower().endswith('.pdf'):
+            flash('Please upload a final PDF file.', 'danger')
+            return redirect(url_for('admin_papers'))
+
+        filename = secure_filename(final_file.filename)
+        unique_filename = (
+            f"final_{current_user.id}_"
+            f"{int(datetime.now().timestamp())}_"
+            f"{filename}"
+        )
+        upload_dir = os.path.join(
+            app.root_path,
+            'static',
+            'assets',
+            'pdf',
+            'final'
+        )
+        os.makedirs(upload_dir, exist_ok=True)
+        saved_path = os.path.join(
+            upload_dir,
+            unique_filename
+        )
+        final_file.save(saved_path)
+        paper.final_pdf_filename = f"final/{unique_filename}"
+        new_final_pdf_filename = paper.final_pdf_filename
+    elif not paper.final_pdf_filename:
+        flash(
+            'Please upload the final PDF to request admin approval.',
+            'danger'
+        )
+        return redirect(url_for('admin_papers'))
+
+    paper.final_approval_requested = True
+    paper.author_approval_state = 'pending'
+    paper.author_approval_comment = None
+    paper.workflow_status = 'final_approval'
+    paper.status = 'pending'
+    paper.rejection_reason = None
+    db.session.commit()
+    
+    if (old_final_pdf_filename and new_final_pdf_filename and old_final_pdf_filename != new_final_pdf_filename):
+        old_file_path = os.path.join(
+            app.root_path,
+            'static',
+            'assets',
+            'pdf',
+            old_final_pdf_filename
+        )
+        try:
+            if os.path.exists(old_file_path):
+                os.remove(old_file_path)
+        except OSError as e:
+            app.logger.warning("Failed to delete old final PDF '%s': %s",old_file_path, e)
+
+    flash('Final paper PDF uploaded successfully. The author approval workflow is ready.', 'success')
+    return redirect(url_for('admin_papers'))
+
+
+@app.route('/student/paper/<int:paper_id>/final-approval-decision', methods=['POST'])
+@login_required
+def submit_final_approval_decision(paper_id):
+    current_user = User.query.filter_by(username=session['username']).first()
+    if delete_session_if_user_not_exists(current_user):
+        return redirect(url_for('login'))
+
+    paper = SubmittedPaper.query.get_or_404(paper_id)
+    if paper.user_id != current_user.id:
+        flash('You are not authorized to approve or comment on this paper.', 'danger')
+        return redirect(url_for('student_dashboard'))
+
+    decision = (request.form.get('final_decision') or '').strip().lower()
+    print(f"Final decision: {decision}")
+    if decision == 'approved':
+        paper.author_approval_state = 'approved'
+        paper.author_approval_comment = None
+        paper.workflow_status = 'final_approval'
+        paper.status = 'pending'
+        paper.rejection_reason = None
+        db.session.commit()
+        flash('Final paper approval submitted. Admin can now publish it.', 'success')
+    elif decision == 'comment':
+        comment = (request.form.get('author_comment') or '').strip()
+        if not comment:
+            flash('A comment is required when the paper is not approved.', 'danger')
+            return redirect(url_for('student_dashboard'))
+        paper.author_approval_state = 'commented'
+        paper.author_approval_comment = comment
+        paper.workflow_status = 'revised'
+        paper.status = 'pending'
+        paper.rejection_reason = comment
+        db.session.commit()
+        flash('Your comment has been saved. You can resubmit the paper after editing.', 'warning')
+    else:
+        flash('Please choose an approval decision.', 'warning')
+
+    return redirect(url_for('student_dashboard'))
+
+
 # ----------------------------------
 # Admin & Approver Panel - Paper Verification & Dropdown User Filter
 # ----------------------------------
@@ -1861,18 +1984,21 @@ def approve_submitted_paper(paper_id):
         flash("Please choose a valid paper workflow status.", "warning")
         return redirect(url_for("admin_papers"))
 
-    volume = request.form.get("volume", type=int)
-    issue = request.form.get("issue", type=int)
     research_paper = None
-
     if workflow_status == "paper_published":
-        if not volume or not issue:
-            flash("Please provide both Volume and Issue before publishing the paper.", "warning")
+        volume = request.form.get("volume", type=int)
+        issue = request.form.get("issue", type=int)
+        citation = request.form.get("citation")
+        title = request.form.get("title", type=str)
+        if title: title = title.strip()
+
+        if not volume or not issue or not citation:
+            flash("Please provide both Volume, Issue and Citaton before publishing the paper.", "warning")
             return redirect(url_for("admin_papers"))
 
         if paper.journal_id:
             existing_rp = ResearchPaper.query.filter_by(
-                title=paper.title,
+                title=paper.title if not title else title,
                 journal_id=paper.journal_id,
                 volume=volume,
                 issue=issue,
@@ -1880,20 +2006,21 @@ def approve_submitted_paper(paper_id):
             ).first()
             if not existing_rp:
                 research_paper = ResearchPaper(
-                    title=paper.title,
+                    title=paper.title if not title else title,
                     authors=(paper.authors if paper.authors else (paper.user.name or paper.user.username)),
                     volume=volume,
                     issue=issue,
                     year=datetime.now().year,
                     abstract=paper.abstract,
-                    pdf_filename=paper.pdf_filename,
+                    pdf_filename=paper.final_pdf_filename,
                     journal_id=paper.journal_id,
-                    citation=paper.citation,
+                    citation=citation,
                     is_current=True,
                 )
                 db.session.add(research_paper)
+                if title: paper.title = title
             else:
-                flash("A research paper with the same title, volume, and issue already exists. Please check before publishing.", "warning")
+                flash("A research paper with the same title, volume, and issue already exists. Please check before publishing.", "danger")
                 return redirect(url_for("admin_papers"))
 
         paper.status = "approved"

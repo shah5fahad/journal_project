@@ -90,6 +90,10 @@ class SubmittedPaper(db.Model):
     workflow_status = db.Column(db.String(80), default='under_review', nullable=False)
     reviewer_comment = db.Column(db.Text, nullable=True)
     rejection_reason = db.Column(db.Text, nullable=True)
+    final_pdf_filename = db.Column(db.String(250), nullable=True)
+    final_approval_requested = db.Column(db.Boolean, default=False)
+    author_approval_state = db.Column(db.String(20), default='pending', nullable=True)
+    author_approval_comment = db.Column(db.Text, nullable=True)
     submitted_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
